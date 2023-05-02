@@ -29,3 +29,15 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+
+fonts:
+  - family: times new roman
+    fonts:
+      - asset: assets/fonts/times new roman.ttf
+  - family: times new roman bold
+    fonts:
+      - asset: assets/fonts/times new roman bold.ttf    
+  - family: times new roman italic
+    fonts:
+      - asset: assets/fonts/times new roman italic.ttf

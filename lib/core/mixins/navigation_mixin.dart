@@ -6,4 +6,5 @@ mixin NavigationMixin {
   final NavigationService _navigationService = locator<NavigationService>();
 
   void goToDashboard() => _navigationService.navigateTo(Routes.dashboardView);
+  void goToStudents() => _navigationService.navigateTo(Routes.studentView);
 }
