@@ -67,4 +67,5 @@ extension TextStyleHelpers on TextStyle {
   TextStyle get white => copyWith(color: Colors.white);
   TextStyle get white70 => copyWith(color: Colors.white70);
   TextStyle get white54 => copyWith(color: Colors.white54);
+  TextStyle get red => copyWith(color: Colors.red);
 }

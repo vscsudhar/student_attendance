@@ -9,6 +9,7 @@ class Box extends StatelessWidget {
     this.onTap,
     this.padding,
     this.margin,
+    this.boxColor,
     super.key,
   });
 
@@ -17,6 +18,7 @@ class Box extends StatelessWidget {
   final double? height;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
+  final Color? boxColor;
   final Function()? onTap;
 
   @override
@@ -31,9 +33,9 @@ class Box extends StatelessWidget {
             margin: margin ?? defaultPadding20,
             width: width ?? double.infinity,
             height: height,
-            decoration: const BoxDecoration(
-                color: appcolor2699FB,
-                borderRadius: BorderRadius.all(
+            decoration: BoxDecoration(
+                color: boxColor ?? appcolor2699FB,
+                borderRadius: const BorderRadius.all(
                   Radius.circular(8),
                 )),
             child: child,

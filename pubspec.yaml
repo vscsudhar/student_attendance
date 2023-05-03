@@ -14,6 +14,7 @@ dependencies:
   stacked: ^3.2.2
   stacked_services: ^0.9.9
   get_it : ^7.2.0
+  dropdown_textfield : ^1.0.8
 
 dev_dependencies:
   flutter_test:

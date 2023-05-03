@@ -7,4 +7,5 @@ mixin NavigationMixin {
 
   void goToDashboard() => _navigationService.navigateTo(Routes.dashboardView);
   void goToStudents() => _navigationService.navigateTo(Routes.studentView);
+  void goToSection() => _navigationService.navigateTo(Routes.sectionView);
 }

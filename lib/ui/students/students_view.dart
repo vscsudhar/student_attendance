@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workspace/ui/shared/styles.dart';
+import 'package:workspace/ui/students/widgets/student_list_widget.dart';
 
 class StudentView extends StatelessWidget {
   const StudentView({super.key});
@@ -10,19 +11,15 @@ class StudentView extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Students',
-          style: fontFamilyBold.size20.white,
+          style: fontFamilyBold.size24.white,
         ),
       ),
       body: ListView.separated(
         padding: defaultPadding20,
-        itemBuilder: (context, index) => Text(
-          'Student $index',
-          style: fontFamilyRegular.size14.color2699FB,
-        ),
-        separatorBuilder: (context, index) => const Padding(
-          padding: defaultPadding8,
-          child: horizontalDivider,
-        ),
+        itemBuilder: (context, index) {
+          return StudentListWidget(name: 'Student $index');
+        },
+        separatorBuilder: (context, index) => verticalSpacing20,
         itemCount: 10,
       ),
     );
