@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workspace/ui/dashboard/dashboard_view.dart';
 import 'package:workspace/ui/login/login_view.dart';
 import 'package:workspace/ui/profiles/profile_view.dart';
 import 'package:workspace/ui/shared/styles.dart';

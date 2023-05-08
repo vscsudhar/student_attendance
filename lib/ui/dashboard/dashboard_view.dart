@@ -39,7 +39,7 @@ class Ddashboard_viewVate extends State<DashboardView> {
                       width: double.infinity,
                     ),
                     Box(
-                        onTap: () => setState(() => isVisible = !isVisible1),
+                        onTap: () => setState(() => isVisible = !isVisible),
                         margin: zeroPadding,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,18 +48,18 @@ class Ddashboard_viewVate extends State<DashboardView> {
                               'Staff attendance',
                               style: fontFamilyBold.size20.white,
                             ),
-                            if (isVisible)
+                            if (isVisible == false)
                               Box(
-                                  onTap: () => setState(() => isVisible = !isVisible),
+                                  onTap: () => setState(() => isVisible1 = !isVisible1),
                                   boxColor: Colors.blueAccent,
                                   child: Text(
                                     "Login",
                                     style: fontFamilyRegular.size16.white,
                                     textAlign: TextAlign.center,
                                   )),
-                            if (isVisible1)
+                            if (!isVisible1)
                               Box(
-                                  onTap: () => setState(() => isVisible1 = !isVisible1),
+                                  onTap: () => setState(() => isVisible = !isVisible),
                                   boxColor: Colors.red,
                                   child: Text(
                                     "LogOut",
