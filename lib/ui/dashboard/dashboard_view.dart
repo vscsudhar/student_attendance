@@ -11,10 +11,12 @@ class DashboardView extends StatefulWidget {
   final bool isVisible = true;
 
   @override
-  State<DashboardView> createState() => Ddashboard_viewVate();
+  State<DashboardView> createState() => DashboardviewState();
 }
 
-class Ddashboard_viewVate extends State<DashboardView> {
+
+
+class DashboardviewState extends State<DashboardView> {
   late bool isVisible = true;
   late bool isVisible1 = true;
   @override

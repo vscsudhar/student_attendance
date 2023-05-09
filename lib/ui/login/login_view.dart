@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/login/login_viewmodel.dart';
 import 'package:workspace/ui/shared/styles.dart';
+import 'package:workspace/ui/widgets/box.dart';
 import 'package:workspace/ui/widgets/button.dart';
 import 'package:workspace/ui/widgets/text_field1.dart';
 
@@ -38,14 +41,55 @@ class _LoginViewState extends State<LoginView> {
                     "Login",
                     style: fontFamilyRegular.size26.color2699FB,
                   ),
-                  const TextField1(hintText: 'USERNAME',),
+                  const TextField1(
+                    hintText: 'USERNAME',
+                  ),
                   verticalSpacing10,
-                  const TextField1(hintText: 'PASSWORD',),
+                  const TextField1(
+                    hintText: 'PASSWORD',
+                  ),
                   verticalSpacing10,
                   verticalSpacing20,
                   Button(
                     name: 'Login',
-                    onPressed: viewModel.goToDashboard,
+                    onPressed: () {
+                      if (viewModel.atLocation) {
+                        viewModel.goToDashboard();
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const AlertDialog(
+                                
+                                title: Text(
+                                  'Hello Sudhar...',
+                                  textAlign: TextAlign.center,
+                                ),
+                                content: Text('Succesfully LogedIn....'),
+                              
+                                
+                              );
+                            });
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const AlertDialog(
+                                title: Text('You are not inside the school campus'),
+                                content: Text('kindly ensure your location and login again...'),
+                                actions: [
+                                  Box(
+                                      boxColor: appcolor2699FB,
+                                      child: Text(
+                                        'Cancel',
+                                        style: fontFamilyRegular,
+                                        textAlign: TextAlign.center,
+                                      ))
+                                ],
+                              );
+                            });
+                        log('you are not inside the school campus,\nkindly ensure your location and login again...');
+                      }
+                    },
                   )
                 ]),
               ),

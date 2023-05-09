@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:workspace/ui/changepassword/changepass_view.dart';
+import 'package:workspace/ui/changepassword/changepass_viewmodel.dart';
 import 'package:workspace/ui/login/login_view.dart';
 import 'package:workspace/ui/profiles/profile_viewmodel.dart';
 import 'package:workspace/ui/shared/styles.dart';
@@ -53,13 +55,15 @@ class _ProfileViewState extends State<ProfileView> {
                 ],
               ),
               Box(
+                onTap: () => viewModel.goToChangepassword(),
+                width: 155,
                   child: Text(
-                'Chage Password',
-                style: fontFamilyRegular.size16,
-                textAlign: TextAlign.center,
-              )),
-              verticalSpacing10,
+                    'Chage Password',
+                    style: fontFamilyRegular.size16,
+                    textAlign: TextAlign.center,
+                  )),
               Box(
+                width: 90,
                 onTap: () {
                   showDialog(
                       context: context,

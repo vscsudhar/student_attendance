@@ -17,7 +17,10 @@ class StudentView extends StatelessWidget {
       body: ListView.separated(
         padding: defaultPadding20,
         itemBuilder: (context, index) {
-          return StudentListWidget(name: 'Student $index');
+          return Column(children: [
+           
+            StudentListWidget(name: 'Student $index')
+          ],);
         },
         separatorBuilder: (context, index) => verticalSpacing20,
         itemCount: 10,
