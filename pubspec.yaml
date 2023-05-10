@@ -16,6 +16,7 @@ dependencies:
   get_it : ^7.2.0
   dropdown_textfield : ^1.0.8
   maps_toolkit: ^2.0.1
+  dio: ^5.1.2
 
 dev_dependencies:
   flutter_test:

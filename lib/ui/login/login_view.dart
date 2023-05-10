@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/login/login_viewmodel.dart';
 import 'package:workspace/ui/shared/styles.dart';
-import 'package:workspace/ui/widgets/box.dart';
 import 'package:workspace/ui/widgets/button.dart';
 import 'package:workspace/ui/widgets/text_field1.dart';
 
@@ -16,7 +13,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final GlobalKey _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -41,54 +38,27 @@ class _LoginViewState extends State<LoginView> {
                     "Login",
                     style: fontFamilyRegular.size26.color2699FB,
                   ),
-                  const TextField1(
+                  TextField1(
                     hintText: 'USERNAME',
+                    validator: (val) => val == null || val.isEmpty ? 'email is required' : null,
+                    onSaved: (email) => viewModel.loginRequest.email = email,
                   ),
                   verticalSpacing10,
-                  const TextField1(
+                  TextField1(
                     hintText: 'PASSWORD',
+                    validator: (val) => val == null || val.isEmpty ? 'password is required' : null,
+                    onSaved: (password) => viewModel.loginRequest.password = password,
                   ),
                   verticalSpacing10,
                   verticalSpacing20,
                   Button(
                     name: 'Login',
                     onPressed: () {
-                      if (viewModel.atLocation) {
-                        viewModel.goToDashboard();
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return const AlertDialog(
-                                
-                                title: Text(
-                                  'Hello Sudhar...',
-                                  textAlign: TextAlign.center,
-                                ),
-                                content: Text('Succesfully LogedIn....'),
-                              
-                                
-                              );
-                            });
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return const AlertDialog(
-                                title: Text('You are not inside the school campus'),
-                                content: Text('kindly ensure your location and login again...'),
-                                actions: [
-                                  Box(
-                                      boxColor: appcolor2699FB,
-                                      child: Text(
-                                        'Cancel',
-                                        style: fontFamilyRegular,
-                                        textAlign: TextAlign.center,
-                                      ))
-                                ],
-                              );
-                            });
-                        log('you are not inside the school campus,\nkindly ensure your location and login again...');
+                      if (_formKey.currentState?.validate() ?? false) {
+                        _formKey.currentState?.save();
+                        viewModel.login();
                       }
+                   
                     },
                   )
                 ]),

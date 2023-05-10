@@ -24,6 +24,7 @@ const horizontalSpacing20 = SizedBox(width: 20);
 const zeroPadding = EdgeInsets.all(0);
 const defaultPadding20 = EdgeInsets.all(20);
 const defaultPadding10 = EdgeInsets.all(10);
+const defaultPadding12 = EdgeInsets.all(12);
 const defaultPadding8 = EdgeInsets.all(8);
 const topPadding20 = EdgeInsets.only(top: 20);
 const topPadding10 = EdgeInsets.only(top: 10);

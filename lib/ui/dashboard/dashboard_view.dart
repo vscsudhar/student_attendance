@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/dashboard/dashboard_viewmodel.dart';
-import 'package:workspace/ui/dashboard/widget_drawer.dart';
+import 'package:workspace/ui/dashboard/widgets/drawer_widget.dart';
 import 'package:workspace/ui/shared/styles.dart';
 import 'package:workspace/ui/widgets/box.dart';
 
@@ -14,11 +14,7 @@ class DashboardView extends StatefulWidget {
   State<DashboardView> createState() => DashboardviewState();
 }
 
-
-
 class DashboardviewState extends State<DashboardView> {
-  late bool isVisible = true;
-  late bool isVisible1 = true;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
@@ -41,7 +37,7 @@ class DashboardviewState extends State<DashboardView> {
                       width: double.infinity,
                     ),
                     Box(
-                        onTap: () => setState(() => isVisible = !isVisible),
+                        onTap: () {},
                         margin: zeroPadding,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,24 +46,14 @@ class DashboardviewState extends State<DashboardView> {
                               'Staff attendance',
                               style: fontFamilyBold.size20.white,
                             ),
-                            if (isVisible == false)
-                              Box(
-                                  onTap: () => setState(() => isVisible1 = !isVisible1),
-                                  boxColor: Colors.blueAccent,
-                                  child: Text(
-                                    "Login",
-                                    style: fontFamilyRegular.size16.white,
-                                    textAlign: TextAlign.center,
-                                  )),
-                            if (!isVisible1)
-                              Box(
-                                  onTap: () => setState(() => isVisible = !isVisible),
-                                  boxColor: Colors.red,
-                                  child: Text(
-                                    "LogOut",
-                                    style: fontFamilyRegular.size16.white,
-                                    textAlign: TextAlign.center,
-                                  )),
+                            Box(
+                                onTap: () => viewModel.setLogIn(viewModel.isStaffLoggedIn ? false : true),
+                                boxColor: viewModel.isStaffLoggedIn ? Colors.red : Colors.blueAccent,
+                                child: Text(
+                                  viewModel.isStaffLoggedIn ? "LogOut" : "LogIn",
+                                  style: fontFamilyRegular.size16.white,
+                                  textAlign: TextAlign.center,
+                                )),
                             verticalSpacing12,
                           ],
                         )),

@@ -18,26 +18,29 @@ class _ChangepassViewState extends State<ChangepassView> {
         title: const Text('Change Password'),
         elevation: 0,
       ),
-      body: Column(
-        children: const [
-          Padding(
-            padding: defaultPadding20,
-            child: Text('Hi your enter the Change password section....'),
-          ),
-          Card(
-            child: Text(
-              'Hello sudhar',
+      body: Padding(
+        padding: defaultPadding20,
+        child: Column(
+          children: const [
+            // Padding(
+            //   padding: defaultPadding20,
+            //   child: Text('Hi your in Change password section....'),
+            // ),
+            Card(
+              child: Text(
+                'Hello sudhar',
+              ),
             ),
-          ),
-          verticalSpacing60,
-          TextField1(hintText: 'Enter New Password'),
-          verticalSpacing20,
-          TextField1(
-            hintText: 'ReEnter Password',
-          ),
-          verticalSpacing20,
-          Box(width: 120, child: Text('Submit', textAlign: TextAlign.center, style: fontFamilyRegular))
-        ],
+            verticalSpacing60,
+            TextField1(hintText: 'Enter New Password'),
+            verticalSpacing20,
+            TextField1(
+              hintText: 'ReEnter Password',
+            ),
+            verticalSpacing20,
+            Box(width: 120, child: Text('Submit', textAlign: TextAlign.center, style: fontFamilyRegular))
+          ],
+        ),
       ),
     );
   }
