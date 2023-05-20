@@ -42,6 +42,7 @@ class _LoginViewState extends State<LoginView> {
                     hintText: 'USERNAME',
                     validator: (val) => val == null || val.isEmpty ? 'email is required' : null,
                     onSaved: (email) => viewModel.loginRequest.email = email,
+                    
                   ),
                   verticalSpacing10,
                   TextField1(
@@ -58,7 +59,6 @@ class _LoginViewState extends State<LoginView> {
                         _formKey.currentState?.save();
                         viewModel.login();
                       }
-                   
                     },
                   )
                 ]),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../shared/styles.dart';
 
@@ -12,13 +10,14 @@ class TextField1 extends StatelessWidget {
     this.onChanged,
     this.validator,
     super.key,
-  });
+      });
 
   final String? initialValue;
   final String? hintText;
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
   final String? Function(String?)? validator;
+ 
 
   @override
   Widget build(BuildContext context) {

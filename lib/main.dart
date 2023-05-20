@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:workspace/init_app.dart';
+import 'package:workspace/ui/shared/styles.dart';
 
 import 'core/app/app.router.dart';
 
@@ -23,9 +24,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Student Attendance',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: appcolor2699FB,
+        scaffoldBackgroundColor: Colors.white,
+      ),
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
     );
   }
 }
-

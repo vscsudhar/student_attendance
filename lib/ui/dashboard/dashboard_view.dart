@@ -104,7 +104,7 @@ class DashboardviewState extends State<DashboardView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'student Iist',
+                              'student Attendance View',
                               style: fontFamilyBold.size20.white,
                             ),
                             verticalSpacing12,
