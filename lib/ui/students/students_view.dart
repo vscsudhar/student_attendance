@@ -31,8 +31,11 @@ class _StudentViewState extends State<StudentView> {
                     return Column(
                       children: [
                         const Text(''),
-                        Card(
-                          child: StudentListWidget(name: '${viewModel.studentList[index].firstName}\n${viewModel.studentList[index].lastName}'),
+                        InkWell(
+                          onTap: () => viewModel.goToStudentDetails(viewModel.studentList[index].id ?? 0),
+                          child: Card(
+                            child: StudentListWidget(name: '${viewModel.studentList[index].firstName}\n${viewModel.studentList[index].lastName}'),
+                          ),
                         ),
                       ],
                     );

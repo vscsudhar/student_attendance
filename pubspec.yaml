@@ -11,9 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  stacked: ^3.2.2
-  stacked_services: ^0.9.9
-  get_it : ^7.2.0
+  stacked: ^3.2.7
+  stacked_services: ^1.0.2
+  get_it : ^7.6.0
   dropdown_textfield : ^1.0.8
   maps_toolkit: ^2.0.1
   dio: ^5.1.2

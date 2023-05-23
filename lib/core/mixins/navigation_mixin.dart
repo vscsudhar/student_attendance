@@ -10,4 +10,6 @@ mixin NavigationMixin {
   void goToSection() => _navigationService.navigateTo(Routes.sectionView);
   void goToProfiles() => _navigationService.navigateTo(Routes.profileView);
   void goToChangepassword() => _navigationService.navigateTo(Routes.changepassView);
+  void goToStudentDetails(int id) => _navigationService.navigateTo(Routes.studentDetailsView,arguments: StudentDetailsViewArguments(Id: id));
+  
 }
