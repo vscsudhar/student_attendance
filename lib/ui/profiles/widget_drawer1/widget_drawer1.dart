@@ -32,7 +32,7 @@ class _DrawerView1State extends State<DrawerView1> {
           ),
           verticalSpacing10,
           Text('sudhar', style: fontFamilyBold.size18.white),
-          Text('vscsudhar.com', style: fontFamilyBold.size14.white54),
+          Text('vscsudhar@.in', style: fontFamilyBold.size14.white54),
         ]),
       );
   Widget buildMenuItems(BuildContext context) => Column(

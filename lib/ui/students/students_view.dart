@@ -3,9 +3,14 @@ import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/shared/styles.dart';
 import 'package:workspace/ui/students/students_viewmodel.dart';
 import 'package:workspace/ui/students/widgets/student_list_widget.dart';
+import 'package:workspace/ui/widgets/button1.dart';
+
+import '../../core/models/students_model.dart';
 
 class StudentView extends StatefulWidget {
-  const StudentView({super.key});
+  const StudentView({required this.data, super.key});
+
+  final List<Data>? data;
 
   @override
   State<StudentView> createState() => _StudentViewState();
@@ -15,7 +20,7 @@ class _StudentViewState extends State<StudentView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-        viewModelBuilder: () => StudentsViewModel(),
+        viewModelBuilder: () => StudentsViewModel(widget.data ?? []),
         builder: (context, viewModel, child) => Scaffold(
               appBar: AppBar(
                 title: Text(
@@ -25,23 +30,39 @@ class _StudentViewState extends State<StudentView> {
               ),
               body: Visibility(
                 visible: !viewModel.isBusy,
-                child: ListView.separated(
-                  padding: defaultPadding20,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        const Text(''),
-                        InkWell(
-                          onTap: () => viewModel.goToStudentDetails(viewModel.studentList[index].id ?? 0),
-                          child: Card(
-                            child: StudentListWidget(name: '${viewModel.studentList[index].firstName}\n${viewModel.studentList[index].lastName}'),
-                          ),
+                child: Stack(
+                  children: [
+                    ListView.separated(
+                      padding: defaultPadding20,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            const Text(''),
+                            InkWell(
+                              onTap: () => viewModel.goToStudentDetails(viewModel.studentList[index].id ?? 0),
+                              child: Card(
+                                child: StudentListWidget(
+                                  data: viewModel.studentList[index],
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      separatorBuilder: (context, index) => verticalSpacing20,
+                      itemCount: viewModel.studentList.length,
+                    ),
+                     Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: defaultPadding20,
+                        child: Button1(
+                          onTap: () => viewModel.goToStudentConfirmation(viewModel.absentStudentList, viewModel.presentStudentList),
+                          title: 'Next',
                         ),
-                      ],
-                    );
-                  },
-                  separatorBuilder: (context, index) => verticalSpacing20,
-                  itemCount: viewModel.studentList.length,
+                      ),
+                    )
+                  ],
                 ),
               ),
             ));

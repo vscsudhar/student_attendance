@@ -18,14 +18,11 @@ class _ChangepassViewState extends State<ChangepassView> {
         title: const Text('Change Password'),
         elevation: 0,
       ),
-      body: Padding(
+      body: const Padding(
         padding: defaultPadding20,
         child: Column(
-          children: const [
-            // Padding(
-            //   padding: defaultPadding20,
-            //   child: Text('Hi your in Change password section....'),
-            // ),
+          children: [
+            
             Card(
               child: Text(
                 'Hello sudhar',

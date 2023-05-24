@@ -5,15 +5,25 @@ import 'package:workspace/service/api/api_service.dart';
 import 'package:workspace/service/locator.dart';
 
 class StudentsViewModel extends BaseViewModel with NavigationMixin {
-  StudentsViewModel() {
-    getstudents();
+  StudentsViewModel(this._studentList);
+
+  final List<Data> _studentList;
+  final List<Data> _absentStudentList = [];
+  final List<Data> _presentStudentList = [];
+
+  List<Data> get studentList => _studentList;
+  List<Data> get absentStudentList => _absentStudentList;
+  List<Data> get presentStudentList => _presentStudentList;
+
+  void addAbsentList(Data data) {
+    _absentStudentList.add(data);
+    _studentList.remove(data);
+    notifyListeners();
   }
-  StudentsResponse? _response;
 
-  List<Data> get studentList => _response?.data ?? [];
-
-  final _apiSerivce = locator<ApiService>();
-  Future<void> getstudents() async {
-    _response = await runBusyFuture(_apiSerivce.getStudents());
+  void addPresentList(Data data) {
+    _presentStudentList.add(data);
+    _studentList.remove(data);
+    notifyListeners();
   }
 }

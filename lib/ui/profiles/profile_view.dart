@@ -29,19 +29,21 @@ class _ProfileViewState extends State<ProfileView> {
           body: ListView(
             padding: defaultPadding20,
             children: [
-              const SizedBox(
-                width: double.infinity,
-                height: 300,
-                child: Icon(Icons.account_circle, size: 200, color: Colors.black),
+              const CircleAvatar(
+                minRadius: 70,
+                maxRadius: 150,
+                foregroundImage: NetworkImage('https://reqres.in/img/faces/1-image.jpg'),
               ),
-              Row(
+              verticalSpacing16,
+              const Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [Text('Full Name:'), Text('sudharsan ')],
+                children: [Text('Full Name:'), Text('sudharsan ')],
               ),
-              Row(
+              verticalSpacing20,
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [Text('User Id:'), Text('1234')],
+                children: [Text('User Id:'), Text('1234')],
               ),
               Column(
                 children: [

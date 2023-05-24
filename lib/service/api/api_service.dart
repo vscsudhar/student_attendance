@@ -4,7 +4,6 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:workspace/core/models/login_model.dart';
 import 'package:workspace/core/models/students_details_model.dart';
 import 'package:workspace/core/models/students_model.dart';
-import 'package:workspace/ui/student_details/studentsdetails_view.dart';
 
 part 'api_service.g.dart';
 

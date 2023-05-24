@@ -1,9 +1,19 @@
+import 'dart:developer';
+
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:stacked/stacked.dart';
 import 'package:workspace/core/mixins/navigation_mixin.dart';
+import 'package:workspace/core/models/students_model.dart';
+
+import '../../service/api/api_service.dart';
+import '../../service/locator.dart';
 
 class SectionViewModel extends BaseViewModel with NavigationMixin {
   SectionViewModel();
+
+  StudentsResponse? _response;
+
+  List<Data> get studentList => _response?.data ?? [];
 
   final _classList = [
     const DropDownValueModel(name: 'CSE', value: '1'),
@@ -31,4 +41,14 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   List<DropDownValueModel> get yearList => _yearList;
   List<DropDownValueModel> get sectionlist => _sectionlist;
   List<DropDownValueModel> get subjectList => _subjectList;
+
+  final _apiSerivce = locator<ApiService>();
+  Future<void> getstudents() async {
+    _response = await runBusyFuture(_apiSerivce.getStudents());
+    if (hasError) {
+      log('Something went wrong..!');
+    } else if (_response?.data?.isNotEmpty ?? false) {
+      goToStudents(_response?.data ?? []);
+    }
+  }
 }

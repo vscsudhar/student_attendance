@@ -3,7 +3,8 @@ import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/section/section_viewmodel.dart';
 import 'package:workspace/ui/section/widgets/drop_down_widget.dart';
 import 'package:workspace/ui/shared/styles.dart';
-import 'package:workspace/ui/widgets/button.dart';
+
+import '../widgets/button1.dart';
 
 class SectionView extends StatefulWidget {
   const SectionView({super.key});
@@ -65,9 +66,13 @@ class _SectionViewState extends State<SectionView> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Button(
-                          name: 'Submit',
-                          onPressed: viewModel.goToStudents,
+                        Padding(
+                          padding: defaultPadding8,
+                          child: Button1(
+                            title: 'Submit',
+                            busy: viewModel.isBusy,
+                            onTap: () => viewModel.getstudents(),
+                          ),
                         ),
                         verticalSpacing20,
                       ],
