@@ -44,7 +44,7 @@ class LoginViewModel extends BaseViewModel with NavigationMixin {
       _dialogService.showDialog(title: 'Message', description: errorHandler(error(BusyObjects.isLogin)));
     }
     if (loginResponse.token?.isNotEmpty ?? false) {
-      goToDashboard();
+      goToDashboard(loginResponse);
     } else {
       showErrDialog('Login Failed.');
     }

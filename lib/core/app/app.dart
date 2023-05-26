@@ -1,4 +1,5 @@
 import 'package:stacked/stacked_annotations.dart';
+import 'package:workspace/ui/announcement_details/announcement_details_view.dart';
 import 'package:workspace/ui/changepassword/changepass_view.dart';
 import 'package:workspace/ui/dashboard/dashboard_view.dart';
 import 'package:workspace/ui/login/login_view.dart';
@@ -17,5 +18,6 @@ import 'package:workspace/ui/students/students_view.dart';
   MaterialRoute(page: ChangepassView),
   MaterialRoute(page: StudentDetailsView),
   MaterialRoute(page: StudentConfirmationView),
+  MaterialRoute(page: AnnouncementDetailsView),
 ])
 class App {}

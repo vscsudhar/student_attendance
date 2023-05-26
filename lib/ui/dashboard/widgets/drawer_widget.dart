@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
+import 'package:workspace/ui/dashboard/dashboard_viewmodel.dart';
 import 'package:workspace/ui/login/login_view.dart';
 import 'package:workspace/ui/profiles/profile_view.dart';
 import 'package:workspace/ui/shared/styles.dart';
 
-class DrawerView extends StatefulWidget {
+class DrawerView extends ViewModelWidget<DashboardViewmodel> {
   const DrawerView({super.key});
 
   @override
-  State<DrawerView> createState() => _DrawerViewState();
-}
-
-class _DrawerViewState extends State<DrawerView> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,DashboardViewmodel viewModel) {
     return Drawer(
       child: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          buildHeader(context),
+          buildHeader(context,viewModel.userName),
           buildMenuItems(context),
         ]),
       ),
     );
   }
 
-  Widget buildHeader(BuildContext context) => Container(
+  Widget buildHeader(BuildContext context,String userName) => Container(
         color: appcolor2699FB,
         padding: defaultPadding20,
         child: Column(children: [
@@ -31,10 +28,11 @@ class _DrawerViewState extends State<DrawerView> {
             radius: 45,
           ),
           verticalSpacing10,
-          Text('sudhar', style: fontFamilyBold.size18.white),
-          Text('vscsudhar.com', style: fontFamilyBold.size14.white54),
+          Text(userName, style: fontFamilyBold.size18.white),
+          Text('$userName.com', style: fontFamilyBold.size14.white54),
         ]),
       );
+
   Widget buildMenuItems(BuildContext context) => Column(
         children: [
           ListTile(

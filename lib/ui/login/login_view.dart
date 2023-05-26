@@ -39,16 +39,16 @@ class _LoginViewState extends State<LoginView> {
                     style: fontFamilyRegular.size26.color2699FB,
                   ),
                   TextField1(
-                    initialValue: 'eve.holt@reqres.in',
-                    hintText: 'USERNAME',
+                    //initialValue: 'eve.holt@reqres.in',
+                    hintText: 'User ID',
                     validator: (val) => val == null || val.isEmpty ? 'email is required' : null,
-                    onSaved: (email) => viewModel.loginRequest.email = email,
+                    onSaved: (userId) => viewModel.loginRequest.userId = userId,
                     
                   ),
                   verticalSpacing10,
                   TextField1(
-                    initialValue: 'cityslicka',
-                    hintText: 'PASSWORD',
+                   // initialValue: 'cityslicka',
+                    hintText: 'Password',
                     validator: (val) => val == null || val.isEmpty ? 'password is required' : null,
                     onSaved: (password) => viewModel.loginRequest.password = password,
                   ),

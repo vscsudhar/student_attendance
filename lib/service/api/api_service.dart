@@ -15,13 +15,13 @@ abstract class ApiService {
 
   static ApiService init() {
     final dio = Dio();
-    dio.options.baseUrl = 'https://reqres.in/api';
+    dio.options.baseUrl = 'http://rubric.rrwinfo.com';
     dio.interceptors.addAll([PrettyDioLogger(requestBody: true)]);
 
     return ApiService(dio);
   }
 
-  @POST('/login')
+  @POST('/Accounts')
   Future<LoginResponse> login(@Body() LoginRequest loginRequest);
 
   @GET('/users?page=1')

@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/dashboard/dashboard_view.dart';
+import 'package:workspace/ui/dashboard/dashboard_viewmodel.dart';
 import 'package:workspace/ui/login/login_view.dart';
 import 'package:workspace/ui/shared/styles.dart';
 
-class DrawerView1 extends StatefulWidget {
+class DrawerView1 extends ViewModelWidget<DashboardViewmodel>{
   const DrawerView1({super.key});
 
   @override
-  State<DrawerView1> createState() => _DrawerView1State();
-}
-
-class _DrawerView1State extends State<DrawerView1> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, DashboardViewmodel viewModel) {
     return Drawer(
       child: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          buildHeader(context),
-          buildMenuItems(context),
+          buildHeader(context,viewModel.userName),
+          buildMenuItems(context,viewModel),
         ]),
       ),
     );
   }
 
-  Widget buildHeader(BuildContext context) => Container(
+  Widget buildHeader(BuildContext context,String userName) => Container(
         color: appcolor2699FB,
         padding: defaultPadding20,
         child: Column(children: [
@@ -31,11 +28,12 @@ class _DrawerView1State extends State<DrawerView1> {
             radius: 45,
           ),
           verticalSpacing10,
-          Text('sudhar', style: fontFamilyBold.size18.white),
-          Text('vscsudhar@.in', style: fontFamilyBold.size14.white54),
+          Text(userName, style: fontFamilyBold.size18.white),
+          Text('$userName.in', style: fontFamilyBold.size14.white54),
         ]),
       );
-  Widget buildMenuItems(BuildContext context) => Column(
+
+  Widget buildMenuItems(BuildContext context,DashboardViewmodel viewModel) => Column(
         children: [
           ListTile(
               leading: const Icon(Icons.home),
@@ -44,7 +42,7 @@ class _DrawerView1State extends State<DrawerView1> {
                 style: fontFamilyBold.size16,
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardView()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>  DashboardView(loginResponse: viewModel.loginResponse,)));
               }),
           ListTile(
               leading: const Icon(
