@@ -69,7 +69,7 @@ class _SectionViewState extends State<SectionView> {
                         Padding(
                           padding: defaultPadding8,
                           child: Button1(
-                            title: 'Submit',
+                            title: 'Submit' ,
                             busy: viewModel.isBusy,
                             onTap: () => viewModel.getstudents(),
                           ),

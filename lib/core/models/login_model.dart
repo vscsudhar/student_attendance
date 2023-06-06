@@ -11,6 +11,8 @@ String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
 class LoginResponse {
     String? logo;
     String? name;
+    String? employeeId;
+    String? insType;
     dynamic empattendstatus;
     String? token;
     List<Annoncement>? annoncement;
@@ -18,6 +20,8 @@ class LoginResponse {
     LoginResponse({
         this.logo,
         this.name,
+        this.employeeId,
+        this.insType,
         this.empattendstatus,
         this.token,
         this.annoncement,
@@ -26,6 +30,8 @@ class LoginResponse {
     factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         logo: json["logo"],
         name: json["name"],
+        employeeId: json["employeeID"],
+        insType: json["insType"],
         empattendstatus: json["empattendstatus"],
         token: json["token"],
         annoncement: json["annoncement"] == null ? [] : List<Annoncement>.from(json["annoncement"]!.map((x) => Annoncement.fromJson(x))),
@@ -34,6 +40,8 @@ class LoginResponse {
     Map<String, dynamic> toJson() => {
         "logo": logo,
         "name": name,
+        "employeeID": employeeId,
+        "insType": insType,
         "empattendstatus": empattendstatus,
         "token": token,
         "annoncement": annoncement == null ? [] : List<dynamic>.from(annoncement!.map((x) => x.toJson())),
@@ -59,9 +67,6 @@ class Annoncement {
         "details": details,
     };
 }
-// To parse this JSON data, do
-//
-//     final loginRequest = loginRequestFromJson(jsonString);
 
 
 LoginRequest loginRequestFromJson(String str) => LoginRequest.fromJson(json.decode(str));

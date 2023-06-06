@@ -5,8 +5,6 @@ import 'package:workspace/ui/profiles/profile_viewmodel.dart';
 import 'package:workspace/ui/shared/styles.dart';
 import 'package:workspace/ui/widgets/box.dart';
 
-import 'widget_drawer1/widget_drawer1.dart';
-
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
@@ -38,7 +36,7 @@ class _ProfileViewState extends State<ProfileView> {
               const Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text('Full Name:'), Text('sudharsan ')],
+                children: [Text('Full Name:'), Text('')],
               ),
               verticalSpacing20,
               const Row(
@@ -96,7 +94,7 @@ class _ProfileViewState extends State<ProfileView> {
               ),
             ],
           ),
-          drawer: const DrawerView1(),
+          //drawer: const DrawerView1(),
         );
       },
     );

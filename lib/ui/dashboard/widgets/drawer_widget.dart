@@ -9,18 +9,18 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
   const DrawerView({super.key});
 
   @override
-  Widget build(BuildContext context,DashboardViewmodel viewModel) {
+  Widget build(BuildContext context, DashboardViewmodel viewModel) {
     return Drawer(
       child: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          buildHeader(context,viewModel.userName),
+          buildHeader(context, viewModel.userName, viewModel.empId),
           buildMenuItems(context),
         ]),
       ),
     );
   }
 
-  Widget buildHeader(BuildContext context,String userName) => Container(
+  Widget buildHeader(BuildContext context, String userName, String empId) => Container(
         color: appcolor2699FB,
         padding: defaultPadding20,
         child: Column(children: [
@@ -29,7 +29,8 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
           ),
           verticalSpacing10,
           Text(userName, style: fontFamilyBold.size18.white),
-          Text('$userName.com', style: fontFamilyBold.size14.white54),
+          Text(empId, style: fontFamilyBold.size16.white54)
+          //  Text('$userName.com', style: fontFamilyBold.size14.white54),
         ]),
       );
 

@@ -17,6 +17,9 @@ dependencies:
   dropdown_textfield : ^1.0.8
   maps_toolkit: ^2.0.1
   dio: ^5.1.2
+  shared_preferences: ^2.1.1
+  geolocator: ^9.0.2
+
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +31,7 @@ dev_dependencies:
   flutter_native_splash:
   flutter_launcher_icons: ^0.9.2
   pretty_dio_logger: ^1.2.0-beta-1
+
 
 flutter:
 

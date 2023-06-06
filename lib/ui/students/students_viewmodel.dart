@@ -1,8 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:workspace/core/mixins/navigation_mixin.dart';
 import 'package:workspace/core/models/students_model.dart';
-import 'package:workspace/service/api/api_service.dart';
-import 'package:workspace/service/locator.dart';
 
 class StudentsViewModel extends BaseViewModel with NavigationMixin {
   StudentsViewModel(this._studentList);

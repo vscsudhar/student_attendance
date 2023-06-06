@@ -5,7 +5,7 @@ import 'package:workspace/ui/dashboard/dashboard_viewmodel.dart';
 import 'package:workspace/ui/login/login_view.dart';
 import 'package:workspace/ui/shared/styles.dart';
 
-class DrawerView1 extends ViewModelWidget<DashboardViewmodel>{
+class DrawerView1 extends ViewModelWidget<DashboardViewmodel> {
   const DrawerView1({super.key});
 
   @override
@@ -13,14 +13,14 @@ class DrawerView1 extends ViewModelWidget<DashboardViewmodel>{
     return Drawer(
       child: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          buildHeader(context,viewModel.userName),
-          buildMenuItems(context,viewModel),
+          buildHeader(context, viewModel.userName),
+          buildMenuItems(context, viewModel),
         ]),
       ),
     );
   }
 
-  Widget buildHeader(BuildContext context,String userName) => Container(
+  Widget buildHeader(BuildContext context, String userName) => Container(
         color: appcolor2699FB,
         padding: defaultPadding20,
         child: Column(children: [
@@ -33,7 +33,7 @@ class DrawerView1 extends ViewModelWidget<DashboardViewmodel>{
         ]),
       );
 
-  Widget buildMenuItems(BuildContext context,DashboardViewmodel viewModel) => Column(
+  Widget buildMenuItems(BuildContext context, DashboardViewmodel viewModel) => Column(
         children: [
           ListTile(
               leading: const Icon(Icons.home),
@@ -42,7 +42,8 @@ class DrawerView1 extends ViewModelWidget<DashboardViewmodel>{
                 style: fontFamilyBold.size16,
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>  DashboardView(loginResponse: viewModel.loginResponse,)));
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardView(loginResponse: viewModel.loginResponse)));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardView(loginResponse: viewModel.loginResponse,)));
               }),
           ListTile(
               leading: const Icon(

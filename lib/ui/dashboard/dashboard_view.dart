@@ -3,14 +3,11 @@ import 'package:stacked/stacked.dart';
 import 'package:workspace/core/models/login_model.dart';
 import 'package:workspace/ui/dashboard/dashboard_viewmodel.dart';
 import 'package:workspace/ui/dashboard/widgets/drawer_widget.dart';
-import 'package:workspace/ui/profiles/widget_drawer1/widget_drawer1.dart';
 import 'package:workspace/ui/shared/styles.dart';
 import 'package:workspace/ui/widgets/box.dart';
 
 class DashboardView extends StatefulWidget {
-  const DashboardView({
-    required this.loginResponse,
-    super.key});
+  const DashboardView({ required this.loginResponse, super.key});
 
   final LoginResponse? loginResponse;
   final bool isVisible = true;
@@ -18,6 +15,8 @@ class DashboardView extends StatefulWidget {
   @override
   State<DashboardView> createState() => DashboardviewState();
 }
+
+
 
 class DashboardviewState extends State<DashboardView> {
   @override
@@ -37,7 +36,7 @@ class DashboardviewState extends State<DashboardView> {
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: Column(children: [
-                     SizedBox(
+                    SizedBox(
                       height: 200,
                       child: Image.memory(viewModel.image),
                       width: double.infinity,
@@ -93,7 +92,7 @@ class DashboardviewState extends State<DashboardView> {
                               itemBuilder: (context, index) => InkWell(
                                 onTap: () => viewModel.goToAnnouncementDetails(viewModel.annoncement[index]),
                                 child: Text(
-                                  viewModel.annoncement[index].title?? 'N/A',
+                                  viewModel.annoncement[index].title ?? 'N/A',
                                   style: fontFamilyItalic.size14.white70,
                                 ),
                               ),
