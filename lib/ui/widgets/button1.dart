@@ -14,8 +14,9 @@ class Button1 extends StatelessWidget {
     required this.title,
     this.disabled = false,
     this.busy = false,
-    this.onTap,
+    this.onTap, 
     this.leading,
+    //this.leading, required Null Function() onPressed,
   })  : outline = false,
         super(key: key);
 

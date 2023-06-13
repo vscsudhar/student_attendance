@@ -5,12 +5,14 @@ import 'package:workspace/ui/dashboard/dashboard_view.dart';
 import 'package:workspace/ui/login/login_view.dart';
 import 'package:workspace/ui/profiles/profile_view.dart';
 import 'package:workspace/ui/section/section_view.dart';
+import 'package:workspace/ui/splash/splash_view.dart';
 import 'package:workspace/ui/student_confirmation/student_confirmation_view.dart';
 import 'package:workspace/ui/student_details/studentsdetails_view.dart';
 import 'package:workspace/ui/students/students_view.dart';
 
 @StackedApp(routes: [
-  MaterialRoute(page: LoginView, initial: true),
+  MaterialRoute(page: SplashView, initial: true),  
+  MaterialRoute(page: LoginView),
   MaterialRoute(page: DashboardView),
   MaterialRoute(page: StudentView),
   MaterialRoute(page: SectionView),

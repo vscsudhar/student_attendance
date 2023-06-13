@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:maps_toolkit/maps_toolkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,14 +6,11 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:workspace/core/mixins/navigation_mixin.dart';
 import 'package:workspace/core/models/login_model.dart';
 import 'package:workspace/service/locator.dart';
-
-import '../../core/enum/busy_objects.dart';
-import '../../core/helpers/error_handler.dart';
+import 'package:workspace/service/user_authentication_service.dart';
 
 class LoginViewModel extends BaseViewModel with NavigationMixin {
   LoginViewModel() {
     _loginRequest = LoginRequest();
-
     init();
   }
 
@@ -32,6 +27,8 @@ class LoginViewModel extends BaseViewModel with NavigationMixin {
   late LoginRequest _loginRequest;
   late SharedPreferences _sharedPreference;
 
+  final userAuthenticationService = locator<UserAuthenticationService>();
+
   final p1 = LatLng(76.9660987, 10.90941317);
   final p2 = LatLng(76.9666191, 10.9087705);
   final p3 = LatLng(76.9672521, 10.9097976);
@@ -46,28 +43,15 @@ class LoginViewModel extends BaseViewModel with NavigationMixin {
   String get password => _password ?? '';
   LoginRequest get loginRequest => _loginRequest;
 
-  Future<void> login() async {
-    // final loginResponse = await runBusyFuture(_apiService.login(loginRequest), busyObject: BusyObjects.isLogin);
-
-    final request = {"userID": "${_loginRequest.userId}", "password": "${_loginRequest.password}"};
-    final loginResponse = await  _dio.post('http://rubric.rrwinfo.com/Accounts/Login',
-        data:request ,
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-        ));
-    log(loginResponse.data["token"] ?? 'error');
-    final String token = loginResponse.data["token"] ?? '';
-    if (loginResponse.statusCode!=200) {
-      _dialogService.showDialog(title: 'Message', description: 'login failed');
-    }
-    if (token.isNotEmpty) {
-      goToDashboard( LoginResponse.fromJson(loginResponse.data));
-      _sharedPreference.setString('token', token );
+  void userLogin() async {
+    final loginResponse = await userAuthenticationService.login(loginRequest);
+    final token = loginResponse["token"];
+    if (token != null && loginResponse != null) {
+      _sharedPreference.setString('token', token);
+      _sharedPreference.setString('user_credentials', loginResponse.toString());
+      goToDashboard();
     } else {
-      showErrDialog('Login Failed.');
+      showErrDialog('login failed');
     }
   }
 

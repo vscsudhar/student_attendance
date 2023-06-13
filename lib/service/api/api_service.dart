@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -7,6 +8,8 @@ import 'package:workspace/core/models/boundry_model.dart';
 import 'package:workspace/core/models/login_model.dart';
 import 'package:workspace/core/models/students_details_model.dart';
 import 'package:workspace/core/models/students_model.dart';
+import 'package:workspace/service/locator.dart';
+import 'package:workspace/service/user_authentication_service.dart';
 
 part 'api_service.g.dart';
 
@@ -19,10 +22,7 @@ abstract class ApiService {
   static ApiService init() {
     final dio = Dio();
     dio.options.baseUrl = 'http://rubric.rrwinfo.com';
-    dio.interceptors.addAll([
-      _interceptorsWrapper(dio),
-      PrettyDioLogger(requestBody: true)
-      ]);
+    dio.interceptors.addAll([_interceptorsWrapper(dio), PrettyDioLogger(requestBody: true)]);
 
     return ApiService(dio);
   }
@@ -43,9 +43,9 @@ abstract class ApiService {
 InterceptorsWrapper _interceptorsWrapper(Dio dio) {
   return InterceptorsWrapper(
     onRequest: (options, handler) {
-      // print("TOKEN>>" + locator<amazonCognitoService>().getToken());
-
-      options.headers[HttpHeaders.authorizationHeader] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiY29sbGVnZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJTdWRoYXIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3NlcmlhbG51bWJlciI6IjEwMjAiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJUZWFjaGVyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiJDb2xsZWdlIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc2lkIjoiMSIsImV4cCI6MTY4NjA3OTM0OCwiaXNzIjoiSldUQXV0aGVudGljYXRpb25TZXJ2ZXIiLCJhdWQiOiJKV1RTZXJ2aWNlUG9zdG1hbkNsaWVudCJ9.N34id1JqFFDcvm2zBROBQG4d4wECy6EEL5Jtl55bngQ';
+      print("TOKEN>>" + locator<UserAuthenticationService>().token);
+      //options.headers["Authorization"] = "Bearer " + accessToken.toString();
+      options.headers["Authorization"] = 'Bearer ${locator<UserAuthenticationService>().token}';
       options.headers[HttpHeaders.contentTypeHeader] = 'application/json';
       return handler.next(options);
     },
@@ -64,7 +64,7 @@ InterceptorsWrapper _interceptorsWrapper(Dio dio) {
       // Instabug.
       if (dioError.response != null && dioError.response?.data["message"] == "The incoming token has expired") {
         // var result = await locator<AmazonCognitoService>().refreshSession();
-        var result = null;
+        var result;
         if (result) {
           handler.resolve(
             await dio.request(

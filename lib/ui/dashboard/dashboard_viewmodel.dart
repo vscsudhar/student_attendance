@@ -8,9 +8,10 @@ import 'package:workspace/core/mixins/navigation_mixin.dart';
 import 'package:workspace/core/models/login_model.dart';
 import 'package:workspace/service/api/api_service.dart';
 import 'package:workspace/service/locator.dart';
+import 'package:workspace/service/user_authentication_service.dart';
 
 class DashboardViewmodel extends BaseViewModel with NavigationMixin {
-  DashboardViewmodel(this._loginResponse) {
+  DashboardViewmodel() {
     init();
   }
 
@@ -20,18 +21,18 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   }
 
   var _apiService = ApiService.init();
+  final _userAuthenticationService = locator<UserAuthenticationService>() ;
 
-  final LoginResponse? _loginResponse;
   bool? _isStaffLoggedIn;
   late SharedPreferences _sharedPreference;
 
-  LoginResponse get loginResponse => _loginResponse ?? LoginResponse();
+  LoginResponse? get loginResponse => _userAuthenticationService.loginResponse ;
 
-  Uint8List get image => const Base64Decoder().convert(_loginResponse?.logo ?? '');
-  List<Annoncement> get annoncement => _loginResponse?.annoncement ?? [];
+  Uint8List get image => const Base64Decoder().convert(loginResponse?.logo ?? '');
+  List<Annoncement> get annoncement => loginResponse?.annoncement ?? [];
   bool get isStaffLoggedIn => _isStaffLoggedIn ?? false;
-  String get userName => _loginResponse?.name ?? 'college';
-  String get empId => _loginResponse?.employeeId ?? 'empid';
+  String get userName => loginResponse?.name ?? 'college';
+  String get empId => loginResponse?.employeeId ?? 'empid';
 
   String get token => _sharedPreference.getString('token') ?? '';
 
@@ -47,4 +48,12 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
     final res = await _apiService.getBoundries();
     log(res.boundry.toString());
   }
-}
+
+  Future<void> logout() async {
+    _sharedPreference.clear();
+    goToLogin();
+  }
+
+  
+  }
+

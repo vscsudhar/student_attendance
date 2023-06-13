@@ -4,6 +4,7 @@ import 'package:workspace/ui/shared/styles.dart';
 
 class DropDownWidget extends StatelessWidget {
   const DropDownWidget({
+    required this.validator,
     required this.dropDownList,
     this.title,
     super.key,
@@ -11,6 +12,7 @@ class DropDownWidget extends StatelessWidget {
 
   final String? title;
   final List<DropDownValueModel> dropDownList;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class DropDownWidget extends StatelessWidget {
           padding: zeroPadding,
           dropdownColor: appcolor2699FB,
           listTextStyle: fontFamilyBold.size16.white,
+          validator: validator,
         ),
       ],
     );

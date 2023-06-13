@@ -7,22 +7,19 @@ import 'package:workspace/ui/shared/styles.dart';
 import 'package:workspace/ui/widgets/box.dart';
 
 class DashboardView extends StatefulWidget {
-  const DashboardView({ required this.loginResponse, super.key});
+  const DashboardView({super.key});
 
-  final LoginResponse? loginResponse;
   final bool isVisible = true;
 
   @override
   State<DashboardView> createState() => DashboardviewState();
 }
 
-
-
 class DashboardviewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-        viewModelBuilder: () => DashboardViewmodel(widget.loginResponse),
+        viewModelBuilder: () => DashboardViewmodel(),
         builder: (context, viewModel, child) {
           return Scaffold(
             appBar: AppBar(

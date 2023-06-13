@@ -43,7 +43,7 @@ class DrawerView1 extends ViewModelWidget<DashboardViewmodel> {
               ),
               onTap: () {
                 // Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardView(loginResponse: viewModel.loginResponse)));
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardView(loginResponse: viewModel.loginResponse,)));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashboardView()));
               }),
           ListTile(
               leading: const Icon(

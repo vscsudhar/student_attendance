@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/dashboard/dashboard_viewmodel.dart';
-import 'package:workspace/ui/login/login_view.dart';
 import 'package:workspace/ui/profiles/profile_view.dart';
 import 'package:workspace/ui/shared/styles.dart';
 
@@ -14,7 +13,7 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
       child: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           buildHeader(context, viewModel.userName, viewModel.empId),
-          buildMenuItems(context),
+          buildMenuItems(context, viewModel),
         ]),
       ),
     );
@@ -34,7 +33,7 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
         ]),
       );
 
-  Widget buildMenuItems(BuildContext context) => Column(
+  Widget buildMenuItems(BuildContext context, DashboardViewmodel viewModel) => Column(
         children: [
           ListTile(
               leading: const Icon(Icons.home),
@@ -84,7 +83,7 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
                             )),
                         IconButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginView()));
+                              viewModel.logout();
                             },
                             icon: const Icon(
                               Icons.done,

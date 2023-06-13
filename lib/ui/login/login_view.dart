@@ -40,6 +40,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   TextField1(
                     hintText: 'User ID',
+                    initialValue: 'college',
                     obscureText: false,
                     validator: (val) => val == null || val.isEmpty ? 'email is required' : null,
                     onSaved: (userId) => viewModel.loginRequest.userId = userId,
@@ -47,6 +48,7 @@ class _LoginViewState extends State<LoginView> {
                   verticalSpacing10,
                   TextField1(
                     obscureText: true,
+                    initialValue: '123',
                     hintText: 'Password',
                     validator: (val) => val == null || val.isEmpty ? 'password is required' : null,
                     onSaved: (password) => viewModel.loginRequest.password = password,
@@ -58,7 +60,7 @@ class _LoginViewState extends State<LoginView> {
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         _formKey.currentState?.save();
-                        viewModel.login();
+                        viewModel.userLogin();
                       }
                     },
                   )

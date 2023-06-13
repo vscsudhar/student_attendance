@@ -8,12 +8,13 @@ import '../models/students_model.dart';
 mixin NavigationMixin {
   final NavigationService _navigationService = locator<NavigationService>();
 
-  void goToDashboard(LoginResponse? loginResponse) => _navigationService.navigateTo(Routes.dashboardView, arguments: DashboardViewArguments(loginResponse: loginResponse));
+  void goToDashboard() => _navigationService.navigateTo(Routes.dashboardView);
   void goToStudents(List<Data>? data) => _navigationService.navigateTo(Routes.studentView, arguments: StudentViewArguments(data: data));
   void goToSection() => _navigationService.navigateTo(Routes.sectionView);
   void goToProfiles() => _navigationService.navigateTo(Routes.profileView);
   void goToChangepassword() => _navigationService.navigateTo(Routes.changepassView);
   void goToStudentDetails(int id) => _navigationService.navigateTo(Routes.studentDetailsView, arguments: StudentDetailsViewArguments(Id: id));
   void goToStudentConfirmation(List<Data> absentList, List<Data> presentList) => _navigationService.navigateTo(Routes.studentConfirmationView, arguments: StudentConfirmationViewArguments(absentStudentList: absentList, presentStudentList: presentList));
-  void goToAnnouncementDetails(Annoncement annoncement) => _navigationService.navigateTo(Routes.announcementDetailsView,arguments: AnnouncementDetailsViewArguments(annoncement: annoncement));
+  void goToAnnouncementDetails(Annoncement annoncement) => _navigationService.navigateTo(Routes.announcementDetailsView, arguments: AnnouncementDetailsViewArguments(annoncement: annoncement));
+  void goToLogin() => _navigationService.navigateTo(Routes.loginView);
 }

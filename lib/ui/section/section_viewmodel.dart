@@ -5,15 +5,18 @@ import 'package:stacked/stacked.dart';
 import 'package:workspace/core/mixins/navigation_mixin.dart';
 import 'package:workspace/core/models/students_model.dart';
 
+import '../../core/models/login_model.dart';
 import '../../service/api/api_service.dart';
 import '../../service/locator.dart';
 
 class SectionViewModel extends BaseViewModel with NavigationMixin {
-  SectionViewModel();
+  SectionViewModel(this._loginResponse);
 
   StudentsResponse? _response;
+  final LoginResponse? _loginResponse;
 
   List<Data> get studentList => _response?.data ?? [];
+  String get insType => _loginResponse?.insType ?? '';
 
   final _classList = [
     const DropDownValueModel(name: 'CSE', value: '1'),
