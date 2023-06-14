@@ -56,7 +56,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/Staff/GetBoundrey',
+              '/Staff/GetBoundry',
               queryParameters: queryParameters,
               data: _data,
             )

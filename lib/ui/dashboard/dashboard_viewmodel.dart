@@ -16,29 +16,29 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   }
 
   init() async {
-    _sharedPreference = await SharedPreferences.getInstance();
     await getBoudry();
   }
 
   var _apiService = ApiService.init();
-  final _userAuthenticationService = locator<UserAuthenticationService>() ;
+   final _sharedPreference = locator<SharedPreferences>();
+
 
   bool? _isStaffLoggedIn;
-  late SharedPreferences _sharedPreference;
 
-  LoginResponse? get loginResponse => _userAuthenticationService.loginResponse ;
 
-  Uint8List get image => const Base64Decoder().convert(loginResponse?.logo ?? '');
-  List<Annoncement> get annoncement => loginResponse?.annoncement ?? [];
+
+  Uint8List get image => const Base64Decoder().convert(_sharedPreference.getString('logo') ?? '');
+  List<Annoncement> get annoncement =>  [];
   bool get isStaffLoggedIn => _isStaffLoggedIn ?? false;
-  String get userName => loginResponse?.name ?? 'college';
-  String get empId => loginResponse?.employeeId ?? 'empid';
+  String get userName => _sharedPreference.getString('name') ?? 'college';
+  String get empId => _sharedPreference.getString('id') ?? 'empid';
 
   String get token => _sharedPreference.getString('token') ?? '';
 
   setLogIn(bool isStaffLoggedIn) async {
     _apiService = ApiService.init();
     await getBoudry();
+
     print(token);
     _isStaffLoggedIn = isStaffLoggedIn;
     notifyListeners();
@@ -53,7 +53,4 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
     _sharedPreference.clear();
     goToLogin();
   }
-
-  
-  }
-
+}

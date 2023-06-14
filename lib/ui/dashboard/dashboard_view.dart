@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:workspace/core/models/login_model.dart';
 import 'package:workspace/ui/dashboard/dashboard_viewmodel.dart';
 import 'package:workspace/ui/dashboard/widgets/drawer_widget.dart';
 import 'package:workspace/ui/shared/styles.dart';

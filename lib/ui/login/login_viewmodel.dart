@@ -11,16 +11,17 @@ import 'package:workspace/service/user_authentication_service.dart';
 class LoginViewModel extends BaseViewModel with NavigationMixin {
   LoginViewModel() {
     _loginRequest = LoginRequest();
-    init();
-  }
 
-  init() async {
-    _sharedPreference = await SharedPreferences.getInstance();
+     init();
+    }
+
+    init() async {
+      _sharedPreference = await SharedPreferences.getInstance();
   }
 
   final _dio = Dio();
   final _dialogService = locator<DialogService>();
-  //final _sharedPreference = locator<SharedPreferences>();
+  // final _sharedPreference = locator<SharedPreferences>();
 
   String? _email;
   String? _password;

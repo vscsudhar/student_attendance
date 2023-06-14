@@ -17,7 +17,7 @@ dependencies:
   dropdown_textfield : ^1.0.8
   maps_toolkit: ^2.0.1
   dio: ^5.1.2
-  shared_preferences: ^2.1.1
+  shared_preferences: ^2.0.13
   geolocator: ^9.0.2
 
 
@@ -48,3 +48,6 @@ fonts:
   - family: times new roman italic
     fonts:
       - asset: assets/fonts/times new roman italic.ttf
+
+assets:
+  - assets/images/

@@ -30,7 +30,7 @@ abstract class ApiService {
   @POST('/Accounts/Login')
   Future<LoginResponse> login(@Body() LoginRequest loginRequest);
 
-  @GET('/Staff/GetBoundrey')
+  @GET('/Staff/GetBoundry')
   Future<BoundryResponse> getBoundries();
 
   @GET('/users?page=1')
@@ -45,7 +45,7 @@ InterceptorsWrapper _interceptorsWrapper(Dio dio) {
     onRequest: (options, handler) {
       print("TOKEN>>" + locator<UserAuthenticationService>().token);
       //options.headers["Authorization"] = "Bearer " + accessToken.toString();
-      options.headers["Authorization"] = 'Bearer ${locator<UserAuthenticationService>().token}';
+      options.headers[HttpHeaders.authorizationHeader] = "Bearer ${locator<UserAuthenticationService>().token}" ;
       options.headers[HttpHeaders.contentTypeHeader] = 'application/json';
       return handler.next(options);
     },
