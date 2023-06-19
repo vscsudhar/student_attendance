@@ -40,7 +40,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   TextField1(
                     hintText: 'User ID',
-                    initialValue: 'college',
+                    initialValue: 'school',
                     obscureText: false,
                     validator: (val) => val == null || val.isEmpty ? 'email is required' : null,
                     onSaved: (userId) => viewModel.loginRequest.userId = userId,

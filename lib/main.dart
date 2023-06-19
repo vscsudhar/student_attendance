@@ -10,6 +10,7 @@ import 'core/app/app.router.dart';
 void main() {
   runZonedGuarded<Future<void>>(() async {
     await initApp();
+    
     runApp(const MyApp());
   }, (Object error, StackTrace stackTrace) {
     //CrashReporting.reportCrash(error, stackTrace);

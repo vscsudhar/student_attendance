@@ -23,7 +23,7 @@ class ErrorDialog extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -35,13 +35,13 @@ class ErrorDialog extends StatelessWidget {
                     verticalSpacing20,
                     Text(
                       title ?? 'Error',
-                      style: fontFamilyBold.size16.white,
+                      style: fontFamilyBold.size16.copyWith(color: Colors.black87),
                     ),
                     verticalSpacing8,
                     Text(
                       description ?? 'Description not available.',
                       textAlign: TextAlign.center,
-                      style: fontFamilyRegular.size14.white,
+                      style: fontFamilyRegular.size14.color2699FB,
                     ),
                     verticalSpacing20,
                   ],
@@ -56,26 +56,6 @@ class ErrorDialog extends StatelessWidget {
                   children: [
                     Expanded(
                       child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                        ),
-                        child: Center(
-                          child: Padding(
-                            padding: defaultPadding12,
-                            child: Text(
-                              'Report a bug',
-                              style: fontFamilyBold.size16.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    verticalDivider,
-                    Expanded(
-                      child: InkWell(
                         borderRadius: const BorderRadius.only(bottomRight: Radius.circular(15)),
                         onTap: onMainButtonClick,
                         child: Center(
@@ -83,7 +63,7 @@ class ErrorDialog extends StatelessWidget {
                             padding: defaultPadding8,
                             child: Text(
                               mainButtonTitle ?? 'Dismiss',
-                              style: fontFamilyBold.size16.white,
+                              style: fontFamilyBold.size16.color2699FB,
                             ),
                           ),
                         ),

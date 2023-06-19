@@ -18,7 +18,8 @@ dependencies:
   maps_toolkit: ^2.0.1
   dio: ^5.1.2
   shared_preferences: ^2.0.13
-  geolocator: ^9.0.2
+  location: ^4.4.0
+  network_info_plus: ^4.0.1
 
 
 dev_dependencies:

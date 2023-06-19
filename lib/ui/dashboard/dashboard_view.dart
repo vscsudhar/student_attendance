@@ -38,7 +38,6 @@ class DashboardviewState extends State<DashboardView> {
                       width: double.infinity,
                     ),
                     Box(
-                        onTap: () {},
                         margin: zeroPadding,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,31 +46,39 @@ class DashboardviewState extends State<DashboardView> {
                               'Staff attendance',
                               style: fontFamilyBold.size20.white,
                             ),
-                            Box(
-                                onTap: () => viewModel.setLogIn(viewModel.isStaffLoggedIn ? false : true),
-                                boxColor: viewModel.isStaffLoggedIn ? Colors.red : Colors.blueAccent,
-                                child: Text(
-                                  viewModel.isStaffLoggedIn ? "LogOut" : "LogIn",
-                                  style: fontFamilyRegular.size16.white,
-                                  textAlign: TextAlign.center,
-                                )),
-                            verticalSpacing12,
-                          ],
-                        )),
-                    verticalSpacing20,
-                    Box(
-                        onTap: viewModel.goToSection,
-                        margin: zeroPadding,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'student attendance',
-                              style: fontFamilyBold.size20.white,
+                            InkWell(
+                              onTap: () {
+                                viewModel.setLogIn();
+                              },
+                              child: Box(
+                                  boxColor: viewModel.isStaffLoggedIn ? Colors.red : Colors.blueAccent,
+                                  child: Text(
+                                    viewModel.isStaffLoggedIn ? "LogOut" : "LogIn",
+                                    style: fontFamilyRegular.size16.white,
+                                    textAlign: TextAlign.center,
+                                  )),
                             ),
                             verticalSpacing12,
                           ],
                         )),
+                    verticalSpacing20,
+                    InkWell(
+                      onTap: () {
+                        viewModel.section();
+                      },
+                      child: Box(
+                          margin: zeroPadding,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'student attendance',
+                                style: fontFamilyBold.size20.white,
+                              ),
+                              verticalSpacing12,
+                            ],
+                          )),
+                    ),
                     verticalSpacing20,
                     Box(
                         margin: zeroPadding,
@@ -102,7 +109,7 @@ class DashboardviewState extends State<DashboardView> {
                         )),
                     verticalSpacing20,
                     Box(
-                        onTap: viewModel.goToSection,
+                        onTap: viewModel.section,
                         margin: zeroPadding,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

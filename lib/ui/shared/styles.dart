@@ -41,8 +41,8 @@ const leftPadding8 = EdgeInsets.only(bottom: 8);
 
 //Divider
 
-const verticalDivider = VerticalDivider(width: 1, color: Colors.white24);
-const horizontalDivider = Divider(height: 1, color: Colors.grey);
+const verticalDivider = VerticalDivider(width: 1.5, color: Colors.black87);
+const horizontalDivider = Divider(height: 1.5, color: Colors.black87);
 
 //fontFamily
 

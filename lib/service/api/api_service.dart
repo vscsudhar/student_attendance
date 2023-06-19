@@ -11,6 +11,8 @@ import 'package:workspace/core/models/students_model.dart';
 import 'package:workspace/service/locator.dart';
 import 'package:workspace/service/user_authentication_service.dart';
 
+import '../../core/models/staff_login_model.dart';
+
 part 'api_service.g.dart';
 
 @RestApi(
@@ -22,6 +24,7 @@ abstract class ApiService {
   static ApiService init() {
     final dio = Dio();
     dio.options.baseUrl = 'http://rubric.rrwinfo.com';
+    dio.options;
     dio.interceptors.addAll([_interceptorsWrapper(dio), PrettyDioLogger(requestBody: true)]);
 
     return ApiService(dio);
@@ -41,13 +44,18 @@ abstract class ApiService {
 }
 
 InterceptorsWrapper _interceptorsWrapper(Dio dio) {
+  RequestOptions options = RequestOptions(headers: {"Authorization": "Bearer ${locator<UserAuthenticationService>().token}", "accept": "application/json"});
   return InterceptorsWrapper(
-    onRequest: (options, handler) {
-      print("TOKEN>>" + locator<UserAuthenticationService>().token);
-      //options.headers["Authorization"] = "Bearer " + accessToken.toString();
-      options.headers[HttpHeaders.authorizationHeader] = "Bearer ${locator<UserAuthenticationService>().token}" ;
-      options.headers[HttpHeaders.contentTypeHeader] = 'application/json';
-      return handler.next(options);
+    // onRequest: (options, handler) {
+    //   print("TOKEN>>" + locator<UserAuthenticationService>().token);
+    //   //options.headers["Authorization"] = "Bearer " + accessToken.toString();
+    //   // options.headers[HttpHeaders.authorizationHeader] = "Bearer ${locator<UserAuthenticationService>().token}";
+    //   // options.headers[HttpHeaders.contentTypeHeader] = 'application/json';
+    //   return handler.next(options);
+    // },
+    onRequest: (RequestOptions requestOptions, RequestInterceptorHandler handler) {
+      requestOptions.headers.putIfAbsent('Authorization', () => 'Bearer ${locator<UserAuthenticationService>().token}');
+      handler.next(requestOptions);
     },
     onResponse: (response, handler) {
       if (response.data["errorCode"] != 0) {

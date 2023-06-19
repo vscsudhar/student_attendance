@@ -37,6 +37,10 @@ class LoginResponse {
         annoncement: json["annoncement"] == null ? [] : List<Annoncement>.from(json["annoncement"]!.map((x) => Annoncement.fromJson(x))),
     );
 
+  get lat => null;
+
+  get long => null;
+
     Map<String, dynamic> toJson() => {
         "logo": logo,
         "name": name,

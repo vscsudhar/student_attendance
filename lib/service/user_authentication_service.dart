@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:workspace/core/models/staff_login_model.dart';
 
 import '../core/models/login_model.dart';
 import 'locator.dart';
@@ -14,7 +15,7 @@ class UserAuthenticationService {
   final _dio = Dio();
   final _dialogService = locator<DialogService>();
 
- LoginResponse? _loginResponse;
+  LoginResponse? _loginResponse;
 
   String get token => _sharedPreference.getString('token') ?? '';
 
@@ -30,11 +31,12 @@ class UserAuthenticationService {
             'Accept': 'application/json',
           },
         ));
-    _loginResponse = LoginResponse.fromJson(response.data) ;
+    _loginResponse = LoginResponse.fromJson(response.data);
     log('token : ' + (_loginResponse?.token ?? ''));
     _sharedPreference.setString('user_credentials', json.encode(_loginResponse));
     _sharedPreference.setString('name', _loginResponse?.name ?? '');
-    _sharedPreference.setString('id',  _loginResponse?.employeeId ?? '');
+    _sharedPreference.setString('id', _loginResponse?.employeeId ?? '');
+   _sharedPreference.setString('annoncement', json.encode(_loginResponse?.annoncement));
     _sharedPreference.setString('logo', _loginResponse?.logo ?? '');
 
     if (response.statusCode != 200) {

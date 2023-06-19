@@ -23,7 +23,7 @@ class MessageDialog extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Colors.white70,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -35,13 +35,13 @@ class MessageDialog extends StatelessWidget {
                   verticalSpacing20,
                   Text(
                     title ?? 'Title not available',
-                    style: fontFamilyBold.size16.white,
+                    style: fontFamilyBold.size16.color2699FB,
                   ),
                   verticalSpacing8,
                   Text(
                     description ?? 'Description not available.',
                     textAlign: TextAlign.center,
-                    style: fontFamilyRegular.size12.white,
+                    style: fontFamilyRegular.size12.color2699FB,
                   ),
                   verticalSpacing20,
                 ],
@@ -59,7 +59,7 @@ class MessageDialog extends StatelessWidget {
                 child: Center(
                   child: Text(
                     mainButtonTitle ?? 'Okay',
-                    style: fontFamilyBold.size16.white,
+                    style: fontFamilyBold.size16.color2699FB,
                   ),
                 ),
               ),

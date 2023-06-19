@@ -10,6 +10,7 @@ class ProfileView extends StatefulWidget {
 
   @override
   State<ProfileView> createState() => _ProfileViewState();
+
 }
 
 class _ProfileViewState extends State<ProfileView> {
@@ -33,15 +34,15 @@ class _ProfileViewState extends State<ProfileView> {
                 foregroundImage: NetworkImage('https://reqres.in/img/faces/1-image.jpg'),
               ),
               verticalSpacing16,
-              const Row(
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text('Full Name:'), Text('')],
+                children: [const Text('Full Name:'), Text(viewModel.userName,style: fontFamilyItalic.size16,)],
               ),
               verticalSpacing20,
-              const Row(
+               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text('User Id:'), Text('1234')],
+                children:  [const Text('User Id:'), Text(viewModel.empId, style: fontFamilyItalic.size16,)],
               ),
               Column(
                 children: [
