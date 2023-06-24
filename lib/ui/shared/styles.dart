@@ -32,15 +32,14 @@ const topPadding8 = EdgeInsets.only(top: 8);
 const bottomPadding20 = EdgeInsets.only(bottom: 20);
 const bottomPadding10 = EdgeInsets.only(bottom: 10);
 const bottomPadding8 = EdgeInsets.only(bottom: 8);
-const rightPadding20 = EdgeInsets.only(bottom: 20);
-const rightPadding10 = EdgeInsets.only(bottom: 10);
-const rightPadding8 = EdgeInsets.only(bottom: 8);
-const leftPadding20 = EdgeInsets.only(bottom: 20);
-const leftPadding10 = EdgeInsets.only(bottom: 10);
-const leftPadding8 = EdgeInsets.only(bottom: 8);
+const rightPadding20 = EdgeInsets.only(right: 20);
+const rightPadding10 = EdgeInsets.only(right: 10);
+const rightPadding8 = EdgeInsets.only(right: 8);
+const leftPadding20 = EdgeInsets.only(left: 20);
+const leftPadding10 = EdgeInsets.only(left: 10);
+const leftPadding8 = EdgeInsets.only(left: 8);
 
 //Divider
-
 const verticalDivider = VerticalDivider(width: 1.5, color: Colors.black87);
 const horizontalDivider = Divider(height: 1.5, color: Colors.black87);
 

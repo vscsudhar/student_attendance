@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:workspace/core/models/section_model.dart';
 import 'package:workspace/ui/shared/styles.dart';
 import 'package:workspace/ui/student_confirmation/student_confirmation_viewmodel.dart';
 
@@ -12,8 +13,8 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
     super.key,
   });
 
-  final List<Data> absentStudentList;
-  final List<Data> presentStudentList;
+  final List<Student> absentStudentList;
+  final List<Student> presentStudentList;
 
   @override
   Widget builder(BuildContext context, StudentConfirmationViewModel viewModel, Widget? child) {
@@ -37,7 +38,7 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
             ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemBuilder: (context, index) => Text(absentStudentList[index].firstName ?? ''),
+              itemBuilder: (context, index) => Text(absentStudentList[index].studentName ?? ''),
               separatorBuilder: (context, index) => const Padding(
                 padding: defaultPadding8,
                 child: horizontalDivider,
@@ -55,7 +56,7 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
             ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemBuilder: (context, index) => Text(presentStudentList[index].firstName ?? ''),
+              itemBuilder: (context, index) => Text(presentStudentList[index].studentName ?? ''),
               separatorBuilder: (context, index) => const Padding(
                 padding: defaultPadding8,
                 child: horizontalDivider,

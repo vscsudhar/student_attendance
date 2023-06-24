@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i15;
 import 'package:workspace/core/models/login_model.dart' as _i14;
-import 'package:workspace/core/models/students_model.dart' as _i13;
+import 'package:workspace/core/models/section_model.dart' as _i13;
 import 'package:workspace/ui/announcement_details/announcement_details_view.dart'
     as _i11;
 import 'package:workspace/ui/changepassword/changepass_view.dart' as _i8;
@@ -125,7 +125,8 @@ class StackedRouter extends _i1.RouterBase {
     _i5.StudentView: (data) {
       final args = data.getArgs<StudentViewArguments>(nullOk: false);
       return _i12.MaterialPageRoute<dynamic>(
-        builder: (context) => _i5.StudentView(data: args.data, key: args.key),
+        builder: (context) =>
+            _i5.StudentView(students: args.students, key: args.key),
         settings: data,
       );
     },
@@ -187,28 +188,28 @@ class StackedRouter extends _i1.RouterBase {
 
 class StudentViewArguments {
   const StudentViewArguments({
-    required this.data,
+    required this.students,
     this.key,
   });
 
-  final List<_i13.Data>? data;
+  final List<_i13.Student>? students;
 
   final _i12.Key? key;
 
   @override
   String toString() {
-    return '{"data": "$data", "key": "$key"}';
+    return '{"students": "$students", "key": "$key"}';
   }
 
   @override
   bool operator ==(covariant StudentViewArguments other) {
     if (identical(this, other)) return true;
-    return other.data == data && other.key == key;
+    return other.students == students && other.key == key;
   }
 
   @override
   int get hashCode {
-    return data.hashCode ^ key.hashCode;
+    return students.hashCode ^ key.hashCode;
   }
 }
 
@@ -273,9 +274,9 @@ class StudentConfirmationViewArguments {
     this.key,
   });
 
-  final List<_i13.Data> absentStudentList;
+  final List<_i13.Student> absentStudentList;
 
-  final List<_i13.Data> presentStudentList;
+  final List<_i13.Student> presentStudentList;
 
   final _i12.Key? key;
 
@@ -371,7 +372,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToStudentView({
-    required List<_i13.Data>? data,
+    required List<_i13.Student>? students,
     _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -380,7 +381,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.studentView,
-        arguments: StudentViewArguments(data: data, key: key),
+        arguments: StudentViewArguments(students: students, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -450,8 +451,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToStudentConfirmationView({
-    required List<_i13.Data> absentStudentList,
-    required List<_i13.Data> presentStudentList,
+    required List<_i13.Student> absentStudentList,
+    required List<_i13.Student> presentStudentList,
     _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -531,7 +532,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithStudentView({
-    required List<_i13.Data>? data,
+    required List<_i13.Student>? students,
     _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -540,7 +541,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.studentView,
-        arguments: StudentViewArguments(data: data, key: key),
+        arguments: StudentViewArguments(students: students, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -610,8 +611,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithStudentConfirmationView({
-    required List<_i13.Data> absentStudentList,
-    required List<_i13.Data> presentStudentList,
+    required List<_i13.Student> absentStudentList,
+    required List<_i13.Student> presentStudentList,
     _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,

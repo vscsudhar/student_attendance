@@ -20,6 +20,7 @@ dependencies:
   shared_preferences: ^2.0.13
   location: ^4.4.0
   network_info_plus: ^4.0.1
+  local_session_timeout: ^2.3.0
 
 
 dev_dependencies:

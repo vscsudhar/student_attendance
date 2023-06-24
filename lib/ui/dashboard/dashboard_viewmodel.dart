@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
@@ -11,26 +12,33 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:workspace/core/enum/dialog_type.dart';
 import 'package:workspace/core/mixins/navigation_mixin.dart';
 import 'package:workspace/core/models/login_model.dart';
+import 'package:workspace/core/models/staff_login_model.dart';
+import 'package:workspace/service/api/api_service.dart';
 import 'package:workspace/service/locator.dart';
+import 'package:workspace/service/user_authentication_service.dart';
 
 class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   DashboardViewmodel() {
     getCurrentLocation();
     wifiIp();
+    // autologOut();
   }
 
   final _dialogService = locator<DialogService>();
+  final _apiService = ApiService.init();
 
   final _sharedPreference = locator<SharedPreferences>();
 
-  final _dio = Dio();
+  final _userAuthenticationService = locator<UserAuthenticationService>();
+
+  LoginResponse get loginResponse => _userAuthenticationService.loginResponse;
 
   bool? _isStaffLoggedIn;
 
   LocationData? _locationData;
   String? wifiGatewayIP;
   String? getWifiIP;
-  String? staffIn;
+  String? signin = '';
 
   Uint8List get image => const Base64Decoder().convert(_sharedPreference.getString('logo') ?? '');
   // List<Annoncement> get annoncement => [];
@@ -48,13 +56,9 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   String get long => _locationData?.longitude.toString() ?? '';
   String get gatewayIp => wifiGatewayIP.toString();
   String get ipadd => getWifiIP.toString();
-  String get login => staffIn.toString();
 
   setLogIn() async {
     await staffLogin();
-    await getCurrentLocation();
-    await wifiIp();
-    notifyListeners();
   }
 
   getCurrentLocation() async {
@@ -95,29 +99,21 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   }
 
   Future<void> staffLogin() async {
-    final request = {
-      "atime": DateTime.now().toIso8601String(),
-      "lat": long,
-      "long": lat,
-      "wifi": gatewayIp,
-      "employeeID": empId,
-      "description": "string",
-    };
-
-    final response = await _dio.post('http://rubric.rrwinfo.com/Staff/StaffAttendance',
-        data: request,
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-        ));
-    log(response.data.toString());
-    _isStaffLoggedIn = response.data == "True";
-    if (!(_isStaffLoggedIn ?? false)) {
-      showErrDialog('You are not inside the campus');
+    final staffLoginRequest = StaffLoginRequest(atime: DateTime.now(), lat: long, long: lat, wifi: ipadd, employeeId: empId, description: 'test');
+    final response = await runBusyFuture(_apiService.staffAttendance(staffLoginRequest)).catchError((err) {
+      _dialogService.showCustomDialog(variant: DialogType.error, description: err.toString());
+    });
+    if (!hasError) {
+      _isStaffLoggedIn = response == "True";
+      if (!(_isStaffLoggedIn ?? false)) {
+        showErrDialog('You are not inside the campus');
+      }
     }
+  }
+
+  Future<void> autologOut() async {
+    log('autologOut 1');
+    _userAuthenticationService.autoLogout();
   }
 
   Future<void> logout() async {
@@ -127,13 +123,5 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
 
   void showErrDialog(String message) {
     _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
-  }
-
-  Future<void> section() async {
-    if (_isStaffLoggedIn ?? true) {
-      goToSection();
-    } else {
-      showErrDialog('please login after submit the Attendance');
-    }
   }
 }

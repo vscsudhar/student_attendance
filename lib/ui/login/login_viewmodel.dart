@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
@@ -10,12 +11,15 @@ import 'package:workspace/service/user_authentication_service.dart';
 class LoginViewModel extends BaseViewModel with NavigationMixin {
   LoginViewModel() {
     _loginRequest = LoginRequest();
-     init();
-    }
-
-    init() async {
-      _sharedPreference = await SharedPreferences.getInstance();
+    init();
+    //autologOut();
   }
+
+  init() async {
+    _sharedPreference = await SharedPreferences.getInstance();
+  }
+
+  //final _userAuthenticationService = locator<UserAuthenticationService>();
 
   final _dialogService = locator<DialogService>();
   // final _sharedPreference = locator<SharedPreferences>();
@@ -25,20 +29,20 @@ class LoginViewModel extends BaseViewModel with NavigationMixin {
   late LoginRequest _loginRequest;
   late SharedPreferences _sharedPreference;
 
-  final userAuthenticationService = locator<UserAuthenticationService>();
-
+  final _userAuthenticationService = locator<UserAuthenticationService>();
 
   String get email => _email ?? '';
   String get password => _password ?? '';
   LoginRequest get loginRequest => _loginRequest;
 
   void userLogin() async {
-    final loginResponse = await userAuthenticationService.login(loginRequest);
-    final token = loginResponse["token"];
-    if (token != null && loginResponse != null) {
+    setBusy(true);
+    notifyListeners();
+    await _userAuthenticationService.login(loginRequest);
+    setBusy(false);
+    final token = _userAuthenticationService.loginResponse.token;
+    if (token != null) {
       _sharedPreference.setString('token', token);
-      _sharedPreference.setString('user_credentials', loginResponse.toString());
-      goToDashboard();
     } else {
       showErrDialog('login failed');
     }
@@ -47,4 +51,8 @@ class LoginViewModel extends BaseViewModel with NavigationMixin {
   void showErrDialog(String message) {
     _dialogService.showCustomDialog(title: "Message", description: message);
   }
+  // Future<void> autologOut() async {
+  //   log('autologOut 1');
+  //   _userAuthenticationService.autoLogout();
+  // }
 }

@@ -7,10 +7,11 @@ import 'package:workspace/service/user_authentication_service.dart';
 final locator = GetIt.instance;
 
 Future<void> setUpLocator() async {
+     var sharedPreference = await SharedPreferences.getInstance();
+   locator.registerLazySingleton(() => sharedPreference);
+  locator.registerLazySingleton(() => UserAuthenticationService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
-  locator.registerLazySingleton(() => UserAuthenticationService());
   locator.registerLazySingleton<ApiService>(() => ApiService.init());
-   var sharedPreference = await SharedPreferences.getInstance();
-   locator.registerLazySingleton(() => sharedPreference);
+
 }

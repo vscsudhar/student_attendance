@@ -22,7 +22,6 @@ class _SectionViewState extends State<SectionView> {
   @override
   void initState() {
     super.initState();
-    
   }
 
   @override
@@ -31,78 +30,98 @@ class _SectionViewState extends State<SectionView> {
       viewModelBuilder: () => SectionViewModel(widget.loginResponse),
       builder: (context, viewModel, child) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Section',
-              style: fontFamilyBold.size24.white,
-            ),
-          ),
-          body: CustomScrollView(
-            key: _formKey,
-            slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: defaultPadding20,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      DropDownWidget(
-                        title: 'Class',
-                        dropDownList: viewModel.classList,
-                        validator: (val) => val == null || val.isEmpty ? 'Please select the Class' : null,
-                        
-                      ),
-                      verticalSpacing16,
-                      DropDownWidget(
-                        title: 'Year',
-                        dropDownList: viewModel.yearList,
-                        validator: (val) => val == null || val.isEmpty ? 'Please Select the Year' : null,
-                      ),
-                      verticalSpacing16,
-                      DropDownWidget(
-                        title: 'Section',
-                        dropDownList: viewModel.sectionlist,
-                        validator: (val) => val == null || val.isEmpty ? 'Please Select the Section' : null,
-                      ),
-                      verticalSpacing16,
-                      DropDownWidget(
-                        title: 'Session',
-                        dropDownList: viewModel.subjectList,
-                        validator: (val) => val == null || val.isEmpty ? 'Please Select the Session' : null,
-                      ),
-                      verticalSpacing16,
-                    ],
-                  ),
-                ),
+            appBar: AppBar(
+              title: Text(
+                'Section',
+                style: fontFamilyBold.size24.white,
               ),
-              SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: SafeArea(
-                    top: false,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: defaultPadding8,
-                          child: Button1(
-                            title: 'Submit',
-                            busy: viewModel.isBusy,
-                            onTap: () {
-                              if (_formKey.currentState?.validate() ?? false) {
-                                _formKey.currentState?.save();
-                                viewModel.getstudents();
-                              }
-                            }, //viewModel.getstudents(),
+            ),
+            body: !viewModel.isBusy
+                ? SafeArea(
+                    child: CustomScrollView(
+                      key: _formKey,
+                      slivers: [
+                        SliverToBoxAdapter(
+                          child: Padding(
+                            padding: defaultPadding20,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                DropDownWidget(
+                                  title: 'Class',
+                                  selectedValue: viewModel.classClass,
+                                  dropDownList: viewModel.classList,
+                                  validator: viewModel.selectClassName,
+                                ),
+                                // if (widget.loginResponse?.insType == 'College')
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      verticalSpacing16,
+                                      DropDownWidget(
+                                        title: 'Year',
+                                        selectedValue: viewModel.year,
+                                        dropDownList: viewModel.yearsList,
+                                        validator: viewModel.selectYearName
+                                      ),
+                                    ],
+                                  ),
+                                verticalSpacing16,
+                                DropDownWidget(
+                                  title: 'Section',
+                                  selectedValue: viewModel.section,
+                                  dropDownList: viewModel.sectionsList,
+                                  validator: viewModel.selectSectionName
+                                ),
+                                verticalSpacing16,
+                                DropDownWidget(
+                                  title: 'Hour',
+                                  selectedValue: viewModel.hours,
+                                  dropDownList: viewModel.hourlist,
+                                  validator: viewModel.selectHourName
+                                ),
+                                verticalSpacing16,
+                                // DropDownWidget(
+                                //   title: 'Session',
+                                //   dropDownList: viewModel.subjectList,
+                                //   validator: (val) => val == null || val.isEmpty ? 'Please Select the Session' : null,
+                                // ),
+                                // verticalSpacing16,
+                              ],
+                            ),
                           ),
                         ),
-                        verticalSpacing20,
+                        SliverFillRemaining(
+                            hasScrollBody: false,
+                            child: SafeArea(
+                              top: false,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: defaultPadding8,
+                                    child: Button1(
+                                      title: 'Submit',
+                                      busy: viewModel.isBusy,
+                                      onTap: () {
+                                        // if (_formKey.currentState?.validate() ?? false) {
+                                        // _formKey.currentState?.save();
+                                        viewModel.getstudents();
+                                        // }
+                                      }, //viewModel.getstudents(),
+                                    ),
+                                  ),
+                                  verticalSpacing20,
+                                ],
+                              ),
+                            ))
                       ],
                     ),
-                  ))
-            ],
-          ),
-        );
+                  )
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  ));
       },
     );
   }

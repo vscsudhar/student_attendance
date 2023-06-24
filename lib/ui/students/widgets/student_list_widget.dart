@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:workspace/core/models/section_model.dart';
 import 'package:workspace/ui/students/students_viewmodel.dart';
 
 import '../../../core/models/students_model.dart';
@@ -9,7 +10,7 @@ import '../../widgets/box.dart';
 class StudentListWidget extends ViewModelWidget<StudentsViewModel> {
   const StudentListWidget({required this.data, super.key});
 
-  final Data data;
+  final Student data;
   @override
   Widget build(BuildContext context, StudentsViewModel viewModel) {
     return Center(
@@ -18,7 +19,7 @@ class StudentListWidget extends ViewModelWidget<StudentsViewModel> {
           children: [
             Center(
               child: Text(
-                '${data.firstName}\n${data.lastName}',
+                '${data.studentName}\n${data.rollNo}',
                 style: fontFamilyRegular.size18.color2699FB,
               ),
             ),

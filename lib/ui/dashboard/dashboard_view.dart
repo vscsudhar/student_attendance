@@ -50,21 +50,28 @@ class DashboardviewState extends State<DashboardView> {
                               onTap: () {
                                 viewModel.setLogIn();
                               },
-                              child: Box(
-                                  boxColor: viewModel.isStaffLoggedIn ? Colors.red : Colors.blueAccent,
-                                  child: Text(
-                                    viewModel.isStaffLoggedIn ? "LogOut" : "LogIn",
-                                    style: fontFamilyRegular.size16.white,
-                                    textAlign: TextAlign.center,
-                                  )),
+                              child: !viewModel.isBusy
+                                  ? Box(
+                                      boxColor: viewModel.isStaffLoggedIn ? Colors.red : Colors.blueAccent,
+                                      child: Text(
+                                        viewModel.isStaffLoggedIn ? "LogOut" : "LogIn",
+                                        style: fontFamilyRegular.size16.white,
+                                        textAlign: TextAlign.center,
+                                      ))
+                                  : const Center(
+                                      child: Padding(
+                                        padding: defaultPadding20,
+                                        child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                    ),
+                                      )),
                             ),
-                            verticalSpacing12,
                           ],
                         )),
                     verticalSpacing20,
                     InkWell(
                       onTap: () {
-                        viewModel.section();
+                        viewModel.goToSection(viewModel.loginResponse);
                       },
                       child: Box(
                           margin: zeroPadding,
@@ -109,7 +116,7 @@ class DashboardviewState extends State<DashboardView> {
                         )),
                     verticalSpacing20,
                     Box(
-                        onTap: viewModel.section,
+                        onTap: () => viewModel.goToSection(viewModel.loginResponse),
                         margin: zeroPadding,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

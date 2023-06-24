@@ -16,6 +16,6 @@ class StudentDetailsViewModel extends BaseViewModel with NavigationMixin {
   Data? get data => _studentsDetailsResponse?.data;
   final _apiService = locator<ApiService>();
   Future<void> getStudentDetails() async {
-    _studentsDetailsResponse = await runBusyFuture(_apiService.getStudentDetails(_Id.toString()));
+    // _studentsDetailsResponse = await runBusyFuture(_apiService.getStudentDetails(_Id.toString()));
   }
 }

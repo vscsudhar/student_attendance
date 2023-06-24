@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:workspace/core/models/section_model.dart';
 import 'package:workspace/ui/shared/styles.dart';
 import 'package:workspace/ui/students/students_viewmodel.dart';
 import 'package:workspace/ui/students/widgets/student_list_widget.dart';
@@ -8,9 +9,9 @@ import 'package:workspace/ui/widgets/button1.dart';
 import '../../core/models/students_model.dart';
 
 class StudentView extends StatefulWidget {
-  const StudentView({required this.data, super.key});
+  const StudentView({required this.students, super.key});
 
-  final List<Data>? data;
+  final List<Student>? students;
 
   @override
   State<StudentView> createState() => _StudentViewState();
@@ -20,7 +21,7 @@ class _StudentViewState extends State<StudentView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-        viewModelBuilder: () => StudentsViewModel(widget.data ?? []),
+        viewModelBuilder: () => StudentsViewModel(widget.students ?? []),
         builder: (context, viewModel, child) => Scaffold(
               appBar: AppBar(
                 title: Text(
@@ -39,7 +40,7 @@ class _StudentViewState extends State<StudentView> {
                           children: [
                             const Text(''),
                             InkWell(
-                              onTap: () => viewModel.goToStudentDetails(viewModel.studentList[index].id ?? 0),
+                              onTap: () => viewModel.goToStudentDetails(0),
                               child: Card(
                                 child: StudentListWidget(
                                   data: viewModel.studentList[index],

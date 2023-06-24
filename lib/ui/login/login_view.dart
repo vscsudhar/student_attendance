@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/login/login_viewmodel.dart';
 import 'package:workspace/ui/shared/styles.dart';
 import 'package:workspace/ui/widgets/button.dart';
+import 'package:workspace/ui/widgets/button1.dart';
 import 'package:workspace/ui/widgets/text_field1.dart';
 
 class LoginView extends StatefulWidget {
@@ -40,7 +41,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   TextField1(
                     hintText: 'User ID',
-                    initialValue: 'school',
+                    initialValue: 'college',
                     obscureText: false,
                     validator: (val) => val == null || val.isEmpty ? 'email is required' : null,
                     onSaved: (userId) => viewModel.loginRequest.userId = userId,
@@ -55,9 +56,10 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   verticalSpacing10,
                   verticalSpacing20,
-                  Button(
-                    name: 'Login',
-                    onPressed: () {
+                  Button1(
+                    title: 'Login',
+                    busy: viewModel.isBusy,
+                    onTap: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         _formKey.currentState?.save();
                         viewModel.userLogin();
