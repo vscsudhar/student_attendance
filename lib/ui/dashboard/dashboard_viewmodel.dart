@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 
-import 'package:dio/dio.dart';
 import 'package:location/location.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -119,6 +118,16 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   Future<void> logout() async {
     _sharedPreference.clear();
     goToLogin();
+  }
+
+  Future<void> section() async {
+      showErrDialog('Please Login Your Attendance and Take the Student Attendance');
+  
+  }
+
+  Future<void> section1() async {
+      showErrDialog('Please Login Your Attendance and View the Student Attendance');
+  
   }
 
   void showErrDialog(String message) {

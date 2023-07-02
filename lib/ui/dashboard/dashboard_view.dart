@@ -60,18 +60,23 @@ class DashboardviewState extends State<DashboardView> {
                                       ))
                                   : const Center(
                                       child: Padding(
-                                        padding: defaultPadding20,
-                                        child: CircularProgressIndicator(
+                                      padding: defaultPadding20,
+                                      child: CircularProgressIndicator(
                                         color: Colors.white,
-                                    ),
-                                      )),
+                                      ),
+                                    )),
                             ),
                           ],
                         )),
                     verticalSpacing20,
                     InkWell(
                       onTap: () {
-                        viewModel.goToSection(viewModel.loginResponse);
+                        // if (viewModel.isStaffLoggedIn == true) {
+                        //   viewModel.goToSection(viewModel.loginResponse);
+                        // } else {
+                        //   viewModel.Section();
+                        // }
+                           viewModel.goToSection(viewModel.loginResponse);
                       },
                       child: Box(
                           margin: zeroPadding,
@@ -103,7 +108,7 @@ class DashboardviewState extends State<DashboardView> {
                                 onTap: () => viewModel.goToAnnouncementDetails(viewModel.annoncement[index]),
                                 child: Text(
                                   viewModel.annoncement[index].title ?? 'N/A',
-                                  style: fontFamilyItalic.size14.white70,
+                                  style: fontFamilyMedium.size14.white70,
                                 ),
                               ),
                               separatorBuilder: (context, index) => const Padding(
@@ -115,19 +120,28 @@ class DashboardviewState extends State<DashboardView> {
                           ],
                         )),
                     verticalSpacing20,
-                    Box(
-                        onTap: () => viewModel.goToSection(viewModel.loginResponse),
-                        margin: zeroPadding,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'student Attendance View',
-                              style: fontFamilyBold.size20.white,
-                            ),
-                            verticalSpacing12,
-                          ],
-                        )),
+                    InkWell(
+                      onTap: () {
+                        if (viewModel.isStaffLoggedIn == true) {
+                          viewModel.goToSection(viewModel.loginResponse);
+                        } else {
+                          viewModel.section1();
+                        }
+                      },
+                      child: Box(
+                          
+                          margin: zeroPadding,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'student Attendance View',
+                                style: fontFamilyBold.size20.white,
+                              ),
+                              verticalSpacing12,
+                            ],
+                          )),
+                    ),
                   ]),
                 ),
               ),

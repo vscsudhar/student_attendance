@@ -12,7 +12,7 @@ class DropDownWidget extends StatefulWidget {
   });
 
   final String? title;
-  final dynamic selectedValue;
+  final String? selectedValue;
   final List<DropDownModel> dropDownList;
   final void Function(dynamic)? validator;
 
@@ -46,9 +46,20 @@ class _DropDownWidgetState extends State<DropDownWidget> {
           ),
           child: DropdownButton(
             isExpanded: true,
-            value: widget.selectedValue,
+            // value: '',
             padding: leftPadding20,
             style: fontFamilyBold.size16.color2699FB,
+            onTap: () {
+              print('${widget.title} clicked');
+            },
+            // disabledHint: Text(
+            //   'Please select ${widget.title}',
+            //   style: fontFamilyRegular.size14.copyWith(color: Colors.black),
+            // ),
+            hint: Text(
+              widget.selectedValue ?? 'Please select ${widget.title}',
+              style: fontFamilyMedium.size14.copyWith(color: widget.selectedValue != null ? appcolor2699FB : Colors.black),
+            ),
             items: List.generate(widget.dropDownList.length, (index) {
               return DropdownMenuItem(
                 child: Text(

@@ -5,6 +5,7 @@ import 'package:workspace/core/models/login_model.dart';
 import 'package:workspace/service/locator.dart';
 import 'package:workspace/service/user_authentication_service.dart';
 
+
 class SplasViewModel extends BaseViewModel with NavigationMixin {
   SplasViewModel() {
     userAutoLogin();

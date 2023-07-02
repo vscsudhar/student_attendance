@@ -43,29 +43,6 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<BoundryResponse> getBoundries() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<BoundryResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/Staff/GetBoundry',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BoundryResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
   Future<GetClassHoursResponse> getClasses() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -112,7 +89,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<SectionResponse> getSectionDetails(
+  Future<List<GetSubjectResponse>> getSubjectDetails(
     String cId,
     String hId,
   ) async {
@@ -121,7 +98,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SectionResponse>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<GetSubjectResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -133,7 +110,60 @@ class _ApiService implements ApiService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SectionResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            GetSubjectResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<GetStudentResponse>> getStudentDetails(String cId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<GetStudentResponse>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/GetStudents?cid=${cId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) =>
+            GetStudentResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<String> saveAttendance(
+      SaveAttendanceRequest saveAttendanceRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(saveAttendanceRequest.toJson());
+    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/SavaAttendance',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
     return value;
   }
 

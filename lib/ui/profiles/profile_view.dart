@@ -37,12 +37,12 @@ class _ProfileViewState extends State<ProfileView> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [const Text('Full Name:'), Text(viewModel.userName,style: fontFamilyItalic.size16,)],
+                children: [const Text('Full Name:'), Text(viewModel.userName,style: fontFamilyMedium.size16,)],
               ),
               verticalSpacing20,
                Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:  [const Text('User Id:'), Text(viewModel.empId, style: fontFamilyItalic.size16,)],
+                children:  [const Text('User Id:'), Text(viewModel.empId, style: fontFamilyMedium.size16,)],
               ),
               Column(
                 children: [

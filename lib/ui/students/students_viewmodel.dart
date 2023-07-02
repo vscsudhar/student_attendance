@@ -1,27 +1,43 @@
 import 'package:stacked/stacked.dart';
 import 'package:workspace/core/mixins/navigation_mixin.dart';
-import 'package:workspace/core/models/section_model.dart';
+import 'package:workspace/core/models/students_model.dart';
+import 'package:workspace/service/api/api_service.dart';
 
 class StudentsViewModel extends BaseViewModel with NavigationMixin {
-  StudentsViewModel(this._studentList);
+  StudentsViewModel(this._cId) {
+    getStudents();
+  }
 
-  final List<Student> _studentList;
-  final List<Student> _absentStudentList = [];
-  final List<Student> _presentStudentList = [];
+  final _apiService = ApiService.init();
 
-  List<Student> get studentList => _studentList;
-  List<Student> get absentStudentList => _absentStudentList;
-  List<Student> get presentStudentList => _presentStudentList;
+  final String _cId;
+  List<GetStudentResponse> _studentList = [];
+  final List<GetStudentResponse> _absentStudentList = [];
+  final List<GetStudentResponse> _presentStudentList = [];
 
-  void addAbsentList(Student student) {
+  List<GetStudentResponse> get studentList => _studentList;
+  List<GetStudentResponse> get absentStudentList => _absentStudentList;
+  List<GetStudentResponse> get presentStudentList => _presentStudentList;
+
+  void addAbsentList(GetStudentResponse student) {
     _absentStudentList.add(student);
     _studentList.remove(student);
     notifyListeners();
+    if (_studentList.isEmpty) {
+      goToStudentConfirmation(absentStudentList, presentStudentList, int.parse(_cId), 1);
+    }
   }
 
-  void addPresentList(Student student) {
+  void addPresentList(GetStudentResponse student) {
     _presentStudentList.add(student);
     _studentList.remove(student);
     notifyListeners();
+    if (_studentList.isEmpty) {
+      goToStudentConfirmation(absentStudentList, presentStudentList, int.parse(_cId), 1);
+    }
+  }
+
+  Future<void> getStudents() async {
+    _studentList = await runBusyFuture(_apiService.getStudentDetails(_cId)).catchError((err) {});
   }
 }

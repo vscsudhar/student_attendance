@@ -1,3 +1,4 @@
 enum BusyObjects {
   isLogin,
+  studentDetails,
 }

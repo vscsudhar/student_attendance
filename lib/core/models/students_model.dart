@@ -1,97 +1,33 @@
 // To parse this JSON data, do
 //
-//     final studentsResponse = studentsResponseFromJson(jsonString);
+//     final getStudentResponse = getStudentResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-StudentsResponse studentsResponseFromJson(String str) => StudentsResponse.fromJson(json.decode(str));
+List<GetStudentResponse> getStudentResponseFromJson(String str) => List<GetStudentResponse>.from(json.decode(str).map((x) => GetStudentResponse.fromJson(x)));
 
-String studentsResponseToJson(StudentsResponse data) => json.encode(data.toJson());
+String getStudentResponseToJson(List<GetStudentResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class StudentsResponse {
-    int? page;
-    int? perPage;
-    int? total;
-    int? totalPages;
-    List<Data>? data;
-    Support? support;
+class GetStudentResponse {
+    String? rollNo;
+    String? studentName;
+    int? classId;
 
-    StudentsResponse({
-        this.page,
-        this.perPage,
-        this.total,
-        this.totalPages,
-        this.data,
-        this.support,
+    GetStudentResponse({
+        this.rollNo,
+        this.studentName,
+        this.classId,
     });
 
-    factory StudentsResponse.fromJson(Map<String, dynamic> json) => StudentsResponse(
-        page: json["page"],
-        perPage: json["per_page"],
-        total: json["total"],
-        totalPages: json["total_pages"],
-        data: json["data"] == null ? [] : List<Data>.from(json["data"]!.map((x) => Data.fromJson(x))),
-        support: json["support"] == null ? null : Support.fromJson(json["support"]),
+    factory GetStudentResponse.fromJson(Map<String, dynamic> json) => GetStudentResponse(
+        rollNo: json["rollNo"],
+        studentName: json["studentName"],
+        classId: json["class_ID"],
     );
 
     Map<String, dynamic> toJson() => {
-        "page": page,
-        "per_page": perPage,
-        "total": total,
-        "total_pages": totalPages,
-        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
-        "support": support?.toJson(),
-    };
-}
-
-class Data {
-    int? id;
-    String? email;
-    String? firstName;
-    String? lastName;
-    String? avatar;
-
-    Data({
-        this.id,
-        this.email,
-        this.firstName,
-        this.lastName,
-        this.avatar,
-    });
-
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
-        id: json["id"],
-        email: json["email"],
-        firstName: json["first_name"],
-        lastName: json["last_name"],
-        avatar: json["avatar"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "email": email,
-        "first_name": firstName,
-        "last_name": lastName,
-        "avatar": avatar,
-    };
-}
-
-class Support {
-    String? url;
-    String? text;
-
-    Support({
-        this.url,
-        this.text,
-    });
-
-    factory Support.fromJson(Map<String, dynamic> json) => Support(
-        url: json["url"],
-        text: json["text"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "url": url,
-        "text": text,
+        "rollNo": rollNo,
+        "studentName": studentName,
+        "class_ID": classId,
     };
 }

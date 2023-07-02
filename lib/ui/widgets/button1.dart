@@ -14,7 +14,7 @@ class Button1 extends StatelessWidget {
     required this.title,
     this.disabled = false,
     this.busy = false,
-    this.onTap, 
+    this.onTap,
     this.leading,
     //this.leading, required Null Function() onPressed,
   })  : outline = false,
@@ -23,7 +23,7 @@ class Button1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: !disabled ? onTap : () {},
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 350),
         width: double.infinity,

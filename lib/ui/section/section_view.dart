@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:workspace/core/enum/busy_objects.dart';
 import 'package:workspace/core/models/login_model.dart';
 import 'package:workspace/ui/section/section_viewmodel.dart';
 import 'package:workspace/ui/section/widgets/drop_down_widget.dart';
@@ -54,40 +55,52 @@ class _SectionViewState extends State<SectionView> {
                                   dropDownList: viewModel.classList,
                                   validator: viewModel.selectClassName,
                                 ),
-                                // if (widget.loginResponse?.insType == 'College')
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      verticalSpacing16,
-                                      DropDownWidget(
-                                        title: 'Year',
-                                        selectedValue: viewModel.year,
-                                        dropDownList: viewModel.yearsList,
-                                        validator: viewModel.selectYearName
-                                      ),
-                                    ],
-                                  ),
                                 verticalSpacing16,
+                                if(viewModel.classClass!=null)
+                                DropDownWidget(
+                                  title: 'Year',
+                                  selectedValue: viewModel.year,
+                                  dropDownList: viewModel.yearsList,
+                                  validator: viewModel.selectYearName,
+                                ),
+                                verticalSpacing16,
+                                 if(viewModel.year!=null)
                                 DropDownWidget(
                                   title: 'Section',
                                   selectedValue: viewModel.section,
                                   dropDownList: viewModel.sectionsList,
-                                  validator: viewModel.selectSectionName
+                                  validator: viewModel.selectSectionName,
                                 ),
                                 verticalSpacing16,
+                                 if(viewModel.section!=null)
                                 DropDownWidget(
                                   title: 'Hour',
                                   selectedValue: viewModel.hours,
                                   dropDownList: viewModel.hourlist,
-                                  validator: viewModel.selectHourName
+                                  validator: viewModel.selectHourName,
                                 ),
                                 verticalSpacing16,
-                                // DropDownWidget(
-                                //   title: 'Session',
-                                //   dropDownList: viewModel.subjectList,
-                                //   validator: (val) => val == null || val.isEmpty ? 'Please Select the Session' : null,
-                                // ),
-                                // verticalSpacing16,
+                                Stack(
+                                  children: [
+                                    if (viewModel.busy(BusyObjects.studentDetails))
+                                      const Center(
+                                        child: Padding(
+                                          padding: topPadding20,
+                                          child: CircularProgressIndicator(
+                                            color: appcolor2699FB,
+                                          ),
+                                        ),
+                                      ),
+                                    if (viewModel.subjectList.isNotEmpty)
+                                      DropDownWidget(
+                                        title: 'Subjects',
+                                        selectedValue: viewModel.subject,
+                                        dropDownList: viewModel.subjectList,
+                                        validator: viewModel.selectSubject,
+                                      ),
+                                  ],
+                                ),
+                                verticalSpacing16,
                               ],
                             ),
                           ),
@@ -99,6 +112,7 @@ class _SectionViewState extends State<SectionView> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
+                                  if(viewModel.isvalid)
                                   Padding(
                                     padding: defaultPadding8,
                                     child: Button1(
@@ -107,7 +121,7 @@ class _SectionViewState extends State<SectionView> {
                                       onTap: () {
                                         // if (_formKey.currentState?.validate() ?? false) {
                                         // _formKey.currentState?.save();
-                                        viewModel.getstudents();
+                                        viewModel.goToStudent();
                                         // }
                                       }, //viewModel.getstudents(),
                                     ),

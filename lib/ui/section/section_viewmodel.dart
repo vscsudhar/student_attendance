@@ -4,10 +4,11 @@ import 'dart:developer';
 
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:workspace/core/enum/busy_objects.dart';
 import 'package:workspace/core/enum/dialog_type.dart';
 import 'package:workspace/core/mixins/navigation_mixin.dart';
 import 'package:workspace/core/models/dropdown_model.dart';
-import 'package:workspace/core/models/section_model.dart';
+import 'package:workspace/core/models/subject_model.dart';
 import 'package:workspace/core/models/get_class_hour_model.dart';
 
 import '../../core/models/login_model.dart';
@@ -22,7 +23,7 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
 
   final _dialogService = locator<DialogService>();
 
-  SectionResponse? _response;
+  List<GetSubjectResponse>? _subjectListResponse;
 
   final LoginResponse? _loginResponse;
 
@@ -33,16 +34,18 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   String? _insId;
   String? _section;
   String? _hours;
+  String? _subject;
   int? _hid;
+  bool _isValid = false;
 
-  List<Student> get studentList => _response?.students ?? [];
   String get insType => _loginResponse?.insType ?? '';
   String get cid => _cid.toString();
-  String get classClass => _classClass?.toString() ?? (classNames.isNotEmpty ? classNames.first : '');
-  String get year => _year?.toString() ?? (years.isNotEmpty ? years.first : '');
-  String get insId => _insId.toString();
-  String get section => _section?.toString() ?? (sections.isNotEmpty ? sections.first : '');
-  String get hours => _hours ?? (hoursList.isNotEmpty ? hoursList.first : '');
+  String? get classClass => _classClass;
+  String? get year => _year;
+  String? get insId => _insId.toString();
+  String? get section => _section;
+  String? get hours => _hours;
+  String? get subject => _subject;
   int get hid => _hid ?? 0;
 
   List<ClassElement> get classes => _getClassResponse?.classes ?? [];
@@ -57,48 +60,89 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   List<DropDownModel> get yearsList => years.map((year) => DropDownModel(name: year, value: year)).toList();
   List<DropDownModel> get sectionsList => sections.map((section) => DropDownModel(name: section, value: section)).toList();
 
-  List<DropDownModel> get subjectList => [];
+  List<GetSubjectResponse> get subjectListResponse => _subjectListResponse ?? [];
 
-  selectClassName(className) {
+  List<DropDownModel> get subjectList => subjectListResponse.map((subject) => DropDownModel(name: subject.subject, value: subject.subject)).toList();
+
+  bool get isvalid => _isValid;
+
+  selectClassName(className) async {
     _classClass = className;
+    _year = null;
+    _section = null;
+    _hours = null;
+    resetSelection();
     notifyListeners();
   }
 
-  selectYearName(years) {
+  selectYearName(years) async {
     _year = years;
+    _section = null;
+    _hours = null;
+    resetSelection();
     notifyListeners();
   }
 
-  selectSectionName(sections) {
+  selectSectionName(sections) async {
     _section = sections;
+    _hours = null;
+    resetSelection();
     notifyListeners();
   }
 
   selectHourName(hours) async {
     _hours = hours;
+    _subject = null;
     notifyListeners();
-    try {
-      _cid = classes.firstWhere((element) => element.classClass! == classClass && element.year != year && element.section! == section).cid.toString();
-      _hid = hour.firstWhere((element) => element.hours! == hours).hid;
-    } catch (e) {
-      print(e);
-    }
-    await getstudents();
+    resetSelection();
+    await getSubjects();
+  }
+
+  selectSubject(subjects) {
+    _subject = subjects;
+    notifyListeners();
+  }
+
+  resetSelection() {
+    _subjectListResponse = [];
+    _isValid = false;
+  }
+
+  goToStudent() {
+    _cid = classes.firstWhere((element) => (element.classClass! == classClass) && (element.year! == year) && (element.section! == section)).cid.toString();
+
+    goToStudents(_cid!);
   }
 
   Future<void> getClasses() async {
     _getClassResponse = await runBusyFuture(_apiSerivce.getClasses());
     if (hasError) {
       _dialogService.showCustomDialog(variant: DialogType.error, description: 'Something went wrong...!');
+    } else {
+      // await getSubjects();
     }
   }
 
-  Future<void> getstudents() async {
-    _response = await _apiSerivce.getSectionDetails(cid, hid.toString());
+  Future<void> getSubjects() async {
+    try {
+      _cid = classes.firstWhere((element) => (element.classClass! == classClass) && (element.year! == year) && (element.section! == section)).cid.toString();
+      _hid = hour.firstWhere((element) => element.hours! == hours).hid;
+    } catch (e) {
+      print(e);
+    }
+    _subjectListResponse = [];
+    _subjectListResponse = await runBusyFuture(_apiSerivce.getSubjectDetails(cid, hid.toString()), busyObject: BusyObjects.studentDetails).catchError((err) {
+      _dialogService.showCustomDialog(variant: DialogType.error, description: 'Error, Already Marked or Subjects not Mapped for the Class, Retry');
+      _isValid = false;
+    });
     if (hasError) {
       log('Something went wrong..!');
-    } else if (_response?.students?.isNotEmpty ?? false) {
-      goToStudents(_response?.students ?? []);
+    } else if (_subjectListResponse?.isNotEmpty ?? false) {
+      _isValid = true;
+      notifyListeners();
+    } else {
+      _dialogService.showCustomDialog(variant: DialogType.error, description: 'Subjects are not available');
+      _isValid = false;
     }
   }
 }

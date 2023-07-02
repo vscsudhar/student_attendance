@@ -21,6 +21,8 @@ dependencies:
   location: ^4.4.0
   network_info_plus: ^4.0.1
   local_session_timeout: ^2.3.0
+  animated_splash_screen: ^1.3.0
+  flutter_slidable: ^3.0.0
 
 
 dev_dependencies:
@@ -40,16 +42,19 @@ flutter:
   uses-material-design: true
 
 
-fonts:
-  - family: times new roman
-    fonts:
-      - asset: assets/fonts/times new roman.ttf
-  - family: times new roman bold
-    fonts:
-      - asset: assets/fonts/times new roman bold.ttf    
-  - family: times new roman italic
-    fonts:
-      - asset: assets/fonts/times new roman italic.ttf
+  fonts:
+   - family: Poppins-Light
+     fonts:
+       - asset: assets/fonts/Poppins-Light.ttf
+   - family: Poppins-Medium
+     fonts:
+       - asset: assets/fonts/Poppins-Medium.ttf    
+   - family: Poppins-Regular
+     fonts:
+       - asset: assets/fonts/Poppins-Regular.ttf   
+   - family: Poppins-SemiBold
+     fonts:
+       - asset: assets/fonts/Poppins-SemiBold.ttf
 
-assets:
-  - assets/images/
+  assets:
+   - assets/images/

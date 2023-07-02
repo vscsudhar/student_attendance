@@ -25,8 +25,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
-
     return SessionTimeoutManager(
       sessionConfig: locator<UserAuthenticationService>().sessionConfig,
       child: MaterialApp(
@@ -38,6 +36,7 @@ class MyApp extends StatelessWidget {
         ),
         onGenerateRoute: StackedRouter().onGenerateRoute,
         navigatorKey: StackedService.navigatorKey,
+        themeMode: ThemeMode.light,
       ),
     );
   }

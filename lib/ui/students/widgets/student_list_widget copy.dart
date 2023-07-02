@@ -16,14 +16,10 @@ class StudentListWidget extends ViewModelWidget<StudentsViewModel> {
       child: InkWell(
         child: Row(
           children: [
-            
-            Padding(
-              padding: defaultPadding12,
-              child: Center(
-                child: Text(
-                  '${data.studentName}\n${data.rollNo}',
-                  style: fontFamilyRegular.size18.color2699FB,
-                ),
+            Center(
+              child: Text(
+                '${data.studentName}\n${data.rollNo}',
+                style: fontFamilyRegular.size18.color2699FB,
               ),
             ),
             const Spacer(),
@@ -32,27 +28,24 @@ class StudentListWidget extends ViewModelWidget<StudentsViewModel> {
                 margin: zeroPadding,
                 padding: defaultPadding8,
                 width: 80,
-                height: 40,
+                height: 30,
                 boxColor: Colors.red,
                 child: const Text(
                   "Absent",
                   textAlign: TextAlign.center,
                 )),
             horizontalSpacing12,
-            Padding(
-              padding: defaultPadding8,
-              child: Box(
-                  onTap: () => viewModel.addPresentList(data),
-                  margin: zeroPadding,
-                  padding: defaultPadding8,
-                  width: 80,
-                  height: 40,
-                  boxColor: Colors.green,
-                  child: const Text(
-                    "Present",
-                    textAlign: TextAlign.center,
-                  )),
-            ),
+            Box(
+                onTap: () => viewModel.addPresentList(data),
+                margin: zeroPadding,
+                padding: defaultPadding8,
+                width: 80,
+                height: 30,
+                boxColor: Colors.green,
+                child: const Text(
+                  "Present",
+                  textAlign: TextAlign.center,
+                )),
           ],
         ),
       ),

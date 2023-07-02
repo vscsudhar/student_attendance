@@ -41,13 +41,14 @@ const leftPadding8 = EdgeInsets.only(left: 8);
 
 //Divider
 const verticalDivider = VerticalDivider(width: 1.5, color: Colors.black87);
-const horizontalDivider = Divider(height: 1.5, color: Colors.black87);
+const horizontalDivider = Divider(height: 1.6, color: Colors.black87);
 
 //fontFamily
 
-const TextStyle fontFamilyRegular = TextStyle(fontFamily: 'times new roman');
-const TextStyle fontFamilyBold = TextStyle(fontFamily: 'times new roman bold');
-const TextStyle fontFamilyItalic = TextStyle(fontFamily: 'times new roman italic');
+const TextStyle fontFamilyRegular = TextStyle(fontFamily: 'Poppins-Regular');
+const TextStyle fontFamilyLight = TextStyle(fontFamily: 'Poppins-Light');
+const TextStyle fontFamilyBold = TextStyle(fontFamily: 'Poppins-SemiBold');
+const TextStyle fontFamilyMedium = TextStyle(fontFamily: 'Poppins-Medium');
 
 const scale = 1.0;
 
