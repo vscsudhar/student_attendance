@@ -15,16 +15,17 @@ class _SplashViewState extends State<SplashView> {
     return ViewModelBuilder.reactive(
         viewModelBuilder: () => SplasViewModel(),
         builder: (context, viewModel, child) => Scaffold(
-              body: Center(
-                // child: Image(image: AssetImage('assets/images/logo.jpg'),
-                child: Image.asset(
-                  'assets/images/logo.jpg',
-                  width: 120,
-                  height: 120,
+              body: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.redAccent, Colors.blue, Colors.purple],
+                  ),
                 ),
-                // child: Text(
-
-                //   'Splash',style: fontFamilyBold.size22.color2699FB,
+                child: Center(
+                  child: Image.asset('assets/images/logo.jpg'),
+                ),
               ),
             ));
   }

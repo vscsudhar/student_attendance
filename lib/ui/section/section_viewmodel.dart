@@ -35,6 +35,7 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   String? _section;
   String? _hours;
   String? _subject;
+  String? _subjectId;
   int? _hid;
   bool _isValid = false;
 
@@ -46,6 +47,7 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   String? get section => _section;
   String? get hours => _hours;
   String? get subject => _subject;
+  String? get subjectId => _subjectId;
   int get hid => _hid ?? 0;
 
   List<ClassElement> get classes => _getClassResponse?.classes ?? [];
@@ -100,6 +102,8 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
 
   selectSubject(subjects) {
     _subject = subjects;
+    _isValid = true;
+    _subjectId = _subjectListResponse?.firstWhere((element) => element.subject == subjects).subId.toString() ?? '0';
     notifyListeners();
   }
 
@@ -110,8 +114,7 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
 
   goToStudent() {
     _cid = classes.firstWhere((element) => (element.classClass! == classClass) && (element.year! == year) && (element.section! == section)).cid.toString();
-
-    goToStudents(_cid!);
+    goToStudents(_cid!, _hid.toString(),_subjectId.toString());
   }
 
   Future<void> getClasses() async {
@@ -138,7 +141,7 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
     if (hasError) {
       log('Something went wrong..!');
     } else if (_subjectListResponse?.isNotEmpty ?? false) {
-      _isValid = true;
+      _isValid = false;
       notifyListeners();
     } else {
       _dialogService.showCustomDialog(variant: DialogType.error, description: 'Subjects are not available');

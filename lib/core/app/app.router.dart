@@ -125,7 +125,11 @@ class StackedRouter extends _i1.RouterBase {
     _i5.StudentView: (data) {
       final args = data.getArgs<StudentViewArguments>(nullOk: false);
       return _i12.MaterialPageRoute<dynamic>(
-        builder: (context) => _i5.StudentView(cId: args.cId, key: args.key),
+        builder: (context) => _i5.StudentView(
+            cId: args.cId,
+            hId: args.hId,
+            subjectId: args.subjectId,
+            key: args.key),
         settings: data,
       );
     },
@@ -164,6 +168,7 @@ class StackedRouter extends _i1.RouterBase {
         builder: (context) => _i10.StudentConfirmationView(
             cid: args.cid,
             hid: args.hid,
+            subjectId: args.subjectId,
             absentStudentList: args.absentStudentList,
             presentStudentList: args.presentStudentList,
             key: args.key),
@@ -190,27 +195,36 @@ class StackedRouter extends _i1.RouterBase {
 class StudentViewArguments {
   const StudentViewArguments({
     required this.cId,
+    required this.hId,
+    required this.subjectId,
     this.key,
   });
 
   final String cId;
 
+  final String hId;
+
+  final String subjectId;
+
   final _i12.Key? key;
 
   @override
   String toString() {
-    return '{"cId": "$cId", "key": "$key"}';
+    return '{"cId": "$cId", "hId": "$hId", "subjectId": "$subjectId", "key": "$key"}';
   }
 
   @override
   bool operator ==(covariant StudentViewArguments other) {
     if (identical(this, other)) return true;
-    return other.cId == cId && other.key == key;
+    return other.cId == cId &&
+        other.hId == hId &&
+        other.subjectId == subjectId &&
+        other.key == key;
   }
 
   @override
   int get hashCode {
-    return cId.hashCode ^ key.hashCode;
+    return cId.hashCode ^ hId.hashCode ^ subjectId.hashCode ^ key.hashCode;
   }
 }
 
@@ -272,6 +286,7 @@ class StudentConfirmationViewArguments {
   const StudentConfirmationViewArguments({
     required this.cid,
     required this.hid,
+    required this.subjectId,
     required this.absentStudentList,
     required this.presentStudentList,
     this.key,
@@ -281,6 +296,8 @@ class StudentConfirmationViewArguments {
 
   final int hid;
 
+  final int subjectId;
+
   final List<_i14.GetStudentResponse> absentStudentList;
 
   final List<_i14.GetStudentResponse> presentStudentList;
@@ -289,7 +306,7 @@ class StudentConfirmationViewArguments {
 
   @override
   String toString() {
-    return '{"cid": "$cid", "hid": "$hid", "absentStudentList": "$absentStudentList", "presentStudentList": "$presentStudentList", "key": "$key"}';
+    return '{"cid": "$cid", "hid": "$hid", "subjectId": "$subjectId", "absentStudentList": "$absentStudentList", "presentStudentList": "$presentStudentList", "key": "$key"}';
   }
 
   @override
@@ -297,6 +314,7 @@ class StudentConfirmationViewArguments {
     if (identical(this, other)) return true;
     return other.cid == cid &&
         other.hid == hid &&
+        other.subjectId == subjectId &&
         other.absentStudentList == absentStudentList &&
         other.presentStudentList == presentStudentList &&
         other.key == key;
@@ -306,6 +324,7 @@ class StudentConfirmationViewArguments {
   int get hashCode {
     return cid.hashCode ^
         hid.hashCode ^
+        subjectId.hashCode ^
         absentStudentList.hashCode ^
         presentStudentList.hashCode ^
         key.hashCode;
@@ -384,6 +403,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
 
   Future<dynamic> navigateToStudentView({
     required String cId,
+    required String hId,
+    required String subjectId,
     _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -392,7 +413,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.studentView,
-        arguments: StudentViewArguments(cId: cId, key: key),
+        arguments: StudentViewArguments(
+            cId: cId, hId: hId, subjectId: subjectId, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -464,6 +486,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   Future<dynamic> navigateToStudentConfirmationView({
     required int cid,
     required int hid,
+    required int subjectId,
     required List<_i14.GetStudentResponse> absentStudentList,
     required List<_i14.GetStudentResponse> presentStudentList,
     _i12.Key? key,
@@ -477,6 +500,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
         arguments: StudentConfirmationViewArguments(
             cid: cid,
             hid: hid,
+            subjectId: subjectId,
             absentStudentList: absentStudentList,
             presentStudentList: presentStudentList,
             key: key),
@@ -548,6 +572,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
 
   Future<dynamic> replaceWithStudentView({
     required String cId,
+    required String hId,
+    required String subjectId,
     _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -556,7 +582,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.studentView,
-        arguments: StudentViewArguments(cId: cId, key: key),
+        arguments: StudentViewArguments(
+            cId: cId, hId: hId, subjectId: subjectId, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -628,6 +655,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   Future<dynamic> replaceWithStudentConfirmationView({
     required int cid,
     required int hid,
+    required int subjectId,
     required List<_i14.GetStudentResponse> absentStudentList,
     required List<_i14.GetStudentResponse> presentStudentList,
     _i12.Key? key,
@@ -641,6 +669,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
         arguments: StudentConfirmationViewArguments(
             cid: cid,
             hid: hid,
+            subjectId: subjectId,
             absentStudentList: absentStudentList,
             presentStudentList: presentStudentList,
             key: key),

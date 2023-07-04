@@ -144,14 +144,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<String> saveAttendance(
+  Future<dynamic> saveAttendance(
       SaveAttendanceRequest saveAttendanceRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(saveAttendanceRequest.toJson());
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -163,7 +163,7 @@ class _ApiService implements ApiService {
           data: _data,
         )
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
+    final value = _result.data;
     return value;
   }
 

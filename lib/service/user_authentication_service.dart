@@ -55,7 +55,6 @@ class UserAuthenticationService with NavigationMixin {
     final _sessionConfig = SessionConfig(invalidateSessionForAppLostFocus: const Duration(seconds: 8), invalidateSessionForUserInactivity: const Duration(seconds: 10));
     _sessionConfig.stream.listen((SessionTimeoutState timeoutEvent) {
       if (timeoutEvent == SessionTimeoutState.userInactivityTimeout || timeoutEvent == SessionTimeoutState.appFocusTimeout) {
-        print(timeoutEvent.toString());
         locator<SharedPreferences>().clear();
         locator<NavigationService>().navigateToLoginView();
       }

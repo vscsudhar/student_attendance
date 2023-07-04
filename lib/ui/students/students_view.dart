@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/shared/styles.dart';
 import 'package:workspace/ui/students/students_viewmodel.dart';
@@ -8,10 +7,14 @@ import 'package:workspace/ui/students/widgets/student_list_widget.dart';
 class StudentView extends StatefulWidget {
   const StudentView({
     required this.cId,
+    required this.hId,
+    required this.subjectId,
     super.key,
   });
 
   final String cId;
+  final String hId;
+  final String subjectId;
   @override
   State<StudentView> createState() => _StudentViewState();
 }
@@ -20,7 +23,7 @@ class _StudentViewState extends State<StudentView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-        viewModelBuilder: () => StudentsViewModel(widget.cId),
+        viewModelBuilder: () => StudentsViewModel(widget.cId, widget.hId,widget.subjectId),
         builder: (context, viewModel, child) => Scaffold(
             appBar: AppBar(
               title: Text(

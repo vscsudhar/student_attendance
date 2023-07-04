@@ -53,5 +53,5 @@ abstract class ApiService {
   Future<List<GetStudentResponse>> getStudentDetails(@Path('cid') String cId);
 
   @POST('/SavaAttendance')
-  Future<String> saveAttendance(@Body() SaveAttendanceRequest saveAttendanceRequest);
+  Future<dynamic> saveAttendance(@Body() SaveAttendanceRequest saveAttendanceRequest);
 }
