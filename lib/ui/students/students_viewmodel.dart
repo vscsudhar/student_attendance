@@ -4,7 +4,7 @@ import 'package:workspace/core/models/students_model.dart';
 import 'package:workspace/service/api/api_service.dart';
 
 class StudentsViewModel extends BaseViewModel with NavigationMixin {
-  StudentsViewModel(this._cId,this._hId,this._subjectId) {
+  StudentsViewModel(this._cId, this._hId, this._subjectId) {
     getStudents();
   }
 
@@ -26,7 +26,7 @@ class StudentsViewModel extends BaseViewModel with NavigationMixin {
     _studentList.remove(student);
     notifyListeners();
     if (_studentList.isEmpty) {
-      goToStudentConfirmation(absentStudentList, presentStudentList, int.parse(_cId), int.parse(_hId),int.parse(_subjectId));
+      goToStudentConfirmation(absentStudentList, presentStudentList, int.parse(_cId), int.parse(_hId), int.parse(_subjectId));
     }
   }
 

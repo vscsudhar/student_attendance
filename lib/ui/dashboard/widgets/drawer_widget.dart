@@ -36,7 +36,11 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
   Widget buildMenuItems(BuildContext context, DashboardViewmodel viewModel) => Column(
         children: [
           ListTile(
-              leading: const Icon(Icons.home),
+              leading: Image.asset(
+              'assets/icons/dashboard.png',
+              width: 30,
+              height: 30,
+            ),
               title: Text(
                 "Dashboard",
                 style: fontFamilyBold.size16,
@@ -45,10 +49,11 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
                 Navigator.pop(context);
               }),
           ListTile(
-              leading: const Icon(
-                Icons.person,
-                color: appcolor2699FB,
-              ),
+              leading: Image.asset(
+              'assets/icons/group.png',
+              width: 30,
+              height: 30,
+            ),
               title: Text(
                 "Profile",
                 style: fontFamilyBold.size16,
@@ -57,9 +62,11 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileView()));
               }),
           ListTile(
-            leading: const Icon(
-              Icons.exit_to_app_outlined,
-              color: Colors.red,
+            leading: Image.asset(
+              'assets/icons/logout.png',
+              width: 30,
+              height: 30,
+          
             ),
             title: Text(
               "Logout",

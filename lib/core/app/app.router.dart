@@ -5,14 +5,15 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i12;
+import 'package:flutter/material.dart' as _i14;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i15;
-import 'package:workspace/core/models/login_model.dart' as _i13;
-import 'package:workspace/core/models/students_model.dart' as _i14;
+import 'package:stacked_services/stacked_services.dart' as _i17;
+import 'package:workspace/core/models/login_model.dart' as _i15;
+import 'package:workspace/core/models/students_model.dart' as _i16;
 import 'package:workspace/ui/announcement_details/announcement_details_view.dart'
     as _i11;
+import 'package:workspace/ui/attendance_view/attendance_view.dart' as _i12;
 import 'package:workspace/ui/changepassword/changepass_view.dart' as _i8;
 import 'package:workspace/ui/dashboard/dashboard_view.dart' as _i4;
 import 'package:workspace/ui/login/login_view.dart' as _i3;
@@ -23,6 +24,7 @@ import 'package:workspace/ui/student_confirmation/student_confirmation_view.dart
     as _i10;
 import 'package:workspace/ui/student_details/studentsdetails_view.dart' as _i9;
 import 'package:workspace/ui/students/students_view.dart' as _i5;
+import 'package:workspace/ui/view_section/view_section_view.dart' as _i13;
 
 class Routes {
   static const splashView = '/';
@@ -45,6 +47,10 @@ class Routes {
 
   static const announcementDetailsView = '/announcement-details-view';
 
+  static const attandanceView = '/attandance-view';
+
+  static const viewSection = '/view-section';
+
   static const all = <String>{
     splashView,
     loginView,
@@ -56,6 +62,8 @@ class Routes {
     studentDetailsView,
     studentConfirmationView,
     announcementDetailsView,
+    attandanceView,
+    viewSection,
   };
 }
 
@@ -101,30 +109,38 @@ class StackedRouter extends _i1.RouterBase {
       Routes.announcementDetailsView,
       page: _i11.AnnouncementDetailsView,
     ),
+    _i1.RouteDef(
+      Routes.attandanceView,
+      page: _i12.AttandanceView,
+    ),
+    _i1.RouteDef(
+      Routes.viewSection,
+      page: _i13.ViewSection,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.SplashView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
     _i3.LoginView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.LoginView(),
         settings: data,
       );
     },
     _i4.DashboardView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.DashboardView(),
         settings: data,
       );
     },
     _i5.StudentView: (data) {
       final args = data.getArgs<StudentViewArguments>(nullOk: false);
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => _i5.StudentView(
             cId: args.cId,
             hId: args.hId,
@@ -135,27 +151,27 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i6.SectionView: (data) {
       final args = data.getArgs<SectionViewArguments>(nullOk: false);
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i6.SectionView(loginResponse: args.loginResponse, key: args.key),
         settings: data,
       );
     },
     _i7.ProfileView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.ProfileView(),
         settings: data,
       );
     },
     _i8.ChangepassView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.ChangepassView(),
         settings: data,
       );
     },
     _i9.StudentDetailsView: (data) {
       final args = data.getArgs<StudentDetailsViewArguments>(nullOk: false);
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i9.StudentDetailsView(student: args.student, key: args.key),
         settings: data,
@@ -164,7 +180,7 @@ class StackedRouter extends _i1.RouterBase {
     _i10.StudentConfirmationView: (data) {
       final args =
           data.getArgs<StudentConfirmationViewArguments>(nullOk: false);
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => _i10.StudentConfirmationView(
             cid: args.cid,
             hid: args.hid,
@@ -178,9 +194,25 @@ class StackedRouter extends _i1.RouterBase {
     _i11.AnnouncementDetailsView: (data) {
       final args =
           data.getArgs<AnnouncementDetailsViewArguments>(nullOk: false);
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => _i11.AnnouncementDetailsView(
             annoncement: args.annoncement, key: args.key),
+        settings: data,
+      );
+    },
+    _i12.AttandanceView: (data) {
+      final args = data.getArgs<AttandanceViewArguments>(nullOk: false);
+      return _i14.MaterialPageRoute<dynamic>(
+        builder: (context) => _i12.AttandanceView(
+            cid: args.cid, hid: args.hid, sdate: args.sdate, key: args.key),
+        settings: data,
+      );
+    },
+    _i13.ViewSection: (data) {
+      final args = data.getArgs<ViewSectionArguments>(nullOk: false);
+      return _i14.MaterialPageRoute<dynamic>(
+        builder: (context) =>
+            _i13.ViewSection(loginResponse: args.loginResponse, key: args.key),
         settings: data,
       );
     },
@@ -206,7 +238,7 @@ class StudentViewArguments {
 
   final String subjectId;
 
-  final _i12.Key? key;
+  final _i14.Key? key;
 
   @override
   String toString() {
@@ -234,9 +266,9 @@ class SectionViewArguments {
     this.key,
   });
 
-  final _i13.LoginResponse? loginResponse;
+  final _i15.LoginResponse? loginResponse;
 
-  final _i12.Key? key;
+  final _i14.Key? key;
 
   @override
   String toString() {
@@ -261,9 +293,9 @@ class StudentDetailsViewArguments {
     this.key,
   });
 
-  final _i14.GetStudentResponse student;
+  final _i16.GetStudentResponse student;
 
-  final _i12.Key? key;
+  final _i14.Key? key;
 
   @override
   String toString() {
@@ -298,11 +330,11 @@ class StudentConfirmationViewArguments {
 
   final int subjectId;
 
-  final List<_i14.GetStudentResponse> absentStudentList;
+  final List<_i16.GetStudentResponse> absentStudentList;
 
-  final List<_i14.GetStudentResponse> presentStudentList;
+  final List<_i16.GetStudentResponse> presentStudentList;
 
-  final _i12.Key? key;
+  final _i14.Key? key;
 
   @override
   String toString() {
@@ -337,9 +369,9 @@ class AnnouncementDetailsViewArguments {
     this.key,
   });
 
-  final _i13.Annoncement annoncement;
+  final _i15.Annoncement annoncement;
 
-  final _i12.Key? key;
+  final _i14.Key? key;
 
   @override
   String toString() {
@@ -358,7 +390,70 @@ class AnnouncementDetailsViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i15.NavigationService {
+class AttandanceViewArguments {
+  const AttandanceViewArguments({
+    required this.cid,
+    required this.hid,
+    required this.sdate,
+    this.key,
+  });
+
+  final int cid;
+
+  final int hid;
+
+  final DateTime sdate;
+
+  final _i14.Key? key;
+
+  @override
+  String toString() {
+    return '{"cid": "$cid", "hid": "$hid", "sdate": "$sdate", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant AttandanceViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.cid == cid &&
+        other.hid == hid &&
+        other.sdate == sdate &&
+        other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return cid.hashCode ^ hid.hashCode ^ sdate.hashCode ^ key.hashCode;
+  }
+}
+
+class ViewSectionArguments {
+  const ViewSectionArguments({
+    required this.loginResponse,
+    this.key,
+  });
+
+  final _i15.LoginResponse? loginResponse;
+
+  final _i14.Key? key;
+
+  @override
+  String toString() {
+    return '{"loginResponse": "$loginResponse", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant ViewSectionArguments other) {
+    if (identical(this, other)) return true;
+    return other.loginResponse == loginResponse && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return loginResponse.hashCode ^ key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i17.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -405,7 +500,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
     required String cId,
     required String hId,
     required String subjectId,
-    _i12.Key? key,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -422,8 +517,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToSectionView({
-    required _i13.LoginResponse? loginResponse,
-    _i12.Key? key,
+    required _i15.LoginResponse? loginResponse,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -467,8 +562,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToStudentDetailsView({
-    required _i14.GetStudentResponse student,
-    _i12.Key? key,
+    required _i16.GetStudentResponse student,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -487,9 +582,9 @@ extension NavigatorStateExtension on _i15.NavigationService {
     required int cid,
     required int hid,
     required int subjectId,
-    required List<_i14.GetStudentResponse> absentStudentList,
-    required List<_i14.GetStudentResponse> presentStudentList,
-    _i12.Key? key,
+    required List<_i16.GetStudentResponse> absentStudentList,
+    required List<_i16.GetStudentResponse> presentStudentList,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -511,8 +606,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToAnnouncementDetailsView({
-    required _i13.Annoncement annoncement,
-    _i12.Key? key,
+    required _i15.Annoncement annoncement,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -522,6 +617,43 @@ extension NavigatorStateExtension on _i15.NavigationService {
     return navigateTo<dynamic>(Routes.announcementDetailsView,
         arguments: AnnouncementDetailsViewArguments(
             annoncement: annoncement, key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToAttandanceView({
+    required int cid,
+    required int hid,
+    required DateTime sdate,
+    _i14.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.attandanceView,
+        arguments:
+            AttandanceViewArguments(cid: cid, hid: hid, sdate: sdate, key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToViewSection({
+    required _i15.LoginResponse? loginResponse,
+    _i14.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.viewSection,
+        arguments: ViewSectionArguments(loginResponse: loginResponse, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -574,7 +706,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
     required String cId,
     required String hId,
     required String subjectId,
-    _i12.Key? key,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -591,8 +723,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithSectionView({
-    required _i13.LoginResponse? loginResponse,
-    _i12.Key? key,
+    required _i15.LoginResponse? loginResponse,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -636,8 +768,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithStudentDetailsView({
-    required _i14.GetStudentResponse student,
-    _i12.Key? key,
+    required _i16.GetStudentResponse student,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -656,9 +788,9 @@ extension NavigatorStateExtension on _i15.NavigationService {
     required int cid,
     required int hid,
     required int subjectId,
-    required List<_i14.GetStudentResponse> absentStudentList,
-    required List<_i14.GetStudentResponse> presentStudentList,
-    _i12.Key? key,
+    required List<_i16.GetStudentResponse> absentStudentList,
+    required List<_i16.GetStudentResponse> presentStudentList,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -680,8 +812,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithAnnouncementDetailsView({
-    required _i13.Annoncement annoncement,
-    _i12.Key? key,
+    required _i15.Annoncement annoncement,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -691,6 +823,43 @@ extension NavigatorStateExtension on _i15.NavigationService {
     return replaceWith<dynamic>(Routes.announcementDetailsView,
         arguments: AnnouncementDetailsViewArguments(
             annoncement: annoncement, key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithAttandanceView({
+    required int cid,
+    required int hid,
+    required DateTime sdate,
+    _i14.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.attandanceView,
+        arguments:
+            AttandanceViewArguments(cid: cid, hid: hid, sdate: sdate, key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithViewSection({
+    required _i15.LoginResponse? loginResponse,
+    _i14.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.viewSection,
+        arguments: ViewSectionArguments(loginResponse: loginResponse, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

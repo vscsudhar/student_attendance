@@ -21,9 +21,21 @@ class _AnnouncementDetailsViewState extends State<AnnouncementDetailsView> {
         viewModelBuilder: () => AnnouncementDetailsViewModel(),
         builder: (context, viewModel, child) => Scaffold(
               appBar: AppBar(
-                title: Text(
-                  'Announcement Details',
-                  style: fontFamilyBold.size24.white,
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      'assets/icons/announcement.png',
+                      width: 30,
+                      height: 35,
+                    ),
+                    horizontalSpacing10,
+                    Text(
+                      'Announcement Details',
+                      style: fontFamilyBold.size24.white,
+                    ),
+                  ],
                 ),
               ),
               body: ListView(

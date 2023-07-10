@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:workspace/core/models/attendance_response.dart';
+import 'package:workspace/core/models/get_boundry.dart';
 import 'package:workspace/core/models/login_model.dart';
 import 'package:workspace/core/models/save_attendance_model.dart';
 import 'package:workspace/core/models/subject_model.dart';
@@ -43,6 +45,9 @@ abstract class ApiService {
   @GET('/GetClassHours')
   Future<GetClassHoursResponse> getClasses();
 
+  @GET('/Staff/GetBoundry')
+  Future<GetBoundryResponse> getBoundries();
+
   @POST('/Staff/StaffAttendance')
   Future<String> staffAttendance(@Body() StaffLoginRequest staffLoginRequest);
 
@@ -52,6 +57,9 @@ abstract class ApiService {
   @POST('/GetStudents?cid={cid}')
   Future<List<GetStudentResponse>> getStudentDetails(@Path('cid') String cId);
 
-  @POST('/SavaAttendance')
+  @POST('/SaveAttendance')
   Future<dynamic> saveAttendance(@Body() SaveAttendanceRequest saveAttendanceRequest);
+
+  @GET('/GetStudentAttendance?date={date}&cid={cid}&hid={hid}')
+  Future<List<AttendanceViewResponse>> getAttendanceView(@Path('date') String sdate, @Path('cid') String cId, @Path('hid') String hId);
 }

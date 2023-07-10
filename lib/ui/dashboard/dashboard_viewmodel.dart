@@ -10,6 +10,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:workspace/core/enum/dialog_type.dart';
 import 'package:workspace/core/mixins/navigation_mixin.dart';
+import 'package:workspace/core/models/get_boundry.dart';
 import 'package:workspace/core/models/login_model.dart';
 import 'package:workspace/core/models/staff_login_model.dart';
 import 'package:workspace/service/api/api_service.dart';
@@ -20,6 +21,7 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   DashboardViewmodel() {
     getCurrentLocation();
     wifiIp();
+    getBoudry();
     // autologOut();
   }
 
@@ -35,15 +37,16 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   bool? _isStaffLoggedIn;
 
   LocationData? _locationData;
+  int? _insId;
   String? wifiGatewayIP;
   String? getWifiIP;
-  String? signin = '';
 
   Uint8List get image => const Base64Decoder().convert(_sharedPreference.getString('logo') ?? '');
   // List<Annoncement> get annoncement => [];
   bool get isStaffLoggedIn => _isStaffLoggedIn ?? false;
   String get userName => _sharedPreference.getString('name') ?? '';
   String get empId => _sharedPreference.getString('id') ?? '';
+  int? get insId => _insId;
 
   String get token => _sharedPreference.getString('token') ?? '';
   List<Annoncement> get annoncement {
@@ -55,7 +58,6 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   String get long => _locationData?.longitude.toString() ?? '';
   String get gatewayIp => wifiGatewayIP.toString();
   String get ipadd => getWifiIP.toString();
-
   setLogIn() async {
     await staffLogin();
   }
@@ -120,14 +122,19 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
     goToLogin();
   }
 
+  Future<void> getBoudry() async {
+    final res = await _apiService.getBoundries();
+    _insId = res.insId;
+    _sharedPreference.setInt('insId', res.insId ?? 0);
+    log(res.boundry.toString());
+  }
+
   Future<void> section() async {
-      showErrDialog('Please Login Your Attendance and Take the Student Attendance');
-  
+    showErrDialog('Please Login Your Attendance and Take the Student Attendance');
   }
 
   Future<void> section1() async {
-      showErrDialog('Please Login Your Attendance and View the Student Attendance');
-  
+    showErrDialog('Please Login Your Attendance and View the Student Attendance');
   }
 
   void showErrDialog(String message) {

@@ -27,9 +27,10 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
   Widget builder(BuildContext context, StudentConfirmationViewModel viewModel, Widget? child) {
     return Scaffold(
       appBar: AppBar(
+        leading: Image.asset('assets/icons/confirm.png'),
         title: Text(
           'Confirmation',
-          style: fontFamilyBold.size16.white,
+          style: fontFamilyBold.size20.white,
         ),
       ),
       body: Column(
@@ -44,6 +45,12 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Image.asset(
+                      'assets/icons/absent.png',
+                      width: 30,
+                      height: 35,
+                    ),
+                    horizontalSpacing10,
                     Text(
                       'Absented students',
                       style: fontFamilyBold.size18.red,
@@ -79,6 +86,12 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Image.asset(
+                      'assets/icons/present.png',
+                      width: 30,
+                      height: 35,
+                    ),
+                    horizontalSpacing10,
                     Text(
                       'Presented students',
                       style: fontFamilyBold.size18.color2699FB,

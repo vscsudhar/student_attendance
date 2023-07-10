@@ -22,9 +22,19 @@ class DashboardviewState extends State<DashboardView> {
         builder: (context, viewModel, child) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(
-                "Dashboard",
-                style: fontFamilyBold.size24.white,
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/icons/dashboard.png',
+                    width: 24,
+                    height: 24,
+                  ),
+                  horizontalSpacing20,
+                  Text(
+                    "Dashboard",
+                    style: fontFamilyBold.size24.white,
+                  ),
+                ],
               ),
             ),
             body: SingleChildScrollView(
@@ -42,9 +52,19 @@ class DashboardviewState extends State<DashboardView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Staff attendance',
-                              style: fontFamilyBold.size20.white,
+                            Row(
+                              children: [
+                                Image.asset(
+                                  'assets/icons/teacher.png',
+                                  width: 35,
+                                  height: 35,
+                                ),
+                                horizontalSpacing20,
+                                Text(
+                                  'Staff attendance',
+                                  style: fontFamilyBold.size20.white,
+                                ),
+                              ],
                             ),
                             InkWell(
                               onTap: () {
@@ -76,16 +96,26 @@ class DashboardviewState extends State<DashboardView> {
                         // } else {
                         //   viewModel.Section();
                         // }
-                           viewModel.goToSection(viewModel.loginResponse);
+                        viewModel.goToSection(viewModel.loginResponse);
                       },
                       child: Box(
                           margin: zeroPadding,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'student attendance',
-                                style: fontFamilyBold.size20.white,
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    'assets/icons/group.png',
+                                    width: 30,
+                                    height: 35,
+                                  ),
+                                  horizontalSpacing20,
+                                  Text(
+                                    'student attendance',
+                                    style: fontFamilyBold.size20.white,
+                                  ),
+                                ],
                               ),
                               verticalSpacing12,
                             ],
@@ -97,9 +127,19 @@ class DashboardviewState extends State<DashboardView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Announcement',
-                              style: fontFamilyBold.size20.white,
+                            Row(
+                              children: [
+                                Image.asset(
+              'assets/icons/announcement.png',
+              width: 30,
+              height: 35,
+            ),
+            horizontalSpacing20,
+                                Text(
+                                  'Announcement',
+                                  style: fontFamilyBold.size20.white,
+                                ),
+                              ],
                             ),
                             verticalSpacing12,
                             ListView.separated(
@@ -122,21 +162,32 @@ class DashboardviewState extends State<DashboardView> {
                     verticalSpacing20,
                     InkWell(
                       onTap: () {
-                        if (viewModel.isStaffLoggedIn == true) {
-                          viewModel.goToSection(viewModel.loginResponse);
-                        } else {
-                          viewModel.section1();
-                        }
+                        // if (viewModel.isStaffLoggedIn == true) {
+                        //   viewModel.goToSection(viewModel.loginResponse);
+                        // } else {
+                        //   viewModel.section1();
+                        // }
+                      viewModel.goToViewSection(viewModel.loginResponse);
+
                       },
                       child: Box(
-                          
                           margin: zeroPadding,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'student Attendance View',
-                                style: fontFamilyBold.size20.white,
+                              Row(
+                                children: [
+                                  Image.asset(
+              'assets/icons/studentview.png',
+              width: 30,
+              height: 35,
+            ),
+            horizontalSpacing20,
+                                  Text(
+                                    'student Attendance View',
+                                    style: fontFamilyBold.size20.white,
+                                  ),
+                                ],
                               ),
                               verticalSpacing12,
                             ],

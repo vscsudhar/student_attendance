@@ -9,47 +9,47 @@ SaveAttendanceRequest saveAttendanceRequestFromJson(String str) => SaveAttendanc
 String saveAttendanceRequestToJson(SaveAttendanceRequest data) => json.encode(data.toJson());
 
 class SaveAttendanceRequest {
-    List<StudentAttendance>? studentAttendances;
-    List<ClassAttendance>? classAttendances;
+  List<StudentAttendance>? studentAttendances;
+  List<ClassAttendance>? classAttendances;
 
-    SaveAttendanceRequest({
-        this.studentAttendances,
-        this.classAttendances,
-    });
+  SaveAttendanceRequest({
+    this.studentAttendances,
+    this.classAttendances,
+  });
 
-    factory SaveAttendanceRequest.fromJson(Map<String, dynamic> json) => SaveAttendanceRequest(
+  factory SaveAttendanceRequest.fromJson(Map<String, dynamic> json) => SaveAttendanceRequest(
         studentAttendances: json["studentAttendances"] == null ? [] : List<StudentAttendance>.from(json["studentAttendances"]!.map((x) => StudentAttendance.fromJson(x))),
         classAttendances: json["classAttendances"] == null ? [] : List<ClassAttendance>.from(json["classAttendances"]!.map((x) => ClassAttendance.fromJson(x))),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "studentAttendances": studentAttendances == null ? [] : List<dynamic>.from(studentAttendances!.map((x) => x.toJson())),
         "classAttendances": classAttendances == null ? [] : List<dynamic>.from(classAttendances!.map((x) => x.toJson())),
-    };
+      };
 }
 
 class ClassAttendance {
-    int? insId;
-    DateTime? sdate;
-    int? cid;
-    int? hid;
-    int? subId;
-    int? empId;
-    DateTime? modOn;
-    String? remarks;
+  int? insId;
+  DateTime? sdate;
+  int? cid;
+  int? hid;
+  int? subId;
+  int? empId;
+  DateTime? modOn;
+  String? remarks;
 
-    ClassAttendance({
-        this.insId,
-        this.sdate,
-        this.cid,
-        this.hid,
-        this.subId,
-        this.empId,
-        this.modOn,
-        this.remarks,
-    });
+  ClassAttendance({
+    this.insId,
+    this.sdate,
+    this.cid,
+    this.hid,
+    this.subId,
+    this.empId,
+    this.modOn,
+    this.remarks,
+  });
 
-    factory ClassAttendance.fromJson(Map<String, dynamic> json) => ClassAttendance(
+  factory ClassAttendance.fromJson(Map<String, dynamic> json) => ClassAttendance(
         insId: json["insID"],
         sdate: json["sdate"] == null ? null : DateTime.parse(json["sdate"]),
         cid: json["cid"],
@@ -58,9 +58,9 @@ class ClassAttendance {
         empId: json["empID"],
         modOn: json["modOn"] == null ? null : DateTime.parse(json["modOn"]),
         remarks: json["remarks"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "insID": insId,
         "sdate": sdate?.toIso8601String(),
         "cid": cid,
@@ -69,33 +69,33 @@ class ClassAttendance {
         "empID": empId,
         "modOn": modOn?.toIso8601String(),
         "remarks": remarks,
-    };
+      };
 }
 
 class StudentAttendance {
-    int? insId;
-    int? cid;
-    DateTime? sdate;
-    String? rollno;
-    int? subId;
-    int? hid;
-    int? attend;
-    int? status;
-    DateTime? modOn;
+  int? insId;
+  int? cid;
+  DateTime? sdate;
+  String? rollno;
+  int? subId;
+  int? hid;
+  int? attend;
+  int? status;
+  DateTime? modOn;
 
-    StudentAttendance({
-        this.insId,
-        this.cid,
-        this.sdate,
-        this.rollno,
-        this.subId,
-        this.hid,
-        this.attend,
-        this.status,
-        this.modOn,
-    });
+  StudentAttendance({
+    this.insId,
+    this.cid,
+    this.sdate,
+    this.rollno,
+    this.subId,
+    this.hid,
+    this.attend,
+    this.status,
+    this.modOn,
+  });
 
-    factory StudentAttendance.fromJson(Map<String, dynamic> json) => StudentAttendance(
+  factory StudentAttendance.fromJson(Map<String, dynamic> json) => StudentAttendance(
         insId: json["insID"],
         cid: json["cid"],
         sdate: json["sdate"] == null ? null : DateTime.parse(json["sdate"]),
@@ -105,9 +105,9 @@ class StudentAttendance {
         attend: json["attend"],
         status: json["status"],
         modOn: json["modOn"] == null ? null : DateTime.parse(json["modOn"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "insID": insId,
         "cid": cid,
         "sdate": sdate?.toIso8601String(),
@@ -117,5 +117,5 @@ class StudentAttendance {
         "attend": attend,
         "status": status,
         "modOn": modOn?.toIso8601String(),
-    };
+      };
 }

@@ -20,11 +20,21 @@ class _SplashViewState extends State<SplashView> {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.redAccent, Colors.blue, Colors.purple],
+                    colors: [Colors.white10, Colors.blue],
                   ),
                 ),
                 child: Center(
-                  child: Image.asset('assets/images/logo.jpg'),
+                  child: Container(
+                    height: 150,
+                    width: 150,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/logo.jpg'), // Replace with your image path
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ));

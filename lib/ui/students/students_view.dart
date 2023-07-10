@@ -23,12 +23,22 @@ class _StudentViewState extends State<StudentView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-        viewModelBuilder: () => StudentsViewModel(widget.cId, widget.hId,widget.subjectId),
+        viewModelBuilder: () => StudentsViewModel(widget.cId, widget.hId, widget.subjectId),
         builder: (context, viewModel, child) => Scaffold(
             appBar: AppBar(
-              title: Text(
-                'Students',
-                style: fontFamilyBold.size24.white,
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/icons/class.png',
+                    width: 30,
+                    height: 35,
+                  ),
+                  horizontalSpacing20,
+                  Text(
+                    'Students',
+                    style: fontFamilyBold.size24.white,
+                  ),
+                ],
               ),
             ),
             body: !viewModel.isBusy
@@ -71,17 +81,6 @@ class _StudentViewState extends State<StudentView> {
                           : const Center(
                               child: Text('Student data is not available'),
                             ),
-                      // Align(
-                      //   alignment: Alignment.bottomCenter,
-                      //   child: Padding(
-                      //     padding: defaultPadding20,
-                      //     child: Button1(
-                      //      // disabled: viewModel.studentList.isEmpty,
-                      //       onTap: () =>,
-                      //       title: 'Next',
-                      //     ),
-                      //   ),
-                      // )
                     ],
                   )
                 : const Center(

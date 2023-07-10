@@ -32,9 +32,19 @@ class _SectionViewState extends State<SectionView> {
       builder: (context, viewModel, child) {
         return Scaffold(
             appBar: AppBar(
-              title: Text(
-                'Section',
-                style: fontFamilyBold.size24.white,
+              title: Row(
+                children: [
+                  Image.asset(
+              'assets/icons/list3.png',
+              width: 30,
+              height: 35,
+            ),
+            horizontalSpacing20,
+                  Text(
+                    'Section',
+                    style: fontFamilyBold.size24.white,
+                  ),
+                ],
               ),
             ),
             body: !viewModel.isBusy
@@ -49,11 +59,15 @@ class _SectionViewState extends State<SectionView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                DropDownWidget(
-                                  title: 'Class',
-                                  selectedValue: viewModel.classClass,
-                                  dropDownList: viewModel.classList,
-                                  validator: viewModel.selectClassName,
+                                Padding(
+                                  padding: defaultPadding10,
+                                  child: DropDownWidget(
+                                    title: 'Class',
+                                    selectedValue: viewModel.classClass,
+                                    dropDownList: viewModel.classList,
+                                    validator: viewModel.selectClassName,
+                                    
+                                  ),
                                 ),
                                 verticalSpacing16,
                                 if(viewModel.classClass!=null)

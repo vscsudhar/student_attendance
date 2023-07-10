@@ -66,6 +66,29 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<GetBoundryResponse> getBoundries() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GetBoundryResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/Staff/GetBoundry',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetBoundryResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<String> staffAttendance(StaffLoginRequest staffLoginRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -158,12 +181,42 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          '/SavaAttendance',
+          '/SaveAttendance',
           queryParameters: queryParameters,
           data: _data,
         )
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<List<AttendanceViewResponse>> getAttendanceView(
+    String sdate,
+    String cId,
+    String hId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<AttendanceViewResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/GetStudentAttendance?date=${sdate}&cid=${cId}&hid=${hId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) =>
+            AttendanceViewResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
