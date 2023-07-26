@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workspace/ui/shared/styles.dart';
 
+import 'circular_progress_indicator.dart';
+
 class Button1 extends StatelessWidget {
   final String title;
   final bool disabled;
@@ -50,10 +52,19 @@ class Button1 extends StatelessWidget {
                   Text(title, style: fontFamilyBold.size14.white),
                 ],
               )
-            : const CircularProgressIndicator(
-                strokeWidth: 4,
-                valueColor: AlwaysStoppedAnimation(Colors.white),
-              ),
+            // : Center(
+            //     child: Padding(
+            //     padding: defaultPadding20,
+            //     child: AnimatedCircularProgressIndicator(
+            //       color: Colors.white,
+            //       backgroundColor: Colors.grey,
+            //     ),
+
+            //   )),
+        : const CircularProgressIndicator(
+            strokeWidth: 4,
+            valueColor: AlwaysStoppedAnimation(Colors.white),
+          ),
       ),
     );
   }

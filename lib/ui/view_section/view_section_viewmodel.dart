@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:workspace/core/mixins/navigation_mixin.dart';
@@ -28,7 +30,6 @@ class ViewSectionModel extends BaseViewModel with NavigationMixin {
   final _apiService = ApiService.init();
 
   final LoginResponse? _loginResponse;
-
   GetClassHoursResponse? _getClassResponse;
   int? _cid;
   String? _classClass;
@@ -40,7 +41,7 @@ class ViewSectionModel extends BaseViewModel with NavigationMixin {
   String? _subjectId;
   int? _hid;
   bool _isValid = false;
-  final DateTime _sdate = DateTime.now();
+  DateTime? _sdate;
 
   String get insType => _loginResponse?.insType ?? '';
   int get cid => _cid ?? 0;
@@ -52,7 +53,7 @@ class ViewSectionModel extends BaseViewModel with NavigationMixin {
   String? get subject => _subject;
   String? get subjectId => _subjectId;
   int get hid => _hid ?? 0;
-  DateTime get sdate => _sdate;
+  DateTime get sdate => _sdate ?? DateTime.now();
 
   List<ClassElement> get classes => _getClassResponse?.classes ?? [];
   List<Hour> get hour => _getClassResponse?.hour ?? [];
@@ -98,16 +99,31 @@ class ViewSectionModel extends BaseViewModel with NavigationMixin {
 
   selectHourName(hours) async {
     _hours = hours;
-    _subject = null;
+        // _isValid = true;
+    // _subject = null;
     notifyListeners();
     resetSelection();
     await getSubjects();
   }
 
+  Future<void> selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2100),
+    );
+
+    if (pickedDate != null) {
+      _sdate = pickedDate;
+      notifyListeners();
+    }
+  }
+
   selectSubject(subjects) {
     _subject = subjects;
     _isValid = true;
-    _subjectId = _subjectListResponse?.firstWhere((element) => element.subject == subjects).subId.toString() ?? '0';
+    _subjectId = _subjectListResponse?.firstWhere((element) => element.subject == subjects).subId.toString();
     // attendanceView();
     notifyListeners();
   }
@@ -144,10 +160,12 @@ class ViewSectionModel extends BaseViewModel with NavigationMixin {
       print(e);
     }
     _subjectListResponse = [];
-    _subjectListResponse = await runBusyFuture(_apiSerivce.getSubjectDetails(cid.toString(), hid.toString()), busyObject: BusyObjects.studentDetails).catchError((err) {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: 'Error, Already Marked or Subjects not Mapped for the Class, Retry');
+    _subjectListResponse = await runBusyFuture(_apiSerivce.getSubjectDetails(cid.toString(), hid.toString(), sdate.toString()));
+    //  busyObject: BusyObjects.studentDetails).catchError((err) {
+    //   _dialogService.showCustomDialog(variant: DialogType.error, description: 'Error, Already Marked or Subjects not Mapped for the Class, Retry');
       _isValid = false;
-    });
+    // }
+    // );
     if (hasError) {
       log('Something went wrong..!');
     } else if (_subjectListResponse?.isNotEmpty ?? false) {

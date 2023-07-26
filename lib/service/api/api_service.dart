@@ -51,8 +51,8 @@ abstract class ApiService {
   @POST('/Staff/StaffAttendance')
   Future<String> staffAttendance(@Body() StaffLoginRequest staffLoginRequest);
 
-  @POST('/GetSubject?cid={cid}&hid={hid}')
-  Future<List<GetSubjectResponse>> getSubjectDetails(@Path('cid') String cId, @Path('hid') String hId);
+  @POST('/GetSubject?dd={sdate}&cid={cid}&hid={hid}')
+  Future<List<GetSubjectResponse>> getSubjectDetails(@Path('sdate') String sdate, @Path('cid') String cId, @Path('hid') String hId);
 
   @POST('/GetStudents?cid={cid}')
   Future<List<GetStudentResponse>> getStudentDetails(@Path('cid') String cId);

@@ -1,4 +1,3 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -50,8 +49,4 @@ class LoginViewModel extends BaseViewModel with NavigationMixin {
   void showErrDialog(String message) {
     _dialogService.showCustomDialog(title: "Message", description: message);
   }
-  // Future<void> autologOut() async {
-  //   log('autologOut 1');
-  //   _userAuthenticationService.autoLogout();
-  // }
 }

@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'dart:core';
 
 import 'dart:developer';
+import 'dart:typed_data';
 
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:workspace/core/enum/busy_objects.dart';
@@ -18,10 +22,13 @@ import '../../service/locator.dart';
 class SectionViewModel extends BaseViewModel with NavigationMixin {
   SectionViewModel(this._loginResponse) {
     getClasses();
+    print(sdate);
   }
   final _apiSerivce = ApiService.init();
 
   final _dialogService = locator<DialogService>();
+    final _sharedPreference = locator<SharedPreferences>();
+
 
   List<GetSubjectResponse>? _subjectListResponse;
 
@@ -49,6 +56,12 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   String? get subject => _subject;
   String? get subjectId => _subjectId;
   int get hid => _hid ?? 0;
+  final DateTime _sdate = DateTime.now();
+  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+
+  
+    Uint8List get image => const Base64Decoder().convert(_sharedPreference.getString('logo') ?? '');
+
 
   List<ClassElement> get classes => _getClassResponse?.classes ?? [];
   List<Hour> get hour => _getClassResponse?.hour ?? [];
@@ -56,6 +69,9 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   List<String> get years => classes.map((classElement) => classElement.year.toString()).toSet().toList();
   List<String> get sections => classes.map((classElement) => classElement.section.toString()).toSet().toList();
   List<String> get hoursList => hour.map((hourElement) => hourElement.hours ?? '').toSet().toList();
+  String get sdate => formatter.format(_sdate);
+
+  //String get sdate => _sdate.toIso8601String().replaceAll('T00:00:00.000000', '');
 
   List<DropDownModel> get hourlist => hour.map((hourElement) => DropDownModel(name: hourElement.hours.toString(), value: hourElement.hours)).toList();
   List<DropDownModel> get classList => classNames.map((className) => DropDownModel(name: className, value: className)).toList();
@@ -98,6 +114,7 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
     notifyListeners();
     resetSelection();
     await getSubjects();
+    // await goToStudent();
   }
 
   selectSubject(subjects) {
@@ -114,7 +131,9 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
 
   goToStudent() {
     _cid = classes.firstWhere((element) => (element.classClass! == classClass) && (element.year! == year) && (element.section! == section)).cid.toString();
-    goToStudents(_cid!, _hid.toString(),_subjectId.toString());
+      // _hid = hour.firstWhere((element) => element.hours! == hours).hid;
+
+    goToStudents(_cid!, _hid.toString(), _subjectId.toString());
   }
 
   Future<void> getClasses() async {
@@ -134,8 +153,8 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
       print(e);
     }
     _subjectListResponse = [];
-    _subjectListResponse = await runBusyFuture(_apiSerivce.getSubjectDetails(cid, hid.toString()), busyObject: BusyObjects.studentDetails).catchError((err) {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: 'Error, Already Marked or Subjects not Mapped for the Class, Retry');
+    _subjectListResponse = await runBusyFuture(_apiSerivce.getSubjectDetails(sdate, cid, hid.toString()), busyObject: BusyObjects.studentDetails).catchError((err) {
+      _dialogService.showCustomDialog(variant: DialogType.error, description: err.toString());
       _isValid = false;
     });
     if (hasError) {

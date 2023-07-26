@@ -18,6 +18,5 @@ mixin NavigationMixin {
   void goToAnnouncementDetails(Annoncement annoncement) => _navigationService.navigateTo(Routes.announcementDetailsView, arguments: AnnouncementDetailsViewArguments(annoncement: annoncement));
   void goToLogin() => _navigationService.navigateTo(Routes.loginView);
   void goToAttendanceView(int cId, int hId, DateTime sdate) => _navigationService.navigateTo(Routes.attandanceView, arguments: AttandanceViewArguments(cid: cId, hid: hId, sdate: sdate));
-    void goToViewSection(LoginResponse? loginResponse) => _navigationService.navigateTo(Routes.viewSection, arguments: ViewSectionArguments(loginResponse: loginResponse));
-
+  void goToViewSection(LoginResponse? loginResponse) => _navigationService.navigateTo(Routes.viewSection, arguments: ViewSectionArguments(loginResponse: loginResponse));
 }

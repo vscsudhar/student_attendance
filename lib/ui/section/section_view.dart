@@ -7,6 +7,7 @@ import 'package:workspace/ui/section/widgets/drop_down_widget.dart';
 import 'package:workspace/ui/shared/styles.dart';
 
 import '../widgets/button1.dart';
+import '../widgets/circular_progress_indicator.dart';
 
 class SectionView extends StatefulWidget {
   const SectionView({required this.loginResponse, super.key});
@@ -31,102 +32,104 @@ class _SectionViewState extends State<SectionView> {
       viewModelBuilder: () => SectionViewModel(widget.loginResponse),
       builder: (context, viewModel, child) {
         return Scaffold(
-            appBar: AppBar(
-              title: Row(
-                children: [
-                  Image.asset(
-              'assets/icons/list3.png',
-              width: 30,
-              height: 35,
+          appBar: AppBar(
+            backgroundColor: appcolor2699FB,
+            title: Row(
+              children: [
+                Image.asset(
+                  'assets/icons/list3.png',
+                  width: 30,
+                  height: 35,
+                ),
+                horizontalSpacing20,
+                Text(
+                  'Section',
+                  style: fontFamilyBold.size24.white,
+                ),
+              ],
             ),
-            horizontalSpacing20,
-                  Text(
-                    'Section',
-                    style: fontFamilyBold.size24.white,
-                  ),
-                ],
-              ),
-            ),
-            body: !viewModel.isBusy
-                ? SafeArea(
-                    child: CustomScrollView(
-                      key: _formKey,
-                      slivers: [
-                        SliverToBoxAdapter(
-                          child: Padding(
-                            padding: defaultPadding20,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: defaultPadding10,
-                                  child: DropDownWidget(
-                                    title: 'Class',
-                                    selectedValue: viewModel.classClass,
-                                    dropDownList: viewModel.classList,
-                                    validator: viewModel.selectClassName,
-                                    
-                                  ),
-                                ),
-                                verticalSpacing16,
-                                if(viewModel.classClass!=null)
+          ),
+          body: !viewModel.isBusy
+              ? SafeArea(
+                  child: CustomScrollView(
+                    key: _formKey,
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: defaultPadding20 + defaultPadding20 - topPadding20 - leftPadding10,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              DropDownWidget(
+                                title: 'Class',
+                                selectedValue: viewModel.classClass,
+                                dropDownList: viewModel.classList,
+                                validator: viewModel.selectClassName,
+                              ),
+                              verticalSpacing16,
+                              if (viewModel.classClass != null)
                                 DropDownWidget(
                                   title: 'Year',
                                   selectedValue: viewModel.year,
                                   dropDownList: viewModel.yearsList,
                                   validator: viewModel.selectYearName,
                                 ),
-                                verticalSpacing16,
-                                 if(viewModel.year!=null)
+                              verticalSpacing16,
+                              if (viewModel.year != null)
                                 DropDownWidget(
                                   title: 'Section',
                                   selectedValue: viewModel.section,
                                   dropDownList: viewModel.sectionsList,
                                   validator: viewModel.selectSectionName,
                                 ),
-                                verticalSpacing16,
-                                 if(viewModel.section!=null)
+                              verticalSpacing16,
+                              if (viewModel.section != null)
                                 DropDownWidget(
                                   title: 'Hour',
                                   selectedValue: viewModel.hours,
                                   dropDownList: viewModel.hourlist,
                                   validator: viewModel.selectHourName,
                                 ),
-                                verticalSpacing16,
-                                Stack(
-                                  children: [
-                                    if (viewModel.busy(BusyObjects.studentDetails))
-                                      const Center(
+                              verticalSpacing16,
+                              Stack(
+                                children: [
+                                  if (viewModel.busy(BusyObjects.studentDetails))
+                                    Center(
                                         child: Padding(
-                                          padding: topPadding20,
-                                          child: CircularProgressIndicator(
-                                            color: appcolor2699FB,
-                                          ),
-                                        ),
+                                      padding: defaultPadding20,
+                                      child: AnimatedCircularProgressIndicator(
+                                        color: Colors.white,
+                                        backgroundColor: appcolor2699FB,
                                       ),
-                                    if (viewModel.subjectList.isNotEmpty)
-                                      DropDownWidget(
-                                        title: 'Subjects',
-                                        selectedValue: viewModel.subject,
-                                        dropDownList: viewModel.subjectList,
-                                        validator: viewModel.selectSubject,
-                                      ),
-                                  ],
-                                ),
-                                verticalSpacing16,
-                              ],
-                            ),
+
+                                      // CircularProgressIndicator(
+                                      //   color: Colors.white,
+                                      //   backgroundColor: Colors.grey,
+                                      // ),
+                                    )),
+                                  if (viewModel.subjectList.isNotEmpty)
+                                    DropDownWidget(
+                                      title: 'Subjects',
+                                      selectedValue: viewModel.subject,
+                                      dropDownList: viewModel.subjectList,
+                                      validator: viewModel.selectSubject,
+                                    ),
+                                ],
+                              ),
+                              verticalSpacing16,
+                            ],
                           ),
                         ),
-                        SliverFillRemaining(
-                            hasScrollBody: false,
-                            child: SafeArea(
-                              top: false,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  if(viewModel.isvalid)
+                      ),
+                      SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: SafeArea(
+                            top: false,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                if (viewModel.isvalid)
                                   Padding(
                                     padding: defaultPadding8,
                                     child: Button1(
@@ -140,16 +143,22 @@ class _SectionViewState extends State<SectionView> {
                                       }, //viewModel.getstudents(),
                                     ),
                                   ),
-                                  verticalSpacing20,
-                                ],
-                              ),
-                            ))
-                      ],
-                    ),
-                  )
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  ));
+                                verticalSpacing20,
+                              ],
+                            ),
+                          ))
+                    ],
+                  ),
+                )
+              : Center(
+                  child: Padding(
+                  padding: defaultPadding20,
+                  child: AnimatedCircularProgressIndicator(
+                    color: Colors.white,
+                    backgroundColor: Colors.grey,
+                  ),
+                )),
+        );
       },
     );
   }

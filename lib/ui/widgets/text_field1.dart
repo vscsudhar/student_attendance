@@ -4,7 +4,7 @@ import '../shared/styles.dart';
 
 class TextField1 extends StatelessWidget {
   const TextField1({
-    this.obscureText = false,
+    this.obscureText,
     this.initialValue,
     this.hintText,
     this.onSaved,
@@ -20,6 +20,7 @@ class TextField1 extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool? obscureText;
 
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -30,7 +31,7 @@ class TextField1 extends StatelessWidget {
       onSaved: onSaved,
       onChanged: onChanged,
       validator: validator,
-      obscureText:  false,
+      obscureText: obscureText ?? false,
     );
   }
 }

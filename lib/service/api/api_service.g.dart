@@ -113,6 +113,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<GetSubjectResponse>> getSubjectDetails(
+    String sdate,
     String cId,
     String hId,
   ) async {
@@ -128,7 +129,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/GetSubject?cid=${cId}&hid=${hId}',
+              '/GetSubject?dd=${sdate}&cid=${cId}&hid=${hId}',
               queryParameters: queryParameters,
               data: _data,
             )

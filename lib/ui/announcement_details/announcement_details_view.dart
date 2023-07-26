@@ -33,7 +33,7 @@ class _AnnouncementDetailsViewState extends State<AnnouncementDetailsView> {
                     horizontalSpacing10,
                     Text(
                       'Announcement Details',
-                      style: fontFamilyBold.size24.white,
+                      style: fontFamilyBold.size20.white,
                     ),
                   ],
                 ),

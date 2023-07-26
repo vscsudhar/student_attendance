@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 //colors
 const appcolor2699FB = Color(0xFF2699FB);
+// const appcolor2699FB = Colors.red;
 
 //spacer
 const emptySpacing = SizedBox.shrink();
@@ -63,10 +64,13 @@ extension TextStyleHelpers on TextStyle {
   TextStyle get size22 => copyWith(fontSize: 22 * scale);
   TextStyle get size24 => copyWith(fontSize: 24 * scale);
   TextStyle get size26 => copyWith(fontSize: 26 * scale);
+  TextStyle get size28 => copyWith(fontSize: 28 * scale);
+  TextStyle get size30 => copyWith(fontSize: 30 * scale);
 
   TextStyle get color2699FB => copyWith(color: appcolor2699FB);
   TextStyle get white => copyWith(color: Colors.white);
   TextStyle get white70 => copyWith(color: Colors.white70);
   TextStyle get white54 => copyWith(color: Colors.white54);
   TextStyle get red => copyWith(color: Colors.red);
+  TextStyle get black => copyWith(color: Colors.black);
 }

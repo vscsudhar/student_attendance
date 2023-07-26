@@ -29,7 +29,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         verticalSpacing10,
-        Text(widget.title ?? '', style: fontFamilyRegular.size14.copyWith(color: Colors.black)),
+        Text(widget.title ?? '', style: fontFamilyBold.size14.copyWith(color: Colors.black)),
         Container(
           margin: const EdgeInsets.only(top: 12),
           decoration: BoxDecoration(

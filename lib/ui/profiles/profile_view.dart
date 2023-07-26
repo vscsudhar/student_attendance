@@ -3,14 +3,12 @@ import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/login/login_view.dart';
 import 'package:workspace/ui/profiles/profile_viewmodel.dart';
 import 'package:workspace/ui/shared/styles.dart';
-import 'package:workspace/ui/widgets/box.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
   @override
   State<ProfileView> createState() => _ProfileViewState();
-
 }
 
 class _ProfileViewState extends State<ProfileView> {
@@ -28,73 +26,100 @@ class _ProfileViewState extends State<ProfileView> {
           body: ListView(
             padding: defaultPadding20,
             children: [
-              const CircleAvatar(
-                minRadius: 70,
-                maxRadius: 150,
-                foregroundImage: NetworkImage('https://reqres.in/img/faces/1-image.jpg'),
-              ),
+              const CircleAvatar(minRadius: 70, maxRadius: 150, backgroundImage: AssetImage('assets/icons/profile.png')),
               verticalSpacing16,
               Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [const Text('Full Name:'), Text(viewModel.userName,style: fontFamilyMedium.size16,)],
+                children: [
+                  const Text('Full Name:'),
+                  Text(
+                    viewModel.userName,
+                    style: fontFamilyMedium.size16,
+                  ),
+                ],
               ),
               verticalSpacing20,
-               Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:  [const Text('User Id:'), Text(viewModel.empId, style: fontFamilyMedium.size16,)],
+                children: [
+                  const Text('User Id:'),
+                  Text(
+                    viewModel.empId,
+                    style: fontFamilyMedium.size16,
+                  ),
+                ],
               ),
+              verticalSpacing20,
               Column(
                 children: [
-                  Box(
-                      onTap: () => viewModel.goToChangepassword(),
+                  GestureDetector(
+                    onTap: () => viewModel.goToChangepassword(),
+                    child: Container(
                       width: 155,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
-                        'Chage Password',
-                        style: fontFamilyRegular.size16,
+                        'Change Password',
+                        style: fontFamilyRegular.size16.copyWith(color: Colors.white),
                         textAlign: TextAlign.center,
-                      )),
-                  Box(
-                    width: 90,
+                      ),
+                    ),
+                  ),
+                  verticalSpacing16,
+                  GestureDetector(
                     onTap: () {
                       showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text("LogOut"),
-                              content: const Text('Are you sure to want Logout?'),
-                              actions: [
-                                IconButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon: const Icon(
-                                      Icons.cancel,
-                                      color: Colors.redAccent,
-                                    )),
-                                IconButton(
-                                    onPressed: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginView()));
-                                    },
-                                    icon: const Icon(
-                                      Icons.done,
-                                      color: appcolor2699FB,
-                                    ))
-                              ],
-                            );
-                          });
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text("Log Out"),
+                            content: const Text('Are you sure you want to log out?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(color: Colors.redAccent),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginView()));
+                                },
+                                child: const Text(
+                                  'Log Out',
+                                  style: TextStyle(color: appcolor2699FB),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
-                    child: Text(
-                      'LogOut',
-                      textAlign: TextAlign.center,
-                      style: fontFamilyRegular.size16,
+                    child: Container(
+                      width: 90,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: const Text(
+                        'Log Out',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
                     ),
-                    boxColor: Colors.red,
-                  )
+                  ),
                 ],
               ),
             ],
           ),
+
           //drawer: const DrawerView1(),
         );
       },

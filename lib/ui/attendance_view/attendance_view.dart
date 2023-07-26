@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:workspace/ui/attendance_view/attendance_viewmodel.dart';
 
 import '../shared/styles.dart';
+import '../widgets/circular_progress_indicator.dart';
 
 class AttandanceView extends StatefulWidget {
   const AttandanceView({required this.cid, required this.hid, required this.sdate, super.key});
@@ -24,14 +25,20 @@ class _AttandanceViewState extends State<AttandanceView> {
         builder: (context, viewModel, child) {
           return Scaffold(
             appBar: AppBar(
+              backgroundColor: appcolor2699FB,
+              leading: Padding(
+                padding: defaultPadding10,
+                child: Image.asset('assets/icons/view.png'),
+              ),
+              actions: [IconButton(onPressed: () => viewModel.goToDashboard(), icon: const Icon(Icons.done))],
               title: Row(
                 children: [
-                  Image.asset(
-                    'assets/icons/view.png',
-                    width: 30,
-                    height: 35,
-                  ),
-                  horizontalSpacing20,
+                  // Image.asset(
+                  //   'assets/icons/view.png',
+                  //   width: 30,
+                  //   height: 35,
+                  // ),
+                  // horizontalSpacing20,
                   Text(
                     'View Attendance',
                     style: fontFamilyBold.size16.white,
@@ -77,86 +84,86 @@ class _AttandanceViewState extends State<AttandanceView> {
                     ],
                   ),
                 SingleChildScrollView(
-                    padding: defaultPadding20,
-                    child: !viewModel.isBusy
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/absent.png',
-                                    width: 30,
-                                    height: 35,
-                                  ),
-                                  horizontalSpacing10,
-                                  Text(
-                                    'Absented students',
-                                    style: fontFamilyBold.size18.red,
-                                  ),
-                                  const Spacer(),
-                                ],
-                              ),
-                              verticalSpacing20,
-                              ListView.separated(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) => Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(viewModel.absentView[index].name ?? ''),
-                                    horizontalSpacing16,
-                                    Text(viewModel.absentView[index].rollno ?? '')
-                                  ],
+                  padding: defaultPadding20,
+                  child: !viewModel.isBusy
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/absent.png',
+                                  width: 30,
+                                  height: 35,
                                 ),
-                                separatorBuilder: (context, index) => const Padding(
-                                  padding: defaultPadding8,
-                                  child: horizontalDivider,
+                                horizontalSpacing10,
+                                Text(
+                                  'Absented students',
+                                  style: fontFamilyBold.size18.red,
                                 ),
-                                itemCount: viewModel.absentView.length,
-                              ),
-                              verticalSpacing20,
-                              horizontalDivider,
-                              verticalSpacing20,
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/present.png',
-                                    width: 30,
-                                    height: 35,
-                                  ),
-                                  horizontalSpacing10,
-                                  Text(
-                                    'Presented students',
-                                    style: fontFamilyBold.size18.color2699FB,
-                                  ),
-                                  const Spacer(),
-                                ],
-                              ),
-                              verticalSpacing20,
-                              ListView.separated(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) => Column(
-                                  children: [Text(viewModel.presentView[index].name ?? ''), verticalSpacing16, Text(viewModel.presentView[index].rollno ?? '')],
-                                ),
-                                separatorBuilder: (context, index) => const Padding(
-                                  padding: defaultPadding8,
-                                  child: horizontalDivider,
-                                ),
-                                itemCount: viewModel.presentView.length,
-                              ),
-                            ],
-                          )
-                        : const Center(
-                            child: CircularProgressIndicator(
-                              color: appcolor2699FB,
+                                const Spacer(),
+                              ],
                             ),
-                          )),
+                            verticalSpacing20,
+                            ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) => Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [Text(viewModel.absentView[index].name ?? ''), horizontalSpacing16, Text(viewModel.absentView[index].rollno ?? '')],
+                              ),
+                              separatorBuilder: (context, index) => const Padding(
+                                padding: defaultPadding8,
+                                child: horizontalDivider,
+                              ),
+                              itemCount: viewModel.absentView.length,
+                            ),
+                            verticalSpacing20,
+                            horizontalDivider,
+                            verticalSpacing20,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/present.png',
+                                  width: 30,
+                                  height: 35,
+                                ),
+                                horizontalSpacing10,
+                                Text(
+                                  'Presented students',
+                                  style: fontFamilyBold.size18.color2699FB,
+                                ),
+                                const Spacer(),
+                              ],
+                            ),
+                            verticalSpacing20,
+                            ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) => Row(
+                                children: [Text(viewModel.presentView[index].name ?? ''), horizontalSpacing16, Text(viewModel.presentView[index].rollno ?? '')],
+                              ),
+                              separatorBuilder: (context, index) => const Padding(
+                                padding: defaultPadding8,
+                                child: horizontalDivider,
+                              ),
+                              itemCount: viewModel.presentView.length,
+                            ),
+                          ],
+                        )
+                      : Center(
+                          child: Padding(
+                          padding: defaultPadding20,
+                          child: AnimatedCircularProgressIndicator(
+                            color: Colors.white,
+                            backgroundColor: Colors.grey,
+                          ),
+                        )),
+                )
               ],
             ),
           );
