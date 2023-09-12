@@ -145,7 +145,11 @@ class _AttandanceViewState extends State<AttandanceView> {
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) => Row(
-                                children: [Text(viewModel.presentView[index].name ?? ''), horizontalSpacing16, Text(viewModel.presentView[index].rollno ?? '')],
+                                children: [
+                                  Text(viewModel.presentView[index].name ?? ''),
+                                  horizontalSpacing16,
+                                  Text(viewModel.presentView[index].rollno ?? ''),
+                                ],
                               ),
                               separatorBuilder: (context, index) => const Padding(
                                 padding: defaultPadding8,

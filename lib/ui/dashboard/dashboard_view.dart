@@ -132,7 +132,7 @@ class DashboardviewState extends State<DashboardView> {
                             ),
                             InkWell(
                               onTap: () {
-                                viewModel.setLogIn();
+                                viewModel.staffLogin();
                               },
                               child: !viewModel.isBusy
                                   ? Box(
@@ -226,90 +226,51 @@ class DashboardviewState extends State<DashboardView> {
                     //         ],
                     //       )),
                     // ),
-                    verticalSpacing16,
+                    verticalSpacing20,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              // if (viewModel.isStaffLoggedIn == true) {
-                              //   viewModel.goToSection(viewModel.loginResponse);
-                              // } else {
-                              //   viewModel.section();
-                              // }
-                              viewModel.goToSection(viewModel.loginResponse);
-                            },
-                            child: Container(
-                                margin: zeroPadding,
-                                decoration: const BoxDecoration(
-                                    color: appcolor2699FB,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(8),
-                                    )),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Image.asset(
-                                          'assets/icons/group.png',
-                                          width: 50,
-                                          height: 60,
-                                        ),
-                                        horizontalSpacing20,
-                                        Text(
-                                          'student Attendance',
-                                          style: fontFamilyBold.size18.white,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ],
-                                    ),
-                                    verticalSpacing12,
-                                  ],
-                                )),
-                          ),
+                          child: Box(
+                              margin: zeroPadding,
+                              padding: const EdgeInsets.only(bottom: 12),
+                              onTap: () => viewModel.goToSection(viewModel.loginResponse),
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/icons/group.png',
+                                    width: 50,
+                                    height: 60,
+                                  ),
+                                  Text(
+                                    'student\nAttendance',
+                                    style: fontFamilyBold.size18.white,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              )),
                         ),
                         horizontalSpacing20,
                         Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              //   if (viewModel.isStaffLoggedIn == true) {
-                              //     viewModel.goToViewSection(viewModel.loginResponse);
-                              //   } else {
-                              //     viewModel.section1();
-                              //   }
-                              viewModel.goToViewSection(viewModel.loginResponse);
-                            },
-                            child: Container(
-                                margin: zeroPadding,
-                                decoration: const BoxDecoration(
-                                    color: appcolor2699FB,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(8),
-                                    )),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Image.asset(
-                                          'assets/icons/studentview.png',
-                                          width: 50,
-                                          height: 60,
-                                        ),
-                                        horizontalSpacing20,
-                                        Text(
-                                          'student Attendance View',
-                                          style: fontFamilyBold.size18.white,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ],
-                                    ),
-                                    verticalSpacing12,
-                                  ],
-                                )),
-                          ),
+                          child: Box(
+                              onTap: () => viewModel.goToViewSection(viewModel.loginResponse),
+                              margin: zeroPadding,
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/icons/studentview.png',
+                                    width: 50,
+                                    height: 60,
+                                  ),
+                                  horizontalSpacing20,
+                                  Text(
+                                    'student Attendance View',
+                                    style: fontFamilyBold.size18.white,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              )),
                         ),
                       ],
                     ),
@@ -322,5 +283,4 @@ class DashboardviewState extends State<DashboardView> {
           );
         });
   }
-  
 }

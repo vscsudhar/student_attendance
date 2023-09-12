@@ -49,7 +49,7 @@ abstract class ApiService {
   Future<GetBoundryResponse> getBoundries();
 
   @POST('/Staff/StaffAttendance')
-  Future<String> staffAttendance(@Body() StaffLoginRequest staffLoginRequest);
+  Future<dynamic> staffAttendance(@Body() StaffLoginRequest staffLoginRequest);
 
   @POST('/GetSubject?dd={sdate}&cid={cid}&hid={hid}')
   Future<List<GetSubjectResponse>> getSubjectDetails(@Path('sdate') String sdate, @Path('cid') String cId, @Path('hid') String hId);

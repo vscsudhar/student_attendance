@@ -27,8 +27,7 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   final _apiSerivce = ApiService.init();
 
   final _dialogService = locator<DialogService>();
-    final _sharedPreference = locator<SharedPreferences>();
-
+  final _sharedPreference = locator<SharedPreferences>();
 
   List<GetSubjectResponse>? _subjectListResponse;
 
@@ -59,9 +58,7 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   final DateTime _sdate = DateTime.now();
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
 
-  
-    Uint8List get image => const Base64Decoder().convert(_sharedPreference.getString('logo') ?? '');
-
+  Uint8List get image => const Base64Decoder().convert(_sharedPreference.getString('logo') ?? '');
 
   List<ClassElement> get classes => _getClassResponse?.classes ?? [];
   List<Hour> get hour => _getClassResponse?.hour ?? [];
@@ -131,7 +128,7 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
 
   goToStudent() {
     _cid = classes.firstWhere((element) => (element.classClass! == classClass) && (element.year! == year) && (element.section! == section)).cid.toString();
-      // _hid = hour.firstWhere((element) => element.hours! == hours).hid;
+    // _hid = hour.firstWhere((element) => element.hours! == hours).hid;
 
     goToStudents(_cid!, _hid.toString(), _subjectId.toString());
   }
@@ -154,7 +151,7 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
     }
     _subjectListResponse = [];
     _subjectListResponse = await runBusyFuture(_apiSerivce.getSubjectDetails(sdate, cid, hid.toString()), busyObject: BusyObjects.studentDetails).catchError((err) {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: err.toString());
+      _dialogService.showCustomDialog(variant: DialogType.error, description: ' Error, Already Marked or Subjects not Mapped for the Class, Retry');
       _isValid = false;
     });
     if (hasError) {

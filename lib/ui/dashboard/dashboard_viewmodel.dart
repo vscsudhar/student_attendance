@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:location/location.dart';
@@ -18,10 +19,14 @@ import 'package:workspace/service/user_authentication_service.dart';
 
 class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   DashboardViewmodel() {
+    init();
+    // autologOut();
+  }
+
+  init() async {
+    // await getBoudry();
     getCurrentLocation();
     wifiIp();
-    getBoudry();
-    // autologOut();
   }
 
   final _dialogService = locator<DialogService>();
@@ -35,7 +40,8 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
 
   bool? _isStaffLoggedIn;
 
-  LocationData? _locationData;
+  String? _lat;
+  String? _long;
   int? _insId;
   String? wifiGatewayIP;
   String? getWifiIP;
@@ -53,17 +59,16 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
     return LoginResponse.fromJson(json1).annoncement ?? [];
   }
 
-  String get lat => _locationData?.latitude.toString() ?? '';
-  String get long => _locationData?.longitude.toString() ?? '';
+  // LocationData? get locationData => _locationData;
+
+  // String? get lat => locationData?.latitude.toString();
+  // String? get long => locationData?.longitude.toString();
   String get gatewayIp => wifiGatewayIP.toString();
   String get ipadd => getWifiIP.toString();
-  setLogIn() async {
-    await staffLogin();
-  }
+
+  Location get location => Location();
 
   getCurrentLocation() async {
-    Location location = Location();
-
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
 
@@ -82,10 +87,6 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
         return;
       }
     }
-    _locationData = await location.getLocation();
-
-    log('lat : ' + (_locationData?.latitude.toString() ?? ''));
-    log('long : ' + (_locationData?.longitude.toString() ?? ''));
   }
 
   wifiIp() async {
@@ -99,15 +100,22 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   }
 
   Future<void> staffLogin() async {
-    final staffLoginRequest = StaffLoginRequest(atime: DateTime.now(), lat: long, long: lat, wifi: ipadd, employeeId: empId, description: 'test');
+    final _locationData = await location.getLocation();
+    _lat = _locationData.latitude?.toString();
+    _long = _locationData.longitude?.toString();
+    final staffLoginRequest = StaffLoginRequest(atime: DateTime.now(), lat: _long, long: _lat, wifi: ipadd, employeeId: empId, description: 'test');
     final response = await runBusyFuture(_apiService.staffAttendance(staffLoginRequest)).catchError((err) {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: err.toString());
+      print(err);
+      _dialogService.showCustomDialog(variant: DialogType.error, description: err?.toString() ?? 'Something went wrong');
     });
     if (!hasError) {
       _isStaffLoggedIn = response == "True";
       if (!(_isStaffLoggedIn ?? false)) {
         showErrDialog('You are not inside the campus');
       }
+    } else {
+      response == HttpStatus.notFound;
+      showErrDialog('File is Not Found');
     }
   }
 

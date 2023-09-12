@@ -59,6 +59,8 @@ class StudentConfirmationViewModel extends BaseViewModel with NavigationMixin {
   DateTime get sdate => _sdate;
   bool get isUpdatePresent => _isUpdatePresent ?? false;
   bool get isUpdateAbsent => _isUpdateAbsent ?? false;
+  //     final DateFormat formatter = DateFormat('yyyy-MM-dd');
+  // String get sdate => formatter.format(_sdate);
 
   Future<void> saveStudentList() async {
     List<StudentAttendance> aList = [];
@@ -117,7 +119,8 @@ class StudentConfirmationViewModel extends BaseViewModel with NavigationMixin {
       goToAttendanceView(cId, hId, sdate);
       print(res);
     } else {
-      showErrDialog('please check the data');
+      showErrDialog(modelError.toString());
+       print(res);
     }
     print(res);
   }

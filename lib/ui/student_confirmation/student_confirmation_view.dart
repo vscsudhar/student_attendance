@@ -201,7 +201,7 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
                     borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
                   ),
                   padding: defaultPadding20,
-                  height: 130,
+                  height: 140,
                   child: Row(
                     children: [
                       Column(

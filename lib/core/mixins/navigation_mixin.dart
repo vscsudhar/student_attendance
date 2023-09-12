@@ -8,7 +8,7 @@ import '../models/students_model.dart';
 mixin NavigationMixin {
   final NavigationService _navigationService = locator<NavigationService>();
 
-  void goToDashboard() => _navigationService.navigateTo(Routes.dashboardView);
+  void goToDashboard() => _navigationService.clearStackAndShow(Routes.dashboardView);
   void goToStudents(String cId, String hId, String subjectId) => _navigationService.navigateTo(Routes.studentView, arguments: StudentViewArguments(cId: cId, hId: hId, subjectId: subjectId));
   void goToSection(LoginResponse? loginResponse) => _navigationService.navigateTo(Routes.sectionView, arguments: SectionViewArguments(loginResponse: loginResponse));
   void goToProfiles() => _navigationService.navigateTo(Routes.profileView);
