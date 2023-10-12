@@ -26,7 +26,7 @@ abstract class ApiService {
 
   static ApiService init() {
     final dio = Dio();
-    dio.options.baseUrl = 'http://rubric.rrwinfo.com';
+    dio.options.baseUrl = 'http://rubric.vewinpro.com';
     try {
       if (locator<UserAuthenticationService>().token.isNotEmpty) {
         log(locator<UserAuthenticationService>().token);
