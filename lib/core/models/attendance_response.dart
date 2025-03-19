@@ -4,9 +4,12 @@
 
 import 'dart:convert';
 
-List<AttendanceViewResponse> attendanceViewResponseFromJson(String str) => List<AttendanceViewResponse>.from(json.decode(str).map((x) => AttendanceViewResponse.fromJson(x)));
+List<AttendanceViewResponse> attendanceViewResponseFromJson(String str) =>
+    List<AttendanceViewResponse>.from(
+        json.decode(str).map((x) => AttendanceViewResponse.fromJson(x)));
 
-String attendanceViewResponseToJson(List<AttendanceViewResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String attendanceViewResponseToJson(List<AttendanceViewResponse> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class AttendanceViewResponse {
   String? rollno;
@@ -21,7 +24,8 @@ class AttendanceViewResponse {
     this.attend,
   });
 
-  factory AttendanceViewResponse.fromJson(Map<String, dynamic> json) => AttendanceViewResponse(
+  factory AttendanceViewResponse.fromJson(Map<String, dynamic> json) =>
+      AttendanceViewResponse(
         rollno: json["rollno"],
         name: json["name"],
         cid: json["cid"],

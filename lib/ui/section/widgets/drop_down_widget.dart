@@ -29,7 +29,8 @@ class _DropDownWidgetState extends State<DropDownWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         verticalSpacing10,
-        Text(widget.title ?? '', style: fontFamilyBold.size14.copyWith(color: Colors.black)),
+        Text(widget.title ?? '',
+            style: fontFamilyBold.size14.copyWith(color: Colors.black)),
         Container(
           margin: const EdgeInsets.only(top: 12),
           decoration: BoxDecoration(
@@ -45,32 +46,38 @@ class _DropDownWidgetState extends State<DropDownWidget> {
               ),
             ],
           ),
-          child: DropdownButton(
-            isExpanded: true,
-            // value: '',
+          child: Padding(
             padding: leftPadding20,
-            style: fontFamilyBold.size16.color2699FB,
-            onTap: () {
-              print('${widget.title} clicked');
-            },
-            // disabledHint: Text(
-            //   'Please select ${widget.title}',
-            //   style: fontFamilyRegular.size14.copyWith(color: Colors.black),
-            // ),
-            hint: Text(
-              widget.selectedValue ?? 'Please select ${widget.title}',
-              style: fontFamilyMedium.size14.copyWith(color: widget.selectedValue != null ? appcolor2699FB : Colors.black),
+            child: DropdownButton(
+              isExpanded: true,
+              // value: '',
+              // padding: leftPadding20,
+              style: fontFamilyBold.size16.color2699FB,
+              onTap: () {
+                print('${widget.title} clicked');
+              },
+              // disabledHint: Text(
+              //   'Please select ${widget.title}',
+              //   style: fontFamilyRegular.size14.copyWith(color: Colors.black),
+              // ),
+              hint: Text(
+                widget.selectedValue ?? 'Please select ${widget.title}',
+                style: fontFamilyMedium.size14.copyWith(
+                    color: widget.selectedValue != null
+                        ? appcolor2699FB
+                        : Colors.black),
+              ),
+              items: List.generate(widget.dropDownList.length, (index) {
+                return DropdownMenuItem(
+                  child: Text(
+                    widget.dropDownList[index].name ?? 'N/A',
+                    style: fontFamilyRegular.size14.color2699FB,
+                  ),
+                  value: widget.dropDownList[index].value,
+                );
+              }),
+              onChanged: widget.validator,
             ),
-            items: List.generate(widget.dropDownList.length, (index) {
-              return DropdownMenuItem(
-                child: Text(
-                  widget.dropDownList[index].name ?? 'N/A',
-                  style: fontFamilyRegular.size14.color2699FB,
-                ),
-                value: widget.dropDownList[index].value,
-              );
-            }),
-            onChanged: widget.validator,
           ),
         )
       ],
@@ -78,15 +85,14 @@ class _DropDownWidgetState extends State<DropDownWidget> {
   }
 }
 
-
-      // DropDownTextField(
-        //   dropDownList: dropDownList,
-        //   dropDownItemCount: dropDownList.length,
-        //   textStyle: fontFamilyBold.size16,
-        //   readOnly: false,
-        //   searchAutofocus: true,
-        //   padding: zeroPadding,
-        //   dropdownColor: appcolor2699FB,
-        //   listTextStyle: fontFamilyBold.size16.white,
-        //   validator: validator,
-        // ),
+// DropDownTextField(
+//   dropDownList: dropDownList,
+//   dropDownItemCount: dropDownList.length,
+//   textStyle: fontFamilyBold.size16,
+//   readOnly: false,
+//   searchAutofocus: true,
+//   padding: zeroPadding,
+//   dropdownColor: appcolor2699FB,
+//   listTextStyle: fontFamilyBold.size16.white,
+//   validator: validator,
+// ),

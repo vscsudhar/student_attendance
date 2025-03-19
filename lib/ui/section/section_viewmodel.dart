@@ -58,26 +58,49 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   final DateTime _sdate = DateTime.now();
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
 
-  Uint8List get image => const Base64Decoder().convert(_sharedPreference.getString('logo') ?? '');
+  Uint8List get image =>
+      const Base64Decoder().convert(_sharedPreference.getString('logo') ?? '');
 
   List<ClassElement> get classes => _getClassResponse?.classes ?? [];
   List<Hour> get hour => _getClassResponse?.hour ?? [];
-  List<String> get classNames => classes.map((classElement) => classElement.classClass.toString()).toSet().toList();
-  List<String> get years => classes.map((classElement) => classElement.year.toString()).toSet().toList();
-  List<String> get sections => classes.map((classElement) => classElement.section.toString()).toSet().toList();
-  List<String> get hoursList => hour.map((hourElement) => hourElement.hours ?? '').toSet().toList();
+  List<String> get classNames => classes
+      .map((classElement) => classElement.classClass.toString())
+      .toSet()
+      .toList();
+  List<String> get years => classes
+      .map((classElement) => classElement.year.toString())
+      .toSet()
+      .toList();
+  List<String> get sections => classes
+      .map((classElement) => classElement.section.toString())
+      .toSet()
+      .toList();
+  List<String> get hoursList =>
+      hour.map((hourElement) => hourElement.hours ?? '').toSet().toList();
   String get sdate => formatter.format(_sdate);
 
   //String get sdate => _sdate.toIso8601String().replaceAll('T00:00:00.000000', '');
 
-  List<DropDownModel> get hourlist => hour.map((hourElement) => DropDownModel(name: hourElement.hours.toString(), value: hourElement.hours)).toList();
-  List<DropDownModel> get classList => classNames.map((className) => DropDownModel(name: className, value: className)).toList();
-  List<DropDownModel> get yearsList => years.map((year) => DropDownModel(name: year, value: year)).toList();
-  List<DropDownModel> get sectionsList => sections.map((section) => DropDownModel(name: section, value: section)).toList();
+  List<DropDownModel> get hourlist => hour
+      .map((hourElement) => DropDownModel(
+          name: hourElement.hours.toString(), value: hourElement.hours))
+      .toList();
+  List<DropDownModel> get classList => classNames
+      .map((className) => DropDownModel(name: className, value: className))
+      .toList();
+  List<DropDownModel> get yearsList =>
+      years.map((year) => DropDownModel(name: year, value: year)).toList();
+  List<DropDownModel> get sectionsList => sections
+      .map((section) => DropDownModel(name: section, value: section))
+      .toList();
 
-  List<GetSubjectResponse> get subjectListResponse => _subjectListResponse ?? [];
+  List<GetSubjectResponse> get subjectListResponse =>
+      _subjectListResponse ?? [];
 
-  List<DropDownModel> get subjectList => subjectListResponse.map((subject) => DropDownModel(name: subject.subject, value: subject.subject)).toList();
+  List<DropDownModel> get subjectList => subjectListResponse
+      .map((subject) =>
+          DropDownModel(name: subject.subject, value: subject.subject))
+      .toList();
 
   bool get isvalid => _isValid;
 
@@ -117,7 +140,11 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   selectSubject(subjects) {
     _subject = subjects;
     _isValid = true;
-    _subjectId = _subjectListResponse?.firstWhere((element) => element.subject == subjects).subId.toString() ?? '0';
+    _subjectId = _subjectListResponse
+            ?.firstWhere((element) => element.subject == subjects)
+            .subId
+            .toString() ??
+        '0';
     notifyListeners();
   }
 
@@ -127,7 +154,13 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   }
 
   goToStudent() {
-    _cid = classes.firstWhere((element) => (element.classClass! == classClass) && (element.year! == year) && (element.section! == section)).cid.toString();
+    _cid = classes
+        .firstWhere((element) =>
+            (element.classClass! == classClass) &&
+            (element.year! == year) &&
+            (element.section! == section))
+        .cid
+        .toString();
     // _hid = hour.firstWhere((element) => element.hours! == hours).hid;
 
     goToStudents(_cid!, _hid.toString(), _subjectId.toString());
@@ -136,7 +169,8 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
   Future<void> getClasses() async {
     _getClassResponse = await runBusyFuture(_apiSerivce.getClasses());
     if (hasError) {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: 'Something went wrong...!');
+      _dialogService.showCustomDialog(
+          variant: DialogType.error, description: 'Something went wrong...!');
     } else {
       // await getSubjects();
     }
@@ -144,14 +178,26 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
 
   Future<void> getSubjects() async {
     try {
-      _cid = classes.firstWhere((element) => (element.classClass! == classClass) && (element.year! == year) && (element.section! == section)).cid.toString();
+      _cid = classes
+          .firstWhere((element) =>
+              (element.classClass! == classClass) &&
+              (element.year! == year) &&
+              (element.section! == section))
+          .cid
+          .toString();
       _hid = hour.firstWhere((element) => element.hours! == hours).hid;
     } catch (e) {
       print(e);
     }
     _subjectListResponse = [];
-    _subjectListResponse = await runBusyFuture(_apiSerivce.getSubjectDetails(sdate, cid, hid.toString()), busyObject: BusyObjects.studentDetails).catchError((err) {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: ' Error, Already Marked or Subjects not Mapped for the Class, Retry');
+    _subjectListResponse = await runBusyFuture(
+            _apiSerivce.getSubjectDetails(sdate, cid, hid.toString()),
+            busyObject: BusyObjects.studentDetails)
+        .catchError((err) {
+      _dialogService.showCustomDialog(
+          variant: DialogType.error,
+          description:
+              ' Error, Already Marked or Subjects not Mapped for the Class, Retry');
       _isValid = false;
     });
     if (hasError) {
@@ -160,7 +206,8 @@ class SectionViewModel extends BaseViewModel with NavigationMixin {
       _isValid = false;
       notifyListeners();
     } else {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: 'Subjects are not available');
+      _dialogService.showCustomDialog(
+          variant: DialogType.error, description: 'Subjects are not available');
       _isValid = false;
     }
   }

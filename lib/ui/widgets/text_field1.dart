@@ -20,14 +20,14 @@ class TextField1 extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool? obscureText;
 
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: TextInputType.text, //username or email
       initialValue: initialValue ?? '',
       style: fontFamilyBold.size16.color2699FB,
-      decoration: InputDecoration(hintText: hintText ?? '', hintStyle: fontFamilyBold.size16),
+      decoration: InputDecoration(
+          hintText: hintText ?? '', hintStyle: fontFamilyBold.size16),
       onSaved: onSaved,
       onChanged: onChanged,
       validator: validator,

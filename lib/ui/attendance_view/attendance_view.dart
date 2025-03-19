@@ -6,7 +6,8 @@ import '../shared/styles.dart';
 import '../widgets/circular_progress_indicator.dart';
 
 class AttandanceView extends StatefulWidget {
-  const AttandanceView({required this.cid, required this.hid, required this.sdate, super.key});
+  const AttandanceView(
+      {required this.cid, required this.hid, required this.sdate, super.key});
 
   @override
   State<AttandanceView> createState() => _AttandanceViewState();
@@ -21,7 +22,8 @@ class _AttandanceViewState extends State<AttandanceView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-        viewModelBuilder: () => AttendanceViewModel(widget.cid, widget.hid, widget.sdate),
+        viewModelBuilder: () =>
+            AttendanceViewModel(widget.cid, widget.hid, widget.sdate),
         builder: (context, viewModel, child) {
           return Scaffold(
             appBar: AppBar(
@@ -30,7 +32,11 @@ class _AttandanceViewState extends State<AttandanceView> {
                 padding: defaultPadding10,
                 child: Image.asset('assets/icons/view.png'),
               ),
-              actions: [IconButton(onPressed: () => viewModel.goToDashboard(), icon: const Icon(Icons.done))],
+              actions: [
+                IconButton(
+                    onPressed: () => viewModel.goToDashboard(),
+                    icon: const Icon(Icons.done))
+              ],
               title: Row(
                 children: [
                   // Image.asset(
@@ -112,9 +118,14 @@ class _AttandanceViewState extends State<AttandanceView> {
                               shrinkWrap: true,
                               itemBuilder: (context, index) => Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [Text(viewModel.absentView[index].name ?? ''), horizontalSpacing16, Text(viewModel.absentView[index].rollno ?? '')],
+                                children: [
+                                  Text(viewModel.absentView[index].name ?? ''),
+                                  horizontalSpacing16,
+                                  Text(viewModel.absentView[index].rollno ?? '')
+                                ],
                               ),
-                              separatorBuilder: (context, index) => const Padding(
+                              separatorBuilder: (context, index) =>
+                                  const Padding(
                                 padding: defaultPadding8,
                                 child: horizontalDivider,
                               ),
@@ -148,10 +159,12 @@ class _AttandanceViewState extends State<AttandanceView> {
                                 children: [
                                   Text(viewModel.presentView[index].name ?? ''),
                                   horizontalSpacing16,
-                                  Text(viewModel.presentView[index].rollno ?? ''),
+                                  Text(viewModel.presentView[index].rollno ??
+                                      ''),
                                 ],
                               ),
-                              separatorBuilder: (context, index) => const Padding(
+                              separatorBuilder: (context, index) =>
+                                  const Padding(
                                 padding: defaultPadding8,
                                 child: horizontalDivider,
                               ),

@@ -23,29 +23,29 @@ class _ViewSectionState extends State<ViewSection> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-      viewModelBuilder: () => ViewSectionModel(widget.loginResponse),
-      builder: (context, viewModel, child) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: appcolor2699FB,
-          title: Row(
-            children: [
-              Image.asset(
-                'assets/icons/list3.png',
-                width: 30,
-                height: 35,
+        viewModelBuilder: () => ViewSectionModel(widget.loginResponse),
+        builder: (context, viewModel, child) => Scaffold(
+              appBar: AppBar(
+                backgroundColor: appcolor2699FB,
+                title: Row(
+                  children: [
+                    Image.asset(
+                      'assets/icons/list3.png',
+                      width: 30,
+                      height: 35,
+                    ),
+                    horizontalSpacing10,
+                    Text(
+                      'View Attendance Section',
+                      style: fontFamilyBold.size20.white,
+                    ),
+                  ],
+                ),
               ),
-              horizontalSpacing10,
-              Text(
-                'View Attendance Section',
-                style: fontFamilyBold.size20.white,
-              ),
-            ],
-          ),
-        ),
-        body: 
-        // !viewModel.isBusy
-        //     ? 
-            SafeArea(
+              body:
+                  // !viewModel.isBusy
+                  //     ?
+                  SafeArea(
                 child: CustomScrollView(
                   key: _formKey,
                   slivers: [
@@ -66,7 +66,9 @@ class _ViewSectionState extends State<ViewSection> {
                             InkWell(
                               onTap: () => viewModel.selectDate(context),
                               child: Container(
-                                margin: const EdgeInsets.only(top: 12) + leftPadding10 + rightPadding10,
+                                margin: const EdgeInsets.only(top: 12) +
+                                    leftPadding10 +
+                                    rightPadding10,
                                 padding: defaultPadding12,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
@@ -82,9 +84,11 @@ class _ViewSectionState extends State<ViewSection> {
                                   ],
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(DateFormat.yMMMEd().format(viewModel.sdate)),
+                                    Text(DateFormat.yMMMEd()
+                                        .format(viewModel.sdate)),
                                     const Icon(Icons.calendar_today),
                                   ],
                                 ),
@@ -153,32 +157,32 @@ class _ViewSectionState extends State<ViewSection> {
                               ),
                             verticalSpacing16,
                             // Stack(
-                              // children: [
-                                // if (viewModel.busy(BusyObjects.studentDetails))
-                                //    Center(
-                                //       child: Padding(
-                                //       padding: defaultPadding20,
-                                //       child: AnimatedCircularProgressIndicator(
-                                //         color: Colors.white,
-                                //         backgroundColor: Colors.grey,
-                                //       ),
+                            // children: [
+                            // if (viewModel.busy(BusyObjects.studentDetails))
+                            //    Center(
+                            //       child: Padding(
+                            //       padding: defaultPadding20,
+                            //       child: AnimatedCircularProgressIndicator(
+                            //         color: Colors.white,
+                            //         backgroundColor: Colors.grey,
+                            //       ),
 
-                                      // CircularProgressIndicator(
-                                      //   color: Colors.white,
-                                      //   backgroundColor: Colors.grey,
-                                      // ),
-                                    // )),
-                                // if (viewModel.subjectList.isNotEmpty)
-                                //   Padding(
-                                //     padding: defaultPadding10,
-                                //     child: DropDownWidget(
-                                //       title: 'Subjects',
-                                //       selectedValue: viewModel.subject,
-                                //       dropDownList: viewModel.subjectList,
-                                //       validator: viewModel.selectSubject,
-                                //     ),
-                                //   ),
-                              // ],
+                            // CircularProgressIndicator(
+                            //   color: Colors.white,
+                            //   backgroundColor: Colors.grey,
+                            // ),
+                            // )),
+                            // if (viewModel.subjectList.isNotEmpty)
+                            //   Padding(
+                            //     padding: defaultPadding10,
+                            //     child: DropDownWidget(
+                            //       title: 'Subjects',
+                            //       selectedValue: viewModel.subject,
+                            //       dropDownList: viewModel.subjectList,
+                            //       validator: viewModel.selectSubject,
+                            //     ),
+                            //   ),
+                            // ],
                             // ),
                             verticalSpacing16,
                           ],
@@ -192,8 +196,8 @@ class _ViewSectionState extends State<ViewSection> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              if(viewModel.hours != null)
-                              // if (viewModel.isvalid)
+                              if (viewModel.hours != null)
+                                // if (viewModel.isvalid)
                                 Padding(
                                   padding: defaultPadding8,
                                   child: Button1(
@@ -202,7 +206,10 @@ class _ViewSectionState extends State<ViewSection> {
                                     onTap: () {
                                       // if (_formKey.currentState?.validate() ?? false) {
                                       // _formKey.currentState?.save();
-                                      viewModel.goToAttendanceView(viewModel.cid, viewModel.hid, viewModel.sdate);
+                                      viewModel.goToAttendanceView(
+                                          viewModel.cid,
+                                          viewModel.hid,
+                                          viewModel.sdate);
                                       // }
                                     }, //viewModel.getstudents(),
                                   ),
@@ -214,20 +221,18 @@ class _ViewSectionState extends State<ViewSection> {
                   ],
                 ),
               ),
-            // : Center(
-            //     child: Padding(
-            //     padding: defaultPadding20,
-            //     child: AnimatedCircularProgressIndicator(
-            //       color: Colors.white,
-            //       backgroundColor: Colors.grey,
-            //     ),
+              // : Center(
+              //     child: Padding(
+              //     padding: defaultPadding20,
+              //     child: AnimatedCircularProgressIndicator(
+              //       color: Colors.white,
+              //       backgroundColor: Colors.grey,
+              //     ),
 
-                // CircularProgressIndicator(
-                //   color: Colors.white,
-                //   backgroundColor: Colors.grey,
-                // ),
-              ));
-      
-    
+              // CircularProgressIndicator(
+              //   color: Colors.white,
+              //   backgroundColor: Colors.grey,
+              // ),
+            ));
   }
 }

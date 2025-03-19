@@ -20,7 +20,8 @@ class _BottonNavigatorState extends State<BottonNavigator> {
       builder: (context, viewModel, child) => Padding(
         padding: defaultPadding20,
         child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: appcolor2699FB),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: appcolor2699FB),
           child: Padding(
             padding: defaultPadding12,
             child: BottomNavigationBar(
@@ -49,7 +50,10 @@ class _BottonNavigatorState extends State<BottonNavigator> {
                 BottomNavigationBarItem(
                   label: ('Profile'),
                   icon: InkWell(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileView())),
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfileView())),
                     child: Image.asset(
                       'assets/icons/profile.png',
                       width: 30,

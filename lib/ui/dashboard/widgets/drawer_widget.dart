@@ -11,7 +11,8 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
   Widget build(BuildContext context, DashboardViewmodel viewModel) {
     return Drawer(
       child: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           buildHeader(context, viewModel.userName, viewModel.empId),
           buildMenuItems(context, viewModel),
         ]),
@@ -19,7 +20,8 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
     );
   }
 
-  Widget buildHeader(BuildContext context, String userName, String empId) => Container(
+  Widget buildHeader(BuildContext context, String userName, String empId) =>
+      Container(
         color: appcolor2699FB,
         padding: defaultPadding20,
         child: Column(children: [
@@ -33,14 +35,15 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
         ]),
       );
 
-  Widget buildMenuItems(BuildContext context, DashboardViewmodel viewModel) => Column(
+  Widget buildMenuItems(BuildContext context, DashboardViewmodel viewModel) =>
+      Column(
         children: [
           ListTile(
               leading: Image.asset(
-              'assets/icons/dashboard.png',
-              width: 30,
-              height: 30,
-            ),
+                'assets/icons/dashboard.png',
+                width: 30,
+                height: 30,
+              ),
               title: Text(
                 "Dashboard",
                 style: fontFamilyBold.size16,
@@ -50,23 +53,25 @@ class DrawerView extends ViewModelWidget<DashboardViewmodel> {
               }),
           ListTile(
               leading: Image.asset(
-              'assets/icons/group.png',
-              width: 30,
-              height: 30,
-            ),
+                'assets/icons/group.png',
+                width: 30,
+                height: 30,
+              ),
               title: Text(
                 "Profile",
                 style: fontFamilyBold.size16,
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileView()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileView()));
               }),
           ListTile(
             leading: Image.asset(
               'assets/icons/logout.png',
               width: 30,
               height: 30,
-          
             ),
             title: Text(
               "Logout",

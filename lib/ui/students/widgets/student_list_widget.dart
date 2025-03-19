@@ -28,7 +28,8 @@ class StudentListWidget extends ViewModelWidget<StudentsViewModel> {
         child: Card(
           elevation: 20.0,
           margin: const EdgeInsets.all(2),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           child: Center(
             child: InkWell(
               child: Row(
@@ -84,7 +85,8 @@ class StudentListWidget extends ViewModelWidget<StudentsViewModel> {
     );
   }
 
-  void removeItem(int index, GetStudentResponse student, StudentsViewModel viewModel, bool isPresent) {
+  void removeItem(int index, GetStudentResponse student,
+      StudentsViewModel viewModel, bool isPresent) {
     viewModel.key.currentState!.removeItem(index, (_, animation) {
       return SizeTransition(
         sizeFactor: animation,
@@ -94,7 +96,8 @@ class StudentListWidget extends ViewModelWidget<StudentsViewModel> {
           color: isPresent ? Colors.green : Colors.red,
           child: ListTile(
             contentPadding: const EdgeInsets.all(15),
-            title: Text(isPresent ? "Present" : "Absent", style: const TextStyle(fontSize: 24)),
+            title: Text(isPresent ? "Present" : "Absent",
+                style: const TextStyle(fontSize: 24)),
           ),
         ),
       );

@@ -35,7 +35,10 @@ class DashboardviewState extends State<DashboardView> {
               leading: Padding(
                 padding: defaultPadding10,
                 child: InkWell(
-                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileView())),
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileView())),
                   child: Image.asset('assets/icons/profile.png'),
                 ),
               ),
@@ -94,13 +97,15 @@ class DashboardviewState extends State<DashboardView> {
                               ),
                               items: viewModel.annoncement.map((announcement) {
                                 return InkWell(
-                                  onTap: () => viewModel.goToAnnouncementDetails(announcement),
+                                  onTap: () => viewModel
+                                      .goToAnnouncementDetails(announcement),
                                   child: Padding(
                                     padding: leftPadding8 + rightPadding8,
                                     child: Text(
                                       announcement.title ?? 'N/A',
                                       selectionColor: appcolor2699FB,
-                                      style: fontFamilyMedium.size14.color2699FB,
+                                      style:
+                                          fontFamilyMedium.size14.color2699FB,
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -136,9 +141,13 @@ class DashboardviewState extends State<DashboardView> {
                               },
                               child: !viewModel.isBusy
                                   ? Box(
-                                      boxColor: viewModel.isStaffLoggedIn ? Colors.red : Colors.blueAccent,
+                                      boxColor: viewModel.isStaffLoggedIn
+                                          ? Colors.red
+                                          : Colors.blueAccent,
                                       child: Text(
-                                        viewModel.isStaffLoggedIn ? "LogOut" : "LogIn",
+                                        viewModel.isStaffLoggedIn
+                                            ? "LogOut"
+                                            : "LogIn",
                                         style: fontFamilyRegular.size16.white,
                                         textAlign: TextAlign.center,
                                       ))
@@ -234,7 +243,8 @@ class DashboardviewState extends State<DashboardView> {
                           child: Box(
                               margin: zeroPadding,
                               padding: const EdgeInsets.only(bottom: 12),
-                              onTap: () => viewModel.goToSection(viewModel.loginResponse),
+                              onTap: () => viewModel
+                                  .goToSection(viewModel.loginResponse),
                               child: Column(
                                 children: [
                                   Image.asset(
@@ -253,7 +263,8 @@ class DashboardviewState extends State<DashboardView> {
                         horizontalSpacing20,
                         Expanded(
                           child: Box(
-                              onTap: () => viewModel.goToViewSection(viewModel.loginResponse),
+                              onTap: () => viewModel
+                                  .goToViewSection(viewModel.loginResponse),
                               margin: zeroPadding,
                               padding: const EdgeInsets.only(bottom: 12),
                               child: Column(

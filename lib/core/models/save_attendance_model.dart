@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-SaveAttendanceRequest saveAttendanceRequestFromJson(String str) => SaveAttendanceRequest.fromJson(json.decode(str));
+SaveAttendanceRequest saveAttendanceRequestFromJson(String str) =>
+    SaveAttendanceRequest.fromJson(json.decode(str));
 
-String saveAttendanceRequestToJson(SaveAttendanceRequest data) => json.encode(data.toJson());
+String saveAttendanceRequestToJson(SaveAttendanceRequest data) =>
+    json.encode(data.toJson());
 
 class SaveAttendanceRequest {
   List<StudentAttendance>? studentAttendances;
@@ -17,14 +19,25 @@ class SaveAttendanceRequest {
     this.classAttendances,
   });
 
-  factory SaveAttendanceRequest.fromJson(Map<String, dynamic> json) => SaveAttendanceRequest(
-        studentAttendances: json["studentAttendances"] == null ? [] : List<StudentAttendance>.from(json["studentAttendances"]!.map((x) => StudentAttendance.fromJson(x))),
-        classAttendances: json["classAttendances"] == null ? [] : List<ClassAttendance>.from(json["classAttendances"]!.map((x) => ClassAttendance.fromJson(x))),
+  factory SaveAttendanceRequest.fromJson(Map<String, dynamic> json) =>
+      SaveAttendanceRequest(
+        studentAttendances: json["studentAttendances"] == null
+            ? []
+            : List<StudentAttendance>.from(json["studentAttendances"]!
+                .map((x) => StudentAttendance.fromJson(x))),
+        classAttendances: json["classAttendances"] == null
+            ? []
+            : List<ClassAttendance>.from(json["classAttendances"]!
+                .map((x) => ClassAttendance.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "studentAttendances": studentAttendances == null ? [] : List<dynamic>.from(studentAttendances!.map((x) => x.toJson())),
-        "classAttendances": classAttendances == null ? [] : List<dynamic>.from(classAttendances!.map((x) => x.toJson())),
+        "studentAttendances": studentAttendances == null
+            ? []
+            : List<dynamic>.from(studentAttendances!.map((x) => x.toJson())),
+        "classAttendances": classAttendances == null
+            ? []
+            : List<dynamic>.from(classAttendances!.map((x) => x.toJson())),
       };
 }
 
@@ -49,7 +62,8 @@ class ClassAttendance {
     this.remarks,
   });
 
-  factory ClassAttendance.fromJson(Map<String, dynamic> json) => ClassAttendance(
+  factory ClassAttendance.fromJson(Map<String, dynamic> json) =>
+      ClassAttendance(
         insId: json["insID"],
         sdate: json["sdate"] == null ? null : DateTime.parse(json["sdate"]),
         cid: json["cid"],
@@ -95,7 +109,8 @@ class StudentAttendance {
     this.modOn,
   });
 
-  factory StudentAttendance.fromJson(Map<String, dynamic> json) => StudentAttendance(
+  factory StudentAttendance.fromJson(Map<String, dynamic> json) =>
+      StudentAttendance(
         insId: json["insID"],
         cid: json["cid"],
         sdate: json["sdate"] == null ? null : DateTime.parse(json["sdate"]),

@@ -11,7 +11,8 @@ class AnnouncementDetailsView extends StatefulWidget {
   final Annoncement annoncement;
 
   @override
-  State<AnnouncementDetailsView> createState() => _AnnouncementDetailsViewState();
+  State<AnnouncementDetailsView> createState() =>
+      _AnnouncementDetailsViewState();
 }
 
 class _AnnouncementDetailsViewState extends State<AnnouncementDetailsView> {
@@ -48,7 +49,7 @@ class _AnnouncementDetailsViewState extends State<AnnouncementDetailsView> {
                   verticalSpacing20,
                   horizontalDivider,
                   verticalSpacing20,
-                   Text(
+                  Text(
                     widget.annoncement.details ?? '',
                     style: fontFamilyRegular.size14.color2699FB,
                   ),

@@ -46,7 +46,8 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   String? wifiGatewayIP;
   String? getWifiIP;
 
-  Uint8List get image => const Base64Decoder().convert(_sharedPreference.getString('logo') ?? '');
+  Uint8List get image =>
+      const Base64Decoder().convert(_sharedPreference.getString('logo') ?? '');
   // List<Annoncement> get annoncement => [];
   bool get isStaffLoggedIn => _isStaffLoggedIn ?? false;
   String get userName => _sharedPreference.getString('name') ?? '';
@@ -55,7 +56,10 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
 
   String get token => _sharedPreference.getString('token') ?? '';
   List<Annoncement> get annoncement {
-    var json1 = {"annoncement": json.decode(_sharedPreference.getString('annoncement') ?? "[{}]")};
+    var json1 = {
+      "annoncement":
+          json.decode(_sharedPreference.getString('annoncement') ?? "[{}]")
+    };
     return LoginResponse.fromJson(json1).annoncement ?? [];
   }
 
@@ -103,10 +107,20 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
     final _locationData = await location.getLocation();
     _lat = _locationData.latitude?.toString();
     _long = _locationData.longitude?.toString();
-    final staffLoginRequest = StaffLoginRequest(atime: DateTime.now(), lat: _long, long: _lat, wifi: ipadd, employeeId: empId, description: 'test');
-    final response = await runBusyFuture(_apiService.staffAttendance(staffLoginRequest)).catchError((err) {
+    final staffLoginRequest = StaffLoginRequest(
+        atime: DateTime.now(),
+        lat: _long,
+        long: _lat,
+        wifi: ipadd,
+        employeeId: empId,
+        description: 'test');
+    final response =
+        await runBusyFuture(_apiService.staffAttendance(staffLoginRequest))
+            .catchError((err) {
       print(err);
-      _dialogService.showCustomDialog(variant: DialogType.error, description: err?.toString() ?? 'Something went wrong');
+      _dialogService.showCustomDialog(
+          variant: DialogType.error,
+          description: err?.toString() ?? 'Something went wrong');
     });
     if (!hasError) {
       _isStaffLoggedIn = response == "True";
@@ -137,14 +151,17 @@ class DashboardViewmodel extends BaseViewModel with NavigationMixin {
   }
 
   Future<void> section() async {
-    showErrDialog('Please Login Your Attendance and Take the Student Attendance');
+    showErrDialog(
+        'Please Login Your Attendance and Take the Student Attendance');
   }
 
   Future<void> section1() async {
-    showErrDialog('Please Login Your Attendance and View the Student Attendance');
+    showErrDialog(
+        'Please Login Your Attendance and View the Student Attendance');
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Message", description: message);
   }
 }

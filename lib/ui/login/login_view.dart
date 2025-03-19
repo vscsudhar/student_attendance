@@ -48,7 +48,8 @@ class _LoginViewState extends State<LoginView> {
                           decoration: const BoxDecoration(
                             shape: BoxShape.rectangle,
                             image: DecorationImage(
-                              image: AssetImage('assets/images/logo.jpg'), // Replace with your image path
+                              image: AssetImage(
+                                  'assets/images/logo.jpg'), // Replace with your image path
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -59,16 +60,22 @@ class _LoginViewState extends State<LoginView> {
                       hintText: 'User ID',
                       //initialValue: 'college',
                       obscureText: false,
-                      validator: (val) => val == null || val.isEmpty ? 'email is required' : null,
-                      onSaved: (userId) => viewModel.loginRequest.userId = userId,
+                      validator: (val) => val == null || val.isEmpty
+                          ? 'email is required'
+                          : null,
+                      onSaved: (userId) =>
+                          viewModel.loginRequest.userId = userId,
                     ),
                     verticalSpacing10,
                     TextField1(
                       obscureText: true,
                       //  initialValue: '123',
                       hintText: 'Password',
-                      validator: (val) => val == null || val.isEmpty ? 'password is required' : null,
-                      onSaved: (password) => viewModel.loginRequest.password = password,
+                      validator: (val) => val == null || val.isEmpty
+                          ? 'password is required'
+                          : null,
+                      onSaved: (password) =>
+                          viewModel.loginRequest.password = password,
                     ),
                     verticalSpacing10,
                     verticalSpacing20,

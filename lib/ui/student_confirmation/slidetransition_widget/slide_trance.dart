@@ -4,13 +4,16 @@ class SlideTranse extends StatefulWidget {
   final Widget child;
   final Color color;
 
-  const SlideTranse({required this.child,this.color = Colors.transparent, Key? key}) : super(key: key);
+  const SlideTranse(
+      {required this.child, this.color = Colors.transparent, Key? key})
+      : super(key: key);
 
   @override
   State<SlideTranse> createState() => _SlideTranseState();
 }
 
-class _SlideTranseState extends State<SlideTranse> with TickerProviderStateMixin {
+class _SlideTranseState extends State<SlideTranse>
+    with TickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 1),
     vsync: this,

@@ -28,7 +28,10 @@ class StudentDetailsView extends StatelessWidget {
                     // verticalSpacing16,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [const Text('RollNo:', style: fontFamilyRegular), Text(student.rollNo?.toString() ?? 'N/A')],
+                      children: [
+                        const Text('RollNo:', style: fontFamilyRegular),
+                        Text(student.rollNo?.toString() ?? 'N/A')
+                      ],
                     ),
                     verticalSpacing16,
                     Text('Name: ${student.studentName} '),

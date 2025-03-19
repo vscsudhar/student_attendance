@@ -30,7 +30,8 @@ abstract class ApiService {
     try {
       if (locator<UserAuthenticationService>().token.isNotEmpty) {
         log(locator<UserAuthenticationService>().token);
-        dio.options.headers['Authorization'] = 'Bearer ${locator<UserAuthenticationService>().token}';
+        dio.options.headers['Authorization'] =
+            'Bearer ${locator<UserAuthenticationService>().token}';
         dio.interceptors.add(PrettyDioLogger(requestBody: true));
       }
     } catch (e) {
@@ -52,14 +53,21 @@ abstract class ApiService {
   Future<dynamic> staffAttendance(@Body() StaffLoginRequest staffLoginRequest);
 
   @POST('/GetSubject?dd={sdate}&cid={cid}&hid={hid}')
-  Future<List<GetSubjectResponse>> getSubjectDetails(@Path('sdate') String sdate, @Path('cid') String cId, @Path('hid') String hId);
+  Future<List<GetSubjectResponse>> getSubjectDetails(
+      @Path('sdate') String sdate,
+      @Path('cid') String cId,
+      @Path('hid') String hId);
 
   @POST('/GetStudents?cid={cid}')
   Future<List<GetStudentResponse>> getStudentDetails(@Path('cid') String cId);
 
   @POST('/SaveAttendance')
-  Future<dynamic> saveAttendance(@Body() SaveAttendanceRequest saveAttendanceRequest);
+  Future<dynamic> saveAttendance(
+      @Body() SaveAttendanceRequest saveAttendanceRequest);
 
   @GET('/GetStudentAttendance?date={date}&cid={cid}&hid={hid}')
-  Future<List<AttendanceViewResponse>> getAttendanceView(@Path('date') String sdate, @Path('cid') String cId, @Path('hid') String hId);
+  Future<List<AttendanceViewResponse>> getAttendanceView(
+      @Path('date') String sdate,
+      @Path('cid') String cId,
+      @Path('hid') String hId);
 }

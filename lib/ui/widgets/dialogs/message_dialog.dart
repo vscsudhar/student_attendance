@@ -28,7 +28,7 @@ class MessageDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: leftPadding20+rightPadding20,
+              padding: leftPadding20 + rightPadding20,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

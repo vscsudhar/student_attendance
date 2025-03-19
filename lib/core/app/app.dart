@@ -13,7 +13,7 @@ import 'package:workspace/ui/students/students_view.dart';
 import 'package:workspace/ui/view_section/view_section_view.dart';
 
 @StackedApp(routes: [
-  MaterialRoute(page: SplashView, initial: true),  
+  MaterialRoute(page: SplashView, initial: true),
   MaterialRoute(page: LoginView),
   MaterialRoute(page: DashboardView),
   MaterialRoute(page: StudentView),
@@ -25,6 +25,5 @@ import 'package:workspace/ui/view_section/view_section_view.dart';
   MaterialRoute(page: AnnouncementDetailsView),
   MaterialRoute(page: AttandanceView),
   MaterialRoute(page: ViewSection),
-
 ])
 class App {}

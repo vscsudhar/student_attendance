@@ -34,14 +34,18 @@ class _ChangepassViewState extends State<ChangepassView> {
                 ),
               ),
               verticalSpacing60,
-              const TextField1(obscureText: true, hintText: 'Enter New Password'),
+              const TextField1(
+                  obscureText: true, hintText: 'Enter New Password'),
               verticalSpacing20,
               const TextField1(
                 obscureText: false,
                 hintText: 'ReEnter Password',
               ),
               verticalSpacing20,
-               const Box(width: 120, child: Text('Submit', textAlign: TextAlign.center, style: fontFamilyRegular))
+              const Box(
+                  width: 120,
+                  child: Text('Submit',
+                      textAlign: TextAlign.center, style: fontFamilyRegular))
             ],
           ),
         ),

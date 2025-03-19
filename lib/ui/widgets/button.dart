@@ -22,10 +22,15 @@ class Button extends StatelessWidget {
         width: width ?? 250,
         height: height ?? 50,
         alignment: Alignment.center,
-        decoration: const BoxDecoration(color: appcolor2699FB, borderRadius: BorderRadius.all(Radius.circular(8))),
+        decoration: const BoxDecoration(
+            color: appcolor2699FB,
+            borderRadius: BorderRadius.all(Radius.circular(8))),
         child: Padding(
           padding: defaultPadding10,
-          child: Text(name,style: fontFamilyRegular.size20.copyWith(color: Colors.white),),
+          child: Text(
+            name,
+            style: fontFamilyRegular.size20.copyWith(color: Colors.white),
+          ),
         ),
       ),
     );

@@ -19,7 +19,9 @@ class UserAuthenticationService with NavigationMixin {
   final _dio = Dio();
   final _dialogService = locator<DialogService>();
 
-  final SessionConfig _sessionConfig = SessionConfig(invalidateSessionForAppLostFocus: const Duration(seconds: 8), invalidateSessionForUserInactivity: const Duration(seconds: 10));
+  final SessionConfig _sessionConfig = SessionConfig(
+      invalidateSessionForAppLostFocus: const Duration(seconds: 8),
+      invalidateSessionForUserInactivity: const Duration(seconds: 10));
   //final _sessionConfig = SessionConfig();
   LoginResponse? _loginResponse;
 
@@ -28,12 +30,13 @@ class UserAuthenticationService with NavigationMixin {
   String get token => _loginResponse?.token ?? 'Empty token';
   String get userCredentials => _sharedPreference.getString('email') ?? '';
 
-
   LoginResponse get loginResponse => _loginResponse ?? LoginResponse();
 
   Future<dynamic> login(LoginRequest loginRequest) async {
-    _loginResponse = await locator<ApiService>().login(loginRequest).catchError((e) {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: e.toString());
+    _loginResponse =
+        await locator<ApiService>().login(loginRequest).catchError((e) {
+      _dialogService.showCustomDialog(
+          variant: DialogType.error, description: e.toString());
       return e;
     });
     _sharedPreference.setString('email', loginRequest.userId ?? '');
@@ -42,19 +45,24 @@ class UserAuthenticationService with NavigationMixin {
       log('token : ' + (_loginResponse?.token ?? ''));
       _sharedPreference.setString('name', _loginResponse?.name ?? '');
       _sharedPreference.setString('id', _loginResponse?.employeeId ?? '');
-      _sharedPreference.setString('annoncement', json.encode(_loginResponse?.annoncement));
+      _sharedPreference.setString(
+          'annoncement', json.encode(_loginResponse?.annoncement));
       _sharedPreference.setString('logo', _loginResponse?.logo ?? '');
       goToDashboard();
     } else {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: 'Login Failed');
+      _dialogService.showCustomDialog(
+          variant: DialogType.error, description: 'Login Failed');
     }
   }
 
   Future<void> autoLogout() async {
     log('autologOut 2');
-    final _sessionConfig = SessionConfig(invalidateSessionForAppLostFocus: const Duration(seconds: 8), invalidateSessionForUserInactivity: const Duration(seconds: 10));
+    final _sessionConfig = SessionConfig(
+        invalidateSessionForAppLostFocus: const Duration(seconds: 8),
+        invalidateSessionForUserInactivity: const Duration(seconds: 10));
     _sessionConfig.stream.listen((SessionTimeoutState timeoutEvent) {
-      if (timeoutEvent == SessionTimeoutState.userInactivityTimeout || timeoutEvent == SessionTimeoutState.appFocusTimeout) {
+      if (timeoutEvent == SessionTimeoutState.userInactivityTimeout ||
+          timeoutEvent == SessionTimeoutState.appFocusTimeout) {
         locator<SharedPreferences>().clear();
         locator<NavigationService>().navigateToLoginView();
       }
@@ -70,14 +78,13 @@ class UserAuthenticationService with NavigationMixin {
   }
 }
 
-
-    // final request = {"userID": "${loginRequest.userId}", "password": "${loginRequest.password}"};
-    // final response = await _dio.post('http://rubric.rrwinfo.com/Accounts/Login',
-    //     data: request,
-    //     options: Options(
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Accept': 'application/json',
-    //       },
-    //     ));
-    // _loginResponse = LoginResponse.fromJson(response.data);
+// final request = {"userID": "${loginRequest.userId}", "password": "${loginRequest.password}"};
+// final response = await _dio.post('http://rubric.rrwinfo.com/Accounts/Login',
+//     data: request,
+//     options: Options(
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json',
+//       },
+//     ));
+// _loginResponse = LoginResponse.fromJson(response.data);

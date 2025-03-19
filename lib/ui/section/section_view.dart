@@ -56,7 +56,10 @@ class _SectionViewState extends State<SectionView> {
                     slivers: [
                       SliverToBoxAdapter(
                         child: Padding(
-                          padding: defaultPadding20 + defaultPadding20 - topPadding20 - leftPadding10,
+                          padding: defaultPadding20 +
+                              defaultPadding20 -
+                              topPadding20 -
+                              leftPadding10,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -94,7 +97,8 @@ class _SectionViewState extends State<SectionView> {
                               verticalSpacing16,
                               Stack(
                                 children: [
-                                  if (viewModel.busy(BusyObjects.studentDetails))
+                                  if (viewModel
+                                      .busy(BusyObjects.studentDetails))
                                     Center(
                                         child: Padding(
                                       padding: defaultPadding20,

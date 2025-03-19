@@ -33,8 +33,7 @@ class StudentConfirmationViewModel extends BaseViewModel with NavigationMixin {
   final DateTime _sdate = DateTime.now();
   bool? _isUpdatePresent;
   bool? _isUpdateAbsent;
-   GlobalKey<AnimatedListState>? _key;
-
+  GlobalKey<AnimatedListState>? _key;
 
   final List<GetStudentResponse> _studentList = [];
   final List<GetStudentResponse> _absentStudentList;
@@ -48,8 +47,7 @@ class StudentConfirmationViewModel extends BaseViewModel with NavigationMixin {
 
   int get insId => _sharedPreference.getInt('insId') ?? 0;
 
-    GlobalKey<AnimatedListState>? get key => _key;
-
+  GlobalKey<AnimatedListState>? get key => _key;
 
   int get cId => _cid;
   int get hId => _hid;
@@ -112,21 +110,24 @@ class StudentConfirmationViewModel extends BaseViewModel with NavigationMixin {
     notifyListeners();
     final reqJson = _saveAttendance.toJson().toString();
     print(reqJson);
-    final res = await runBusyFuture(_apiService.saveAttendance(_saveAttendance)).catchError((error) {
-      _dialogService.showCustomDialog(variant: DialogType.error, description: error.toString());
+    final res = await runBusyFuture(_apiService.saveAttendance(_saveAttendance))
+        .catchError((error) {
+      _dialogService.showCustomDialog(
+          variant: DialogType.error, description: error.toString());
     });
     if (!hasError) {
       goToAttendanceView(cId, hId, sdate);
       print(res);
     } else {
       showErrDialog(modelError.toString());
-       print(res);
+      print(res);
     }
     print(res);
   }
 
   void showErrDialog(String message) {
-    _dialogService.showCustomDialog(variant: DialogType.error, title: "Message", description: message);
+    _dialogService.showCustomDialog(
+        variant: DialogType.error, title: "Message", description: message);
   }
 
   void setEnablePresent(bool value) {
@@ -147,7 +148,7 @@ class StudentConfirmationViewModel extends BaseViewModel with NavigationMixin {
 
   void setUpdateAbsent(GetStudentResponse student) {
     _presentStudentList.remove(student);
-     _absentStudentList.add(student);
+    _absentStudentList.add(student);
     notifyListeners();
   }
 }

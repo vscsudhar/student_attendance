@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 
 String errorHandler(dynamic e, {bool skipErrorAlteration = false}) {

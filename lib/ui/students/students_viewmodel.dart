@@ -31,7 +31,8 @@ class StudentsViewModel extends BaseViewModel with NavigationMixin {
     _studentList.remove(student);
     notifyListeners();
     if (_studentList.isEmpty) {
-      goToStudentConfirmation(absentStudentList, presentStudentList, int.parse(_cId), int.parse(_hId), int.parse(_subjectId));
+      goToStudentConfirmation(absentStudentList, presentStudentList,
+          int.parse(_cId), int.parse(_hId), int.parse(_subjectId));
     }
   }
 
@@ -41,14 +42,18 @@ class StudentsViewModel extends BaseViewModel with NavigationMixin {
     _studentList.remove(student);
     notifyListeners();
     if (_studentList.isEmpty) {
-      goToStudentConfirmation(absentStudentList, presentStudentList, int.parse(_cId), int.parse(_hId), int.parse(_subjectId));
+      goToStudentConfirmation(absentStudentList, presentStudentList,
+          int.parse(_cId), int.parse(_hId), int.parse(_subjectId));
     }
   }
 
   Future<void> getStudents() async {
     setBusy(true);
-    _studentList = await _apiService.getStudentDetails(_cId).catchError((err) {});
-    _key.currentState?.insertAllItems(0, studentList.length, duration: const Duration(milliseconds: 10));
+    _studentList =
+        await _apiService.getStudentDetails(_cId).catchError((err) {});
+    // _key.currentState?.insertAllItems(0, studentList.length, duration: const Duration(milliseconds: 10));
+    _key.currentState
+        ?.insertItem(0, duration: const Duration(milliseconds: 10));
     // _studentList.forEach((element) {});
     setBusy(false);
   }

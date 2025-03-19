@@ -26,7 +26,10 @@ class _ProfileViewState extends State<ProfileView> {
           body: ListView(
             padding: defaultPadding20,
             children: [
-              const CircleAvatar(minRadius: 70, maxRadius: 150, backgroundImage: AssetImage('assets/icons/profile.png')),
+              const CircleAvatar(
+                  minRadius: 70,
+                  maxRadius: 150,
+                  backgroundImage: AssetImage('assets/icons/profile.png')),
               verticalSpacing16,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +66,8 @@ class _ProfileViewState extends State<ProfileView> {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
                         'Change Password',
-                        style: fontFamilyRegular.size16.copyWith(color: Colors.white),
+                        style: fontFamilyRegular.size16
+                            .copyWith(color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -76,7 +80,8 @@ class _ProfileViewState extends State<ProfileView> {
                         builder: (context) {
                           return AlertDialog(
                             title: const Text("Log Out"),
-                            content: const Text('Are you sure you want to log out?'),
+                            content:
+                                const Text('Are you sure you want to log out?'),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -89,7 +94,11 @@ class _ProfileViewState extends State<ProfileView> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginView()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginView()));
                                 },
                                 child: const Text(
                                   'Log Out',

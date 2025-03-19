@@ -8,7 +8,8 @@ import 'package:workspace/ui/widgets/box.dart';
 import '../../core/models/students_model.dart';
 import '../widgets/circular_progress_indicator.dart';
 
-class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> {
+class StudentConfirmationView
+    extends StackedView<StudentConfirmationViewModel> {
   const StudentConfirmationView({
     required this.cid,
     required this.hid,
@@ -27,11 +28,14 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
   // final GetStudentResponse data;
 
   @override
-  Widget builder(BuildContext context, StudentConfirmationViewModel viewModel, Widget? child) {
+  Widget builder(BuildContext context, StudentConfirmationViewModel viewModel,
+      Widget? child) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appcolor2699FB,
-        leading: const Padding(padding: EdgeInsets.all(8.0), child: Text('') //Image.asset('assets/icons/confirm.png'),
+        leading: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('') //Image.asset('assets/icons/confirm.png'),
             ),
         title: Text(
           '         Confirmation',
@@ -64,12 +68,15 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
                           ),
                           const Spacer(),
                           Box(
-                              onTap: () => viewModel.setEnablePresent(!viewModel.isUpdatePresent),
+                              onTap: () => viewModel
+                                  .setEnablePresent(!viewModel.isUpdatePresent),
                               margin: zeroPadding,
                               padding: defaultPadding8,
                               width: 70,
                               height: 30,
-                              boxColor: viewModel.isUpdatePresent ? Colors.red.shade400 : Colors.cyan,
+                              boxColor: viewModel.isUpdatePresent
+                                  ? Colors.red.shade400
+                                  : Colors.cyan,
                               child: Text(
                                 viewModel.isUpdatePresent ? "Done" : "Edit",
                                 // "Edit",
@@ -86,16 +93,18 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
                             children: [
                               Expanded(
                                 child: Card(
-                                    color: const Color.fromARGB(255, 178, 241, 180),
+                                    color: Colors.green.withOpacity(0.1),
                                     child: Text(
-                                      absentStudentList[index].studentName ?? '',
+                                      absentStudentList[index].studentName ??
+                                          '',
                                       style: fontFamilyMedium.size16,
                                     )),
                               ),
                               const Spacer(),
                               if (viewModel.isUpdatePresent)
                                 Box(
-                                    onTap: () => viewModel.setUpdatePresent(absentStudentList[index]),
+                                    onTap: () => viewModel.setUpdatePresent(
+                                        absentStudentList[index]),
                                     margin: zeroPadding,
                                     padding: defaultPadding8,
                                     width: 70,
@@ -133,12 +142,15 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
                           ),
                           const Spacer(),
                           Box(
-                              onTap: () => viewModel.setEnableAbsent(!viewModel.isUpdateAbsent),
+                              onTap: () => viewModel
+                                  .setEnableAbsent(!viewModel.isUpdateAbsent),
                               margin: zeroPadding,
                               padding: defaultPadding8,
                               width: 70,
                               height: 30,
-                              boxColor: viewModel.isUpdateAbsent ? const Color.fromARGB(255, 178, 241, 180) : Colors.cyan,
+                              boxColor: viewModel.isUpdateAbsent
+                                  ? const Color.fromARGB(255, 178, 241, 180)
+                                  : Colors.cyan,
                               child: Text(
                                 viewModel.isUpdateAbsent ? "Done" : "Edit",
                                 textAlign: TextAlign.center,
@@ -154,12 +166,18 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
                             children: [
                               Expanded(
                                   child: Card(
-                                      // color: Colors.green.withOpacity(0.1),
-                                      child: Text(presentStudentList[index].studentName ?? '', style: fontFamilyMedium.size16))),
+                                      color: const Color.fromARGB(
+                                          255, 178, 241, 180),
+                                      child: Text(
+                                          presentStudentList[index]
+                                                  .studentName ??
+                                              '',
+                                          style: fontFamilyMedium.size16))),
                               const Spacer(),
                               if (viewModel.isUpdateAbsent)
                                 Box(
-                                    onTap: () => viewModel.setUpdateAbsent(presentStudentList[index]),
+                                    onTap: () => viewModel.setUpdateAbsent(
+                                        presentStudentList[index]),
                                     margin: zeroPadding,
                                     padding: defaultPadding8,
                                     width: 70,
@@ -198,7 +216,9 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: appcolor2699FB),
-                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)),
                   ),
                   padding: defaultPadding20,
                   height: 140,
@@ -253,5 +273,7 @@ class StudentConfirmationView extends StackedView<StudentConfirmationViewModel> 
   }
 
   @override
-  StudentConfirmationViewModel viewModelBuilder(BuildContext context) => StudentConfirmationViewModel(cid, hid, subjectId, absentStudentList, presentStudentList);
+  StudentConfirmationViewModel viewModelBuilder(BuildContext context) =>
+      StudentConfirmationViewModel(
+          cid, hid, subjectId, absentStudentList, presentStudentList);
 }

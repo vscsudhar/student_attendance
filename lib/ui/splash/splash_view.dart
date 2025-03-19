@@ -30,7 +30,8 @@ class _SplashViewState extends State<SplashView> {
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: AssetImage('assets/images/logo.jpg'), // Replace with your image path
+                        image: AssetImage(
+                            'assets/images/logo.jpg'), // Replace with your image path
                         fit: BoxFit.cover,
                       ),
                     ),

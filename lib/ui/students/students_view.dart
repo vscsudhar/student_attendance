@@ -34,7 +34,8 @@ class _StudentViewState extends State<StudentView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-        viewModelBuilder: () => StudentsViewModel(widget.cId, widget.hId, widget.subjectId, _listKey),
+        viewModelBuilder: () => StudentsViewModel(
+            widget.cId, widget.hId, widget.subjectId, _listKey),
         builder: (context, viewModel, child) {
           return Scaffold(
             appBar: AppBar(
@@ -96,7 +97,7 @@ class _StudentViewState extends State<StudentView> {
         });
   }
 }
-   // CircularProgressIndicator(
-                                      //   color: Colors.white,
-                                      //   backgroundColor: Colors.grey,
-                                      // ),
+// CircularProgressIndicator(
+//   color: Colors.white,
+//   backgroundColor: Colors.grey,
+// ),

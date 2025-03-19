@@ -9,7 +9,6 @@ class ChangepassViewModel extends BaseViewModel with NavigationMixin {
 
   final _sharedPreference = locator<SharedPreferences>();
 
-
   String get userName => _sharedPreference.getString('name') ?? '';
   String get empId => _sharedPreference.getString('id') ?? '';
 }
